@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
+
+    <!--
+         Properties for the geometries
+    -->
+    <xacro:property name="wh_radius" value="0.5" />
+    <xacro:property name="wh_length" value="0.2" />
+    <xacro:property name="ax_axis" value="0 1 0" />
+    <xacro:property name="ch_length" value="2" />
+    <xacro:property name="ch_width" value="2" />
+    <xacro:property name="ch_height" value="0.5" />
+    <xacro:property name="zoffset" value="${wh_radius*1.1/2}" />
+
+    <!--
+         Properties for names and colors
+    -->
+    <xacro:property name="chassisname" value="base_link" />
+
+    <material name="black">
+        <color rgba="0 0 0 1" />
+    </material>
+
+    <material name="white">
+        <color rgba="1 1 1 1" />
+    </material>
+
+    <!-- 
+         Macro for creating wheels
+    -->
+    <xacro:macro name="wheel" params="reflect_lr reflect_fb suffix parent">
+
+        <link name="wh-${suffix}">
+            <visual>
+                <geometry>
+                    <cylinder radius="${wh_radius}" length="${wh_length}" />
+                </geometry>
+                <material name="black" />
+            </visual>
+        </link>
+
+        <joint name="ax-${suffix}" type="fixed">
+            <parent link="${parent}" />
+            <child link="wh-${suffix}" />
+            <origin xyz="${ch_length/2*reflect_fb} ${ch_width/2*reflect_lr} ${zoffset}" rpy="0 1.57 0" />
+            <axis xyz="${ax_axis}" />
+        </joint>
+
+    </xacro:macro>
+
+    <!--
+         The main chassis/body
+    -->
+    <link name="${chassisname}">
+        <visual>
+            <geometry>
+                <box size="${ch_length} ${ch_width} ${ch_height}" />
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 ${zoffset}" />
+            <material name="white" />
+        </visual>
+    </link>
+
+    <!--
+         Macro calls for creating wheels
+    -->
+    <xacro:wheel reflect_lr="-1" reflect_fb="1" suffix="front-left" parent="${chassisname}" />
+    <xacro:wheel reflect_lr="1" reflect_fb="1" suffix="front-right" parent="${chassisname}" />
+    <xacro:wheel reflect_lr="-1" reflect_fb="-1" suffix="back-left" parent="${chassisname}" />
+    <xacro:wheel reflect_lr="1" reflect_fb="-1" suffix="back-right" parent="${chassisname}" />
+
+</robot>
+
