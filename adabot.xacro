@@ -4,12 +4,17 @@
     <!--
          Properties for the geometries
     -->
-    <xacro:property name="wh_radius" value="0.5" />
-    <xacro:property name="wh_length" value="0.2" />
+    <xacro:property name="wh_radius" value="0.02" />
+    <xacro:property name="wh_length" value="0.005" />
+    <xacro:property name="wh_mass" value="${500*3.145927*(wh_radius**2)*wh_length}" />
+   
     <xacro:property name="ax_axis" value="0 1 0" />
-    <xacro:property name="ch_length" value="2" />
-    <xacro:property name="ch_width" value="2" />
-    <xacro:property name="ch_height" value="0.5" />
+
+    <xacro:property name="ch_length" value="0.1" />
+    <xacro:property name="ch_width" value="0.07" />
+    <xacro:property name="ch_height" value="0.035" />
+    <xacro:property name="ch_mass" value="${500*ch_length*ch_width*ch_height}" />
+
     <xacro:property name="zoffset" value="${wh_radius*1.1/2}" />
 
     <!--
@@ -28,7 +33,7 @@
     <!--
          Macro for creating wheel geoms
     -->
-    <xacro:property name="wh-geom">
+    <xacro:property name="wh_orig_geom">
         <origin rpy="1.57075 0 0" xyz="0 0 0" />
         <geometry>
             <cylinder radius="${wh_radius}" length="${wh_length}" />
@@ -42,13 +47,23 @@
 
         <link name="wh-${suffix}">
             <visual>
-                <xacro:insert_block name="wh-geom" />
+                <xacro:insert_block name="wh_orig_geom" />
                 <material name="black" />
-                <origin rpy="1.57075 0 0" xyz="0 0 0" />
             </visual>
             <collision>
-                <xacro:insert_block name="wh-geom" />
-                <geometry>
+                <xacro:insert_block name="wh_orig_geom" />
+            </collision>
+            <inertial>
+                <mass value="${wh_mass}" />
+                <inertia 
+                    ixx="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}" 
+                    ixy="0" 
+                    ixz="0" 
+                    iyy="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}" 
+                    iyz="0" 
+                    izz="${(1/2)*wh_mass*wh_radius**2}"
+                    />
+            </inertial>
         </link>
 
         <joint name="ax-${suffix}" type="continuous">
@@ -61,16 +76,36 @@
     </xacro:macro>
 
     <!--
+         Macro for creating the chassis' geom
+    -->
+    <xacro:property name="ch_orig_geom">
+        <origin rpy="0 0 0" xyz="0 0 ${zoffset}" />
+        <geometry>
+            <box size="${ch_length} ${ch_width} ${ch_height}" />
+        </geometry>
+    </xacro:property>
+    <!--
          The main chassis/body
     -->
     <link name="${chassisname}">
         <visual>
-            <geometry>
-                <box size="${ch_length} ${ch_width} ${ch_height}" />
-            </geometry>
-            <origin rpy="0 0 0" xyz="0 0 ${zoffset}" />
+            <xacro:insert_block name="ch_orig_geom" />
             <material name="white" />
         </visual>
+        <collision>
+            <xacro:insert_block name="ch_orig_geom" />
+        </collision>
+        <inertial>
+            <mass value="${ch_mass}" />
+            <inertia 
+                ixx="${(1/12)*ch_mass*(ch_width**2 + ch_height**2)}"
+                ixy="0"
+                ixz="0"
+                iyy="${(1/12)*ch_mass*(ch_length**2 + ch_height**2)}"
+                iyz="0"
+                izz="${(1/12)*ch_mass*(ch_length**2 + ch_width**2)}"
+                />
+        </inertial>
     </link>
 
     <!--

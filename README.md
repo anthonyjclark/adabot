@@ -12,7 +12,7 @@ I am currently using ubuntu-16.04.1-desktop with the following properties:
 - 4 GB RAM
 - 50 GB fixed storage
 
-*Note: I also cloned the image at this point to give myself something easy to fall back on if*
+*Note: I also cloned the image at this point to give myself something easy to fall back on if I manage to mess up the ROS installatin.*
 
 I had a corrupted display during my installation process, so I had to use [this fix from **askubuntu**](http://askubuntu.com/questions/541006/ubuntu-14-10-does-not-install-in-virtualbox)
 
@@ -29,6 +29,8 @@ Follow the [ROS instructions](http://wiki.ros.org/kinetic/Installation/Ubuntu) t
 I went through the following [tutorials on the wiki](http://wiki.ros.org/ROS/Tutorials).
 
 I also went through the [URDF tutorials](http://wiki.ros.org/urdf/Tutorials) on the wiki.
+
+Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urdf) was also quite useful.
 
 ## Creating Robot Model
 
