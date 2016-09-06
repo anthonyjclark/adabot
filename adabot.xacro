@@ -25,6 +25,16 @@
         <color rgba="1 1 1 1" />
     </material>
 
+    <!--
+         Macro for creating wheel geoms
+    -->
+    <xacro:property name="wh-geom">
+        <origin rpy="1.57075 0 0" xyz="0 0 0" />
+        <geometry>
+            <cylinder radius="${wh_radius}" length="${wh_length}" />
+        </geometry>
+    </xacro:property>
+
     <!-- 
          Macro for creating wheels
     -->
@@ -32,17 +42,19 @@
 
         <link name="wh-${suffix}">
             <visual>
-                <geometry>
-                    <cylinder radius="${wh_radius}" length="${wh_length}" />
-                </geometry>
+                <xacro:insert_block name="wh-geom" />
                 <material name="black" />
+                <origin rpy="1.57075 0 0" xyz="0 0 0" />
             </visual>
+            <collision>
+                <xacro:insert_block name="wh-geom" />
+                <geometry>
         </link>
 
-        <joint name="ax-${suffix}" type="fixed">
+        <joint name="ax-${suffix}" type="continuous">
             <parent link="${parent}" />
             <child link="wh-${suffix}" />
-            <origin xyz="${ch_length/2*reflect_fb} ${ch_width/2*reflect_lr} ${zoffset}" rpy="0 1.57 0" />
+            <origin rpy="0 0 0 " xyz="${ch_length/2*reflect_fb} ${(wh_length+ch_width)/2*reflect_lr} ${zoffset}" />
             <axis xyz="${ax_axis}" />
         </joint>
 

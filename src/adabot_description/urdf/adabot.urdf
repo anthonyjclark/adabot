@@ -28,12 +28,13 @@
         <cylinder length="0.2" radius="0.5"/>
       </geometry>
       <material name="black"/>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
     </visual>
   </link>
-  <joint name="ax-front-left" type="fixed">
+  <joint name="ax-front-left" type="continuous">
     <parent link="base_link"/>
     <child link="wh-front-left"/>
-    <origin rpy="0 1.57 0" xyz="1.0 -1.0 0.275"/>
+    <origin rpy="0 0 0 " xyz="1.0 -1.0 0.275"/>
     <axis xyz="0 1 0"/>
   </joint>
   <link name="wh-front-right">
@@ -42,12 +43,13 @@
         <cylinder length="0.2" radius="0.5"/>
       </geometry>
       <material name="black"/>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
     </visual>
   </link>
-  <joint name="ax-front-right" type="fixed">
+  <joint name="ax-front-right" type="continuous">
     <parent link="base_link"/>
     <child link="wh-front-right"/>
-    <origin rpy="0 1.57 0" xyz="1.0 1.0 0.275"/>
+    <origin rpy="0 0 0 " xyz="1.0 1.0 0.275"/>
     <axis xyz="0 1 0"/>
   </joint>
   <link name="wh-back-left">
@@ -56,12 +58,13 @@
         <cylinder length="0.2" radius="0.5"/>
       </geometry>
       <material name="black"/>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
     </visual>
   </link>
-  <joint name="ax-back-left" type="fixed">
+  <joint name="ax-back-left" type="continuous">
     <parent link="base_link"/>
     <child link="wh-back-left"/>
-    <origin rpy="0 1.57 0" xyz="-1.0 -1.0 0.275"/>
+    <origin rpy="0 0 0 " xyz="-1.0 -1.0 0.275"/>
     <axis xyz="0 1 0"/>
   </joint>
   <link name="wh-back-right">
@@ -70,12 +73,13 @@
         <cylinder length="0.2" radius="0.5"/>
       </geometry>
       <material name="black"/>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
     </visual>
   </link>
-  <joint name="ax-back-right" type="fixed">
+  <joint name="ax-back-right" type="continuous">
     <parent link="base_link"/>
     <child link="wh-back-right"/>
-    <origin rpy="0 1.57 0" xyz="-1.0 1.0 0.275"/>
+    <origin rpy="0 0 0 " xyz="-1.0 1.0 0.275"/>
     <axis xyz="0 1 0"/>
   </joint>
 </robot>

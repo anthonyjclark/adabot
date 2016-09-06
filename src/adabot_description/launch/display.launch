@@ -1,7 +1,7 @@
 <launch>
 
     <arg name="model" default="$(find adabot_description)/urdf/adabot.urdf" />
-    <arg name="gui" default="true" />
+    <arg name="gui" default="True" />
     <arg name="rvizconfig" default="$(find adabot_description)/rviz/urdf.rviz" />
 
     <param name="robot_description" textfile="$(arg model)" />
