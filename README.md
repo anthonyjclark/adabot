@@ -61,3 +61,12 @@ Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urd
     + create launch file
     + create rviz config file
     + `roslaunch <package> <launch-script>`
+
+## TODO
+
+- get it working in Gazebo
+
+## Note
+
+I left off working with the `rrbot_gazebo` launch file.
+
