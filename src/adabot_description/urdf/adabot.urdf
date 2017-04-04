@@ -10,6 +10,9 @@
   <material name="white">
     <color rgba="1 1 1 1"/>
   </material>
+  <material name="red">
+    <color rgba=".255, 0, 0, .001"/>
+  </material>
   <!--
          The main chassis/body
     -->
@@ -54,8 +57,133 @@
   <joint name="ax-front-left" type="continuous">
     <parent link="base_link"/>
     <child link="wh-front-left"/>
-    <origin rpy="0 0 0 " xyz="0.05 -0.0375 0.011"/>
+    <origin rpy="0 0 0" xyz="0.05 -0.0375 0.011"/>
     <axis xyz="0 1 0"/>
+  </joint>
+  <link name="wg-front-left-1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-left-1-joint" type="prismatic">
+    <parent link="wh-front-left"/>
+    <child link="wg-front-left-1"/>
+    <origin rpy="0 1.25663706144 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-front-left-2">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-left-2-joint" type="prismatic">
+    <parent link="wh-front-left"/>
+    <child link="wg-front-left-2"/>
+    <origin rpy="0 2.51327412287 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-front-left-3">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-left-3-joint" type="prismatic">
+    <parent link="wh-front-left"/>
+    <child link="wg-front-left-3"/>
+    <origin rpy="0 3.76991118431 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-front-left-4">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-left-4-joint" type="prismatic">
+    <parent link="wh-front-left"/>
+    <child link="wg-front-left-4"/>
+    <origin rpy="0 5.02654824574 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-front-left-5">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-left-5-joint" type="prismatic">
+    <parent link="wh-front-left"/>
+    <child link="wg-front-left-5"/>
+    <origin rpy="0 6.28318530718 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
   </joint>
   <link name="wh-front-right">
     <visual>
@@ -79,8 +207,133 @@
   <joint name="ax-front-right" type="continuous">
     <parent link="base_link"/>
     <child link="wh-front-right"/>
-    <origin rpy="0 0 0 " xyz="0.05 0.0375 0.011"/>
+    <origin rpy="0 0 0" xyz="0.05 0.0375 0.011"/>
     <axis xyz="0 1 0"/>
+  </joint>
+  <link name="wg-front-right-1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-right-1-joint" type="prismatic">
+    <parent link="wh-front-right"/>
+    <child link="wg-front-right-1"/>
+    <origin rpy="0 1.25663706144 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-front-right-2">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-right-2-joint" type="prismatic">
+    <parent link="wh-front-right"/>
+    <child link="wg-front-right-2"/>
+    <origin rpy="0 2.51327412287 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-front-right-3">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-right-3-joint" type="prismatic">
+    <parent link="wh-front-right"/>
+    <child link="wg-front-right-3"/>
+    <origin rpy="0 3.76991118431 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-front-right-4">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-right-4-joint" type="prismatic">
+    <parent link="wh-front-right"/>
+    <child link="wg-front-right-4"/>
+    <origin rpy="0 5.02654824574 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-front-right-5">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-front-right-5-joint" type="prismatic">
+    <parent link="wh-front-right"/>
+    <child link="wg-front-right-5"/>
+    <origin rpy="0 6.28318530718 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
   </joint>
   <link name="wh-back-left">
     <visual>
@@ -104,8 +357,133 @@
   <joint name="ax-back-left" type="continuous">
     <parent link="base_link"/>
     <child link="wh-back-left"/>
-    <origin rpy="0 0 0 " xyz="-0.05 -0.0375 0.011"/>
+    <origin rpy="0 0 0" xyz="-0.05 -0.0375 0.011"/>
     <axis xyz="0 1 0"/>
+  </joint>
+  <link name="wg-back-left-1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-left-1-joint" type="prismatic">
+    <parent link="wh-back-left"/>
+    <child link="wg-back-left-1"/>
+    <origin rpy="0 1.25663706144 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-back-left-2">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-left-2-joint" type="prismatic">
+    <parent link="wh-back-left"/>
+    <child link="wg-back-left-2"/>
+    <origin rpy="0 2.51327412287 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-back-left-3">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-left-3-joint" type="prismatic">
+    <parent link="wh-back-left"/>
+    <child link="wg-back-left-3"/>
+    <origin rpy="0 3.76991118431 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-back-left-4">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-left-4-joint" type="prismatic">
+    <parent link="wh-back-left"/>
+    <child link="wg-back-left-4"/>
+    <origin rpy="0 5.02654824574 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-back-left-5">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-left-5-joint" type="prismatic">
+    <parent link="wh-back-left"/>
+    <child link="wg-back-left-5"/>
+    <origin rpy="0 6.28318530718 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
   </joint>
   <link name="wh-back-right">
     <visual>
@@ -129,8 +507,133 @@
   <joint name="ax-back-right" type="continuous">
     <parent link="base_link"/>
     <child link="wh-back-right"/>
-    <origin rpy="0 0 0 " xyz="-0.05 0.0375 0.011"/>
+    <origin rpy="0 0 0" xyz="-0.05 0.0375 0.011"/>
     <axis xyz="0 1 0"/>
+  </joint>
+  <link name="wg-back-right-1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-right-1-joint" type="prismatic">
+    <parent link="wh-back-right"/>
+    <child link="wg-back-right-1"/>
+    <origin rpy="0 1.25663706144 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-back-right-2">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-right-2-joint" type="prismatic">
+    <parent link="wh-back-right"/>
+    <child link="wg-back-right-2"/>
+    <origin rpy="0 2.51327412287 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-back-right-3">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-right-3-joint" type="prismatic">
+    <parent link="wh-back-right"/>
+    <child link="wg-back-right-3"/>
+    <origin rpy="0 3.76991118431 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-back-right-4">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-right-4-joint" type="prismatic">
+    <parent link="wh-back-right"/>
+    <child link="wg-back-right-4"/>
+    <origin rpy="0 5.02654824574 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
+  </joint>
+  <link name="wg-back-right-5">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.002 0.001 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4e-05"/>
+      <inertia ixx="5.33666666667e-09" ixy="0" ixz="0" iyy="5.34666666667e-09" iyz="0" izz="1.66666666667e-11"/>
+    </inertial>
+  </link>
+  <joint name="wg-back-right-5-joint" type="prismatic">
+    <parent link="wh-back-right"/>
+    <child link="wg-back-right-5"/>
+    <origin rpy="0 6.28318530718 0" xyz="0 0 0"/>
+    <limit effort="1" lower="0.005" upper="0" velocity="1"/>
   </joint>
 </robot>
 
