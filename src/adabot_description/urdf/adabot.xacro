@@ -15,9 +15,9 @@
     <xacro:property name="ch_height" value="0.035" />
     <xacro:property name="ch_mass" value="${500*ch_length*ch_width*ch_height}" />
     
-    <xacro:property name="wg_length" value="0.002" />
+    <xacro:property name="wg_length" value="${wh_radius*2}" />
     <xacro:property name="wg_width" value="0.001" />
-    <xacro:property name="wg_height" value="0.04" />
+    <xacro:property name="wg_height" value="0.002" />
     <xacro:property name="wg_mass" value="${500*wg_length*wg_width*wg_height}" />
 
     <xacro:property name="zoffset" value="${wh_radius*1.1/2}" />
@@ -130,7 +130,7 @@
             <parent link="${parent}" />
             <child link="wg-${wheel}-${number}" />
             <origin rpy="0 ${2*pi*(number/5)} 0" xyz="0 0 0" />
-            <limit upper="0" lower="0.005" effort="1" velocity="1" />
+            <limit upper="${wg_length*.2}" lower="0" effort="1" velocity="1" />
         </joint>
         
     </xacro:macro>
