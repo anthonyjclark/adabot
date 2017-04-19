@@ -14,6 +14,11 @@
     <xacro:property name="ch_width" value="0.07" />
     <xacro:property name="ch_height" value="0.035" />
     <xacro:property name="ch_mass" value="${500*ch_length*ch_width*ch_height}" />
+    
+    <xacro:property name="wg_length" value="${wh_radius*2}" />
+    <xacro:property name="wg_width" value="0.001" />
+    <xacro:property name="wg_height" value="0.002" />
+    <xacro:property name="wg_mass" value="${500*wg_length*wg_width*wg_height}" />
 
     <xacro:property name="zoffset" value="${wh_radius*1.1/2}" />
 
@@ -28,6 +33,10 @@
 
     <material name="white">
         <color rgba="1 1 1 1" />
+    </material>
+    
+    <material name="red">
+        <color rgba=".255, 0, 0, .001" />
     </material>
 
     <!--
@@ -69,10 +78,61 @@
         <joint name="ax-${suffix}" type="continuous">
             <parent link="${parent}" />
             <child link="wh-${suffix}" />
-            <origin rpy="0 0 0 " xyz="${ch_length/2*reflect_fb} ${(wh_length+ch_width)/2*reflect_lr} ${zoffset}" />
+            <origin rpy="0 0 0" xyz="${ch_length/2*reflect_fb} ${(wh_length+ch_width)/2*reflect_lr} ${zoffset}" />
             <axis xyz="${ax_axis}" />
         </joint>
+        
+        <xacro:weg wheel="${suffix}" number="1" parent="wh-${suffix}" />
+        <xacro:weg wheel="${suffix}" number="2" parent="wh-${suffix}" />
+        <xacro:weg wheel="${suffix}" number="3" parent="wh-${suffix}" />
+        <xacro:weg wheel="${suffix}" number="4" parent="wh-${suffix}" />
+        <xacro:weg wheel="${suffix}" number="5" parent="wh-${suffix}" />
 
+    </xacro:macro>
+   
+    <!--
+         Macro for creating weg geoms
+    -->
+    <xacro:property name="wg_origin_geom">
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <geometry>
+            <box size="${wg_length} ${wg_width} ${wg_height}" />
+        </geometry>
+    </xacro:property>
+    
+    <!--
+         Macro for creating wegs
+    -->
+    <xacro:macro name="weg" params="wheel number parent">
+        
+        <link name="wg-${wheel}-${number}">
+            <visual>
+                <xacro:insert_block name="wg_origin_geom" />
+                <material name="white" />
+            </visual>
+            <collision>
+                <xacro:insert_block name="wg_origin_geom" />
+            </collision>
+            <inertial>
+                <mass value="${wg_mass}" />
+                <inertia
+                    ixx="${(1/12)*wg_mass*(wg_width**2 + wg_height**2)}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(1/12)*wg_mass*(wg_length**2 + wg_height**2)}"
+                    iyz="0"
+                    izz="${(1/12)*wg_mass*(wg_length**2 + wg_width**2)}"        
+                    />
+            </inertial>
+        </link>
+        
+        <joint name="wg-${wheel}-${number}-joint" type="prismatic">
+            <parent link="${parent}" />
+            <child link="wg-${wheel}-${number}" />
+            <origin rpy="0 ${2*pi*(number/5)} 0" xyz="0 0 0" />
+            <limit upper="${wg_length*.2}" lower="0" effort="1" velocity="1" />
+        </joint>
+        
     </xacro:macro>
 
     <!--
