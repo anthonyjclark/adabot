@@ -72,3 +72,12 @@ Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urd
 
 I left off working with the `rrbot_gazebo` launch file.
 
+## Testing
+
+- Unit testing
+- ROStest
+- ROSlaunch Check
+
+catkin_make_isolated
+
+build.ros.org?
