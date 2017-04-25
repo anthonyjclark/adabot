@@ -66,7 +66,8 @@ Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urd
 
 ## TODO
 
-- get it working in Gazebo
+- use proper naming (http://wiki.ros.org/ROS/Patterns/Conventions#Naming_ROS_Resources)
+- fix file hierarchy (http://answers.ros.org/question/9273/using-version-control-git-for-ros-development/)
 
 ## Note
 

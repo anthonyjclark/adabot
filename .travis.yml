@@ -19,14 +19,13 @@
 ###########################################################
 # Configuration
 ###########################################################
-# Ubuntu 16.04.2 LTS (Xenial Xerus)
-dist: xenial
 sudo: required
 language:
   - generic
 cache:
   - apt
-
+services:
+  - docker
 env:
   global:
     - CI_SOURCE_PATH=$(pwd)
@@ -39,63 +38,64 @@ env:
 # http://wiki.ros.org/kinetic/Installation/Ubuntu
 ###########################################################
 before_install:
-  - sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-  - sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
-  - sudo apt-get update
-  - sudo apt-get install ros-kinetic-desktop-full
-  - sudo rosdep init
-  - rosdep update
-  - source /opt/ros/kinetic/setup.bash
-  - sudo apt-get install python-rosinstall
+  # Docker is required to run Ubuntu 16.04.2 LTS (Xenial Xerus)
+  - docker pull ros:kinetic-ros-core
+
+
+script:
+  - docker run -v $(pwd):$(pwd) ros:kinetic-ros-base /bin/bash -c "source $(pwd)/.travis.sh"
+
+
+
+
 
 
 ###########################################################
 # Create a catkin workspace with the package under integration.
 ###########################################################
-install:
-  - mkdir -p ~/catkin_ws/src
-  - cd ~/catkin_ws/src
-  - catkin_init_workspace
-  # Create the devel/setup.bash (run catkin_make with an empty workspace) and
-  # source it to set the path variables.
-  - cd ~/catkin_ws
-  - catkin_make
-  - source devel/setup.bash
-  # Add the package under integration to the workspace using a symlink.
-  - cd ~/catkin_ws/src
-  - ln -s $CI_SOURCE_PATH .
+# install:
+#   - mkdir -p ~/catkin_ws/src
+#   - cd ~/catkin_ws/src
+#   - catkin_init_workspace
+#   # Create the devel/setup.bash (run catkin_make with an empty workspace) and
+#   # source it to set the path variables.
+#   - cd ~/catkin_ws
+#   - catkin_make
+#   - source devel/setup.bash
+#   # Add the package under integration to the workspace using a symlink.
+#   - cd ~/catkin_ws/src
+#   - ln -s $CI_SOURCE_PATH .
+
+# ###########################################################
+# # Install dependencies
+# # This is not currently needed by adabot
+# ###########################################################
+# before_script:
+#   # source dependencies: install using wstool.
+#   - cd ~/catkin_ws/src
+#   - wstool init
+#   - if [[ -f $ROSINSTALL_FILE ]] ; then wstool merge $ROSINSTALL_FILE ; fi
+#   - wstool up
+#   # package depdencies: install using rosdep.
+#   - cd ~/catkin_ws
+#   - rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
 
 
-###########################################################
-# Install dependencies
-# This is not currently needed by adabot
-###########################################################
-before_script:
-  # source dependencies: install using wstool.
-  - cd ~/catkin_ws/src
-  - wstool init
-  - if [[ -f $ROSINSTALL_FILE ]] ; then wstool merge $ROSINSTALL_FILE ; fi
-  - wstool up
-  # package depdencies: install using rosdep.
-  - cd ~/catkin_ws
-  - rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
-
-
-###########################################################
-# Build adabot
-###########################################################
-# Compile and test (mark the build as failed if any step fails). If the
-# CATKIN_OPTIONS file exists, use it as an argument to catkin_make, for example
-# to blacklist certain packages.
-#
-# NOTE on testing: `catkin_make run_tests` will show the output of the tests
-# (gtest, nosetest, etc..) but always returns 0 (success) even if a test
-# fails. Running `catkin_test_results` aggregates all the results and returns
-# non-zero when a test fails (which notifies Travis the build failed).
-script:
-  - source /opt/ros/kinetic/setup.bash
-  - cd ~/catkin_ws
-  - catkin_make_isolated $( [ -f $CATKIN_OPTIONS ] && cat $CATKIN_OPTIONS )
-  # Run the tests, ensuring the path is set correctly.
-  - source devel/setup.bash
-  - catkin_make run_tests && catkin_test_results
+# ###########################################################
+# # Build adabot
+# ###########################################################
+# # Compile and test (mark the build as failed if any step fails). If the
+# # CATKIN_OPTIONS file exists, use it as an argument to catkin_make, for example
+# # to blacklist certain packages.
+# #
+# # NOTE on testing: `catkin_make run_tests` will show the output of the tests
+# # (gtest, nosetest, etc..) but always returns 0 (success) even if a test
+# # fails. Running `catkin_test_results` aggregates all the results and returns
+# # non-zero when a test fails (which notifies Travis the build failed).
+# script:
+#   - source /opt/ros/kinetic/setup.bash
+#   - cd ~/catkin_ws
+#   - catkin_make_isolated $( [ -f $CATKIN_OPTIONS ] && cat $CATKIN_OPTIONS )
+#   # Run the tests, ensuring the path is set correctly.
+#   - source devel/setup.bash
+#   - catkin_make run_tests && catkin_test_results
