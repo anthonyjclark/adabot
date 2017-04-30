@@ -65,7 +65,7 @@ Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urd
     + `roslaunch <package> <launch-script>`
 
 
-##To get the world models to show up:
+## To get the world models to show up:
 
 Go to /home/yourUserName/adabot/src/adabot_gazebo/worlds and open the adabot.world file.
 
