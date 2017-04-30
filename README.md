@@ -64,6 +64,19 @@ Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urd
     + create rviz config file
     + `roslaunch <package> <launch-script>`
 
+
+##To get the world models to show up:
+
+Go to /home/yourUserName/adabot/src/adabot_gazebo/worlds and open the adabot.world file.
+
+Under the rockySurface and any other future models change where the <uri> tag shows up change
+
+<uri>/home/dillonflohr/adabot/src/adabot_gazebo/worlds/worldModels/rockySurfaceGood.dae</uri>
+
+to
+
+<uri>/home/*yourUserName*/adabot/src/adabot_gazebo/worlds/worldModels/rockySurfaceGood.dae</uri>
+
 ## TODO
 
 - get it working in Gazebo
