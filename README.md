@@ -1,38 +1,108 @@
+
 [![Build Status](https://travis-ci.org/anthony-jclark/adabot.svg?branch=master)](https://travis-ci.org/anthony-jclark/adabot)
 
 # adabot
 
+This is a workspace for the adabot robot. [[TODO: add description of adabot later]].
 
-## Install virtual machine software
+## Environment Setup
 
-I am currently using VirtualBox Version 5.0.26 r108824.
+- Ubuntu 16.04.2 LTS (xenial)
+- ROS Kinetic Kame (sudo apt-get install ros-kinetic-desktop-full)
 
-## Install a guest operating system
+## Directory Structure
 
-I am currently using ubuntu-16.04.1-desktop with the following properties:
+Below is the top-level (workspace) directory structure. I've decided to keep all adabot packages together. This makes it easier to developing code, and this code is not likely to be reused by other projects.
 
-- 4 GB RAM
-- 50 GB fixed storage
+```
+adabot
+└── src
+    ├── CMakeLists.txt -> /opt/ros/kinetic/share/catkin/cmake/toplevel.cmake
+    ├── adabot_description
+    └── adabot_gazebo
+```
 
-*Note: I also cloned the image at this point to give myself something easy to fall back on if I manage to mess up the ROS installatin.*
+### adabot_description Package
 
-I had a corrupted display during my installation process, so I had to use [this fix from **askubuntu**](http://askubuntu.com/questions/541006/ubuntu-14-10-does-not-install-in-virtualbox)
+    ├── adabot_description
+    │   ├── CMakeLists.txt
+    │   ├── launch
+    │   │   ├── display.launch
+    │   │   └── display.launch.advanced
+    │   ├── package.xml
+    │   ├── rviz
+    │   │   └── urdf.rviz
+    │   ├── src
+    │   │   └── parser.cpp
+    │   └── urdf
+    │       ├── adabot.urdf
+    │       ├── adabot.xacro
+    │       └── model.urdf
 
-`Left Cmd` + `fn` + `F1` and then `Left Cmd` + `fn` + `F7`
+###
 
->This works by forcing the kernel's graphics buffer / X / XRandR to re-detect the monitor and display in the proper resolution.
+    └── adabot_gazebo
+        ├── CMakeLists.txt
+        ├── launch
+        │   └── adabot_world.launch
+        ├── package.xml
+        └── worlds
+            └── adabot.world
 
-## Install ROS
+## Commonly Used Commands
 
-Follow the [ROS instructions](http://wiki.ros.org/kinetic/Installation/Ubuntu) to install ROS from packages. The previous link is the *current* release version of ROS as of this writing, which is called **Kinetic**.
+Before running any commands, the ROS environment needs to be setup. You can run the following command each time you need to use ROS or you can place it in your shell configuration file (e.g., `.bashrc` or `.zshrc`):
 
-### Follow some of the tutorials to test out ROS
+- General version: `source /opt/ros/{version}/setup.{bash|zsh}`
+- What I use: `source /opt/ros/kinetic/setup.zsh`
 
-I went through the following [tutorials on the wiki](http://wiki.ros.org/ROS/Tutorials).
+## Initial Workspace Setup from the adabot Repository
 
-I also went through the [URDF tutorials](http://wiki.ros.org/urdf/Tutorials) on the wiki.
+In general it is a good idea to keep your workspace separate from your git repository (based on "ROS Best Practices"). The main reason to do this is if you'd like to use a cloned package in multiple workspaces. Thus, a good series of commands for getting started on adabot are:
 
-Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urdf) was also quite useful.
+`cd ~/git/`
+`git https://github.com/anthony-jclark/adabot.git`
+`mkdir -p ~/ros_workspaces/adabot_ws/src/`
+`cd ~/ros_workspaces/adabot_ws/`
+`ln -s ~/git/adabot ~/ros_workspaces/adabot_ws/src/`
+`catkin build adabot`
+
+Once you have your workspace in this configuration, you need to update the ROS environmental variables with your package information. To do this you can source the new configuration file:
+
+- General version: `source <path-to-workspace>/devel/setup.{bash|zsh}`
+- What I use: `source devel/setup.zsh`
+
+## Checking and Cleaning the Workspace
+
+If you run into trouble or something gets mixed up you can clean the directory with `clean`. This will delete the *devel* and *build* folder, but it will not touch the *src* folder.
+`catkin clean`
+
+You can check your catkin workspace setup with the following command:
+`catkin config`
+
+## Building the Workspace
+
+`catkin build <package-name>`
+
+## Other Commands
+
+- rosinstall_generator
+- wstool
+- vcstool
+
+# Useful Documentation and Tutorials
+
+- [Programming for Robotics - ROS](http://www.rsl.ethz.ch/education-students/lectures/ros.html)
+- [ROS Package Template](https://github.com/ethz-asl/ros_best_practices/tree/master/ros_package_template)
+- [Example ROS Robot](https://github.com/carlosjoserg/rrbot)
+- [[Overview] Getting Starting with Autonomous Robots in ROS via Simulations](http://moorerobots.com/blog/post/6)
+- [ROS Documentation](http://wiki.ros.org/)
+- [Gazebo Tutorials](http://gazebosim.org/tutorials)
+
+
+
+
+
 
 ## Creating Robot Model
 
@@ -82,3 +152,5 @@ I left off working with the `rrbot_gazebo` launch file.
 catkin_make_isolated
 
 build.ros.org?
+
+roslint
