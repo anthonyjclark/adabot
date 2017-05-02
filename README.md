@@ -56,6 +56,10 @@ Before running any commands, the ROS environment needs to be setup. You can run 
 - General version: `source /opt/ros/{version}/setup.{bash|zsh}`
 - What I use: `source /opt/ros/kinetic/setup.zsh`
 
+To have this command run whenever you start your shell you can run the following command (you only need to do this once):
+
+`echo "source /opt/ros/kinetic/setup.zsh" >> ~/.zshrc`
+
 ## Initial Workspace Setup from the adabot Repository
 
 In general it is a good idea to keep your workspace separate from your git repository (based on "ROS Best Practices"). The main reason to do this is if you'd like to use a cloned package in multiple workspaces. Thus, a good series of commands for getting started on adabot are:
@@ -63,26 +67,38 @@ In general it is a good idea to keep your workspace separate from your git repos
 `cd ~/git/`
 `git https://github.com/anthony-jclark/adabot.git`
 `mkdir -p ~/ros_workspaces/adabot_ws/src/`
-`cd ~/ros_workspaces/adabot_ws/`
 `ln -s ~/git/adabot ~/ros_workspaces/adabot_ws/src/`
-`catkin build adabot`
+`cd ~/ros_workspaces/adabot_ws/src/`
+`catkin init`
+`cd ~/ros_workspaces/adabot_ws/`
+`catkin build`
 
 Once you have your workspace in this configuration, you need to update the ROS environmental variables with your package information. To do this you can source the new configuration file:
 
 - General version: `source <path-to-workspace>/devel/setup.{bash|zsh}`
 - What I use: `source devel/setup.zsh`
 
+If adabot is the only ROS package that you will be working on, then you can add this to your shell configuration file as well.
+
+`echo "source ~/ros_workspaces/adabot_ws/devel/setup.zsh" >> ~/.zshrc`
+
 ## Checking and Cleaning the Workspace
 
 If you run into trouble or something gets mixed up you can clean the directory with `clean`. This will delete the *devel* and *build* folder, but it will not touch the *src* folder.
+
 `catkin clean`
 
 You can check your catkin workspace setup with the following command:
+
 `catkin config`
 
 ## Building the Workspace
 
 `catkin build <package-name>`
+
+To build packages in release mode add the following to the catkin configuration before building.
+
+`catkin config -DCMAKE_BUILD_TYPE=Release`
 
 ## Other Commands
 
@@ -98,6 +114,23 @@ You can check your catkin workspace setup with the following command:
 - [[Overview] Getting Starting with Autonomous Robots in ROS via Simulations](http://moorerobots.com/blog/post/6)
 - [ROS Documentation](http://wiki.ros.org/)
 - [Gazebo Tutorials](http://gazebosim.org/tutorials)
+
+# Other Tips
+
+- Never edit files in */opt/ros/...*
+- Always use version control
+    + Don't check in binaries
+    + Don't check in generated files (use .gitignore, etc.)
+- Leverage 3rd party libraries
+- Use ROS Overlays for managing ROS versions
+    + Install `rosws`
+    + `rosws init ~/fuerte /opt/ros/fuerte/`
+    + `source ~/fuerte/setup.zsh`
+    + [More Info Here](http://robohow.eu/_media/meetings/first-integration-workshop/ros-best-practices.pdf)
+- You can use an IDE (e.g., Eclipse) to develop and build ROS code
+
+
+
 
 
 
