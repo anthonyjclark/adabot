@@ -5,6 +5,23 @@
 
 This is a stack for the adabot robot.
 
+- [Environment Setup](#environment-setup)
+- [Directory Structure](#directory-structure)
+    - [adabot_description Package](#adabot_description-package)
+- [adabot_gazebo Package](#adabot_gazebo-package)
+- [Commonly Used Commands](#commonly-used-commands)
+    - [Initial Workspace Setup from the adabot Repository](#initial-workspace-setup-from-the-adabot-repository)
+    - [Checking and Cleaning the Workspace](#checking-and-cleaning-the-workspace)
+    - [Building the Workspace](#building-the-workspace)
+    - [Running Tests](#running-tests)
+    - [Creating a New adabot Package](#creating-a-new-adabot-package)
+- [Other Commands](#other-commands)
+- [Useful Documentation and Tutorials](#useful-documentation-and-tutorials)
+- [Other Tips](#other-tips)
+- [Creating Robot Model](#creating-robot-model)
+- [Note](#note)
+- [Testing](#testing)
+
 ## Environment Setup
 
 - Ubuntu 16.04.2 LTS (xenial)
@@ -22,9 +39,21 @@ adabot
     └── adabot_gazebo
 ```
 
-### adabot_description Package
+### adabot_description
 
-### adabot_gazebo Package
+This packages specifies adabot's structure in a Xacro file. Xacro is an XML macro language that enables the writing of shorter more readable XML files (you can use variables, include other files, etc.). The URDF files generated from the Xacro files can be viewed with rviz.
+
+TODO:
+- show launch
+- show directory structure
+
+### adabot_gazebo
+
+This packages enables the simulation of adabot in Gazebo.
+
+TODO:
+- show launch
+- show directory structure
 
 ## Commonly Used Commands
 
@@ -37,7 +66,7 @@ To have this command run whenever you start your shell you can run the following
 
 `echo "source /opt/ros/kinetic/setup.zsh" >> ~/.zshrc`
 
-## Initial Workspace Setup from the adabot Repository
+### Initial Workspace Setup from the adabot Repository
 
 In general it is a good idea to keep your workspace separate from your git repository (based on "ROS Best Practices"). The main reason to do this is if you'd like to use a cloned package in multiple workspaces. Thus, a good series of commands for getting started on adabot are:
 
@@ -48,6 +77,9 @@ mkdir -p ~/ros_workspaces/adabot_ws/src/
 ln -s ~/git/adabot ~/ros_workspaces/adabot_ws/src/
 cd ~/ros_workspaces/adabot_ws/
 catkin init
+catkin config --profile debug -x _debug --cmake-args -DCMAKE_BUILD_TYPE=Debug
+catkin config --profile release -x _release --cmake-args -DCMAKE_BUILD_TYPE=Release
+catkin profile set debug
 catkin build
 ```
 
@@ -64,31 +96,81 @@ If adabot is the only ROS package that you will be working on, then you can add 
 
 `echo "source ~/ros_workspaces/adabot_ws/devel/setup.zsh" >> ~/.zshrc`
 
-## Checking and Cleaning the Workspace
+<!-- source $(catkin locate --shell-verbs) -->
+
+### Checking and Cleaning the Workspace
+
+You can check your catkin workspace setup with the following command (see the [catkin-tools documentation](http://catkin-tools.readthedocs.io/en/latest/verbs/catkin_config.html) for more information):
+
+`catkin config`
+
+You can list information about the packages in the current workspace with:
+
+`catkin list`
+
+For a more detailed check of package configurations (analyzes package.xml and CMakeLists.txt files) use:
+
+`catkin lint`
 
 If you run into trouble or something gets mixed up you can clean the directory with `clean`. This will delete the *devel* and *build* folder, but it will not touch the *src* folder.
 
 `catkin clean`
 
-You can check your catkin workspace setup with the following command:
+### Building the Workspace
 
-`catkin config`
+To build all packages in the workspace you can run the following command:
 
-## Building the Workspace
+`catkin build`
+
+To build a specific package (and its dependencies) use the following:
 
 `catkin build <package-name>`
 
-To build packages in release mode add the following to the catkin configuration before building.
+After you build it is generally a good idea to rerun the source command for the workspace:
 
-`catkin config -DCMAKE_BUILD_TYPE=Release`
+`source devel/setup.zsh`
 
-## Other Commands
+To build packages in release mode you need to change profiles before building:
+
+```
+catkin profile set release
+catkin build
+```
+
+Or you can do this with one line:
+
+`catkin build --profile release`
+
+### Running Tests
+
+To run all tests for the workspace use the following:
+
+`catkin run_tests`
+
+- Unit testing
+- ROStest
+- ROSlaunch Check
+- build.ros.org?
+- roslint
+
+
+### Creating a New adabot Package
+
+To create a new package, use the following command in the `~/ros_workspaces/adabot_ws/src/adabot/` directory:
+
+`catkin create PKG_NAME -l MIT -a YOUR_NAME YOUR_EMAIL -d DESCRIPTION`
+
+for which you will need to supply the name of the package, your name and email address, and a brief description of the package.
+
+### Other Commands
 
 - rosinstall_generator
 - wstool
 - vcstool
+- rosdep update
 
-# Useful Documentation and Tutorials
+
+## Useful Documentation and Tutorials
 
 - [Programming for Robotics - ROS](http://www.rsl.ethz.ch/education-students/lectures/ros.html)
 - [ROS Package Template](https://github.com/ethz-asl/ros_best_practices/tree/master/ros_package_template)
@@ -97,7 +179,11 @@ To build packages in release mode add the following to the catkin configuration 
 - [ROS Documentation](http://wiki.ros.org/)
 - [Gazebo Tutorials](http://gazebosim.org/tutorials)
 
-# Other Tips
+
+- Working with the `rrbot_gazebo` launch file.
+- Fixing the file hierarchy (workspace doesn't belong in repo)
+
+## Other Tips
 
 - Never edit files in */opt/ros/...*
 - Always use version control
@@ -111,6 +197,18 @@ To build packages in release mode add the following to the catkin configuration 
     + [More Info Here](http://robohow.eu/_media/meetings/first-integration-workshop/ros-best-practices.pdf)
     + [ROS Official Documentation Here](http://wiki.ros.org/catkin/Tutorials/workspace_overlaying)
 - You can use an IDE (e.g., Eclipse) to develop and build ROS code
+
+## TODO
+
+- split robot description into multiple files
+    + primary xacro (all needed links and joints)
+    + gazebo specific stuff (visualization, dynamics, sensor/actuator plugins)
+    + materials xacro
+    + macros xacro
+- update rviz launch file
+- update gazebo launch file
+- add words to _gazebo package (and launch files)
+- once simulation is complete start working on physical device
 
 
 
@@ -127,42 +225,7 @@ To build packages in release mode add the following to the catkin configuration 
     + `check_urdf model.urdf`
     + `urdf_to_graphiz model.urdf`
     + `evince test_robot.pdf`
-2. Setup workspace
-    + `mkdir src`
-    + `cd src`
-    + `catkin_init_workspace`
-    + `cd ..`
-    + `catkin_make`
-    + `. devel/setup.bash`
-3. Create package
-    + `cd src`
-    + `catkin_create_pkg <name> <list-of-depends>`
-    + edit package.xml (author, maintainer, license, etc.)
-4. Editing package
-    + `cd <package>/src`
-    + add/edit source files
-    + `cd ..`
-    + update CMakeLists.txt
-    + `cd ..`
-    + `catkin_make -DCMAKE_BUILD_TYPE=release`
 5. Viewing with RViz
     + create launch file
     + create rviz config file
     + `roslaunch <package> <launch-script>`
-
-## Note
-
-- Working with the `rrbot_gazebo` launch file.
-- Fixing the file hierarchy (workspace doesn't belong in repo)
-
-## Testing
-
-- Unit testing
-- ROStest
-- ROSlaunch Check
-
-catkin_make_isolated
-
-build.ros.org?
-
-roslint
