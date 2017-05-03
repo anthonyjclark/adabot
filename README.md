@@ -3,7 +3,7 @@
 
 # adabot
 
-This is a workspace for the adabot robot. [[TODO: add description of adabot later]].
+This is a stack for the adabot robot.
 
 ## Environment Setup
 
@@ -12,7 +12,7 @@ This is a workspace for the adabot robot. [[TODO: add description of adabot late
 
 ## Directory Structure
 
-Below is the top-level (workspace) directory structure. I've decided to keep all adabot packages together. This makes it easier to developing code, and this code is not likely to be reused by other projects. [This ROS Answers Post](http://answers.ros.org/question/257855/git-strategy-for-catkin-and-package-folders/) has a good explanation of how to effectively use a git repository for multiple packages.
+Below is the top-level (workspace) directory structure. I've decided to keep all adabot packages together. This makes it easier to develop code, and this code is not likely to be reused by other projects. [This ROS Answers Post](http://answers.ros.org/question/257855/git-strategy-for-catkin-and-package-folders/) has a good explanation of how to effectively use a git repository for multiple packages.
 
 ```
 adabot
@@ -24,30 +24,7 @@ adabot
 
 ### adabot_description Package
 
-    ├── adabot_description
-    │   ├── CMakeLists.txt
-    │   ├── launch
-    │   │   ├── display.launch
-    │   │   └── display.launch.advanced
-    │   ├── package.xml
-    │   ├── rviz
-    │   │   └── urdf.rviz
-    │   ├── src
-    │   │   └── parser.cpp
-    │   └── urdf
-    │       ├── adabot.urdf
-    │       ├── adabot.xacro
-    │       └── model.urdf
-
-###
-
-    └── adabot_gazebo
-        ├── CMakeLists.txt
-        ├── launch
-        │   └── adabot_world.launch
-        ├── package.xml
-        └── worlds
-            └── adabot.world
+### adabot_gazebo Package
 
 ## Commonly Used Commands
 
@@ -64,14 +41,19 @@ To have this command run whenever you start your shell you can run the following
 
 In general it is a good idea to keep your workspace separate from your git repository (based on "ROS Best Practices"). The main reason to do this is if you'd like to use a cloned package in multiple workspaces. Thus, a good series of commands for getting started on adabot are:
 
-`cd ~/git/`
-`git https://github.com/anthony-jclark/adabot.git`
-`mkdir -p ~/ros_workspaces/adabot_ws/src/`
-`ln -s ~/git/adabot ~/ros_workspaces/adabot_ws/src/`
-`cd ~/ros_workspaces/adabot_ws/src/`
-`catkin init`
-`cd ~/ros_workspaces/adabot_ws/`
-`catkin build`
+```bash
+cd ~/git/
+git clone https://github.com/anthony-jclark/adabot.git
+mkdir -p ~/ros_workspaces/adabot_ws/src/
+ln -s ~/git/adabot ~/ros_workspaces/adabot_ws/src/
+cd ~/ros_workspaces/adabot_ws/
+catkin init
+catkin build
+```
+
+To checkout a specific branch of the repository you can use the following in place of the second command above:
+
+`git clone https://github.com/anthony-jclark/adabot.git -b branch_name`
 
 Once you have your workspace in this configuration, you need to update the ROS environmental variables with your package information. To do this you can source the new configuration file:
 
@@ -127,6 +109,7 @@ To build packages in release mode add the following to the catkin configuration 
     + `rosws init ~/fuerte /opt/ros/fuerte/`
     + `source ~/fuerte/setup.zsh`
     + [More Info Here](http://robohow.eu/_media/meetings/first-integration-workshop/ros-best-practices.pdf)
+    + [ROS Official Documentation Here](http://wiki.ros.org/catkin/Tutorials/workspace_overlaying)
 - You can use an IDE (e.g., Eclipse) to develop and build ROS code
 
 
@@ -167,14 +150,10 @@ To build packages in release mode add the following to the catkin configuration 
     + create rviz config file
     + `roslaunch <package> <launch-script>`
 
-## TODO
-
-- use proper naming (http://wiki.ros.org/ROS/Patterns/Conventions#Naming_ROS_Resources)
-- fix file hierarchy (http://answers.ros.org/question/9273/using-version-control-git-for-ros-development/)
-
 ## Note
 
-I left off working with the `rrbot_gazebo` launch file.
+- Working with the `rrbot_gazebo` launch file.
+- Fixing the file hierarchy (workspace doesn't belong in repo)
 
 ## Testing
 
