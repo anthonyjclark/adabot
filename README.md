@@ -210,17 +210,16 @@ for which you will need to supply the name of the package, your name and email a
     + materials xacro
     + macros xacro
 - add a scaling parameter to the base xacro file
-- check _description
-    + is parser.cpp needed (also in CMakeLists.txt)
 - update rviz launch file
     + option to use current urdf file
 - update rviz config file
 - update gazebo launch file
+    + pass in world file
 - add words to _gazebo package (and launch files)
 - once simulation is complete start working on physical device
 - check_urdf
-
-
+- every needs to add themselves as authors to appropriate packages
+- adabot empty world needs to use xacro file
 
 
 
