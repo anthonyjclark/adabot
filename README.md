@@ -44,7 +44,7 @@ adabot
 This packages specifies adabot's structure in a Xacro file. Xacro is an XML macro language that enables the writing of shorter more readable XML files (you can use variables, include other files, etc.). The URDF files generated from the Xacro files can be viewed with rviz.
 
 TODO:
-- show launch
+- show launch commands
 - show directory structure
 
 ### adabot_gazebo
@@ -52,7 +52,7 @@ TODO:
 This packages enables the simulation of adabot in Gazebo.
 
 TODO:
-- show launch
+- show launch commands
 - show directory structure
 
 ## Commonly Used Commands
@@ -65,6 +65,10 @@ Before running any commands, the ROS environment needs to be setup. You can run 
 To have this command run whenever you start your shell you can run the following command (you only need to do this once):
 
 `echo "source /opt/ros/kinetic/setup.zsh" >> ~/.zshrc`
+
+If you are using `bash` or `zsh` it will also be useful to take advantage of the catkin-tools extended verbs:
+
+`source $(catkin locate --shell-verbs)`
 
 ### Initial Workspace Setup from the adabot Repository
 
@@ -158,9 +162,9 @@ To run all tests for the workspace use the following:
 
 To create a new package, use the following command in the `~/ros_workspaces/adabot_ws/src/adabot/` directory:
 
-`catkin create PKG_NAME -l MIT -a YOUR_NAME YOUR_EMAIL -d DESCRIPTION`
+`catkin create pkg PKG_NAME -l "MIT" -a "YOUR_NAME" "YOUR_EMAIL" -d "DESCRIPTION"`
 
-for which you will need to supply the name of the package, your name and email address, and a brief description of the package.
+for which you will need to supply the name of the package, your name and email address, as well as a brief description of the package.
 
 ### Other Commands
 
@@ -205,7 +209,11 @@ for which you will need to supply the name of the package, your name and email a
     + gazebo specific stuff (visualization, dynamics, sensor/actuator plugins)
     + materials xacro
     + macros xacro
+- check _description
+    + is parser.cpp needed (also in CMakeLists.txt)
+    + 
 - update rviz launch file
+- update rviz config file
 - update gazebo launch file
 - add words to _gazebo package (and launch files)
 - once simulation is complete start working on physical device
