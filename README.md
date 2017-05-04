@@ -211,8 +211,8 @@ for which you will need to supply the name of the package, your name and email a
     + macros xacro
 - check _description
     + is parser.cpp needed (also in CMakeLists.txt)
-    + 
 - update rviz launch file
+    + option to use current urdf file
 - update rviz config file
 - update gazebo launch file
 - add words to _gazebo package (and launch files)
