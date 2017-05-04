@@ -217,6 +217,7 @@ for which you will need to supply the name of the package, your name and email a
 - update gazebo launch file
 - add words to _gazebo package (and launch files)
 - once simulation is complete start working on physical device
+- check_urdf
 
 
 

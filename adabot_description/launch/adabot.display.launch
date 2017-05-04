@@ -16,7 +16,7 @@
     <!--    robot_description : expose the URDF model to {joint,robot}_state_publisher -->
     <!--    use_gui           : tell joint_state_publisher to show a gui -->
     <!--  -->
-    <param name="robot_description" textfile="$(arg model)" />
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
     <param name="use_gui" value="$(arg gui)" />
 
     <!--  -->
