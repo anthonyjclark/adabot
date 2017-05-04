@@ -209,6 +209,7 @@ for which you will need to supply the name of the package, your name and email a
     + gazebo specific stuff (visualization, dynamics, sensor/actuator plugins)
     + materials xacro
     + macros xacro
+- add a scaling parameter to the base xacro file
 - check _description
     + is parser.cpp needed (also in CMakeLists.txt)
 - update rviz launch file
@@ -218,7 +219,6 @@ for which you will need to supply the name of the package, your name and email a
 - add words to _gazebo package (and launch files)
 - once simulation is complete start working on physical device
 - check_urdf
-
 
 
 
