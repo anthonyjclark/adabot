@@ -70,9 +70,13 @@ Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urd
 Run these commands:
 
 cd adabot
+
 catkin_make
+
 source devel/setup.bash
+
 export GAZEBO_MODEL_PATH=~/adabot/src/adabot_gazebo/worlds/worldModels
+
 roslaunch adabot_gazebo adabot_world.launch
 
 
