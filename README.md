@@ -65,23 +65,17 @@ Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urd
     + `roslaunch <package> <launch-script>`
 
 
-## To get the world models to show up:
+## How to run the world after cloning this repo into your home directory.
 
-Go to /home/yourUserName/adabot/src/adabot_gazebo/worlds and open the adabot.world file.
+Run these commands:
 
-Under the rockySurface and any other future models change where the <uri> tag shows up change
+cd adabot
+catkin_make
+source devel/setup.bash
+export GAZEBO_MODEL_PATH=~/adabot/src/adabot_gazebo/worlds/worldModels
+roslaunch adabot_gazebo adabot_world.launch
 
-<uri>/home/dillonflohr/adabot/src/adabot_gazebo/worlds/worldModels/rockySurfaceGood.dae</uri>
-
-to
-
-<uri>/home/*yourUserName*/adabot/src/adabot_gazebo/worlds/worldModels/rockySurfaceGood.dae</uri>
 
 ## TODO
-
-- get it working in Gazebo
-
-## Note
-
-I left off working with the `rrbot_gazebo` launch file.
+Please refer to the Trello page.
 
