@@ -33,8 +33,8 @@
   <!-- Load the URDF into the ROS Parameter Server -->
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
 
-  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-  <!-- <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model adabot -param robot_description"/> -->
+  <!-- Spawn a robot into Gazebo from the ROS Parameter Server -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model adabot" />
 
   <!-- ros_control adabot launch file -->
   <!--include file="$(find adabot_control)/launch/adabot_control.launch" /-->
