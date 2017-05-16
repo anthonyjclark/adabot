@@ -8,7 +8,7 @@ This is a stack for the adabot robot. Below are instructions for setting up the 
 ```bash
 mkdir -p ~/.ros_repos/
 cd ~/.ros_repos/
-git clone https://github.com/anthony-jclark/adabot.git
+hub clone anthony-jclark/adabot.git
 mkdir -p ~/ros_workspaces/adabot_ws/src/
 ln -s ~/.ros_repos/adabot ~/ros_workspaces/adabot_ws/src/
 cd ~/ros_workspaces/adabot_ws/
@@ -39,8 +39,9 @@ catkin build
 - adabot empty world needs to use xacro file
 - split-up the readme into separate files
 - add script for the simple startup
-
-
+- add installation of hub on linux
+- add info about setting up ssh keys on github
+- add general info about using git (git workflow with adabot)
 
 
 
