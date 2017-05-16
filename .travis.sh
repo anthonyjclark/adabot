@@ -3,8 +3,11 @@
 # Error if any command fails
 set -e
 
+printf "\nCreating the catkin workspace.\n"
 
-printf "Testing printing from inside script.\n"
+printf "\n$(ls .)\n"
+
+
 exit 0
 
 
