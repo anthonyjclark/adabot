@@ -5,8 +5,8 @@ set -e
 
 printf "\nCreating the catkin workspace.\n"
 
-printf "\n$(ls .)\n"
-
+find_output=$(find . -name "*adabot*") 
+printf "\n$find_output\n"
 
 exit 0
 
