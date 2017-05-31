@@ -22,11 +22,6 @@ catkin build
 
 ## TODO
 
-- split robot description into multiple files
-    + primary xacro (all needed links and joints)
-    + gazebo specific stuff (visualization, dynamics, sensor/actuator plugins)
-    + materials xacro
-    + macros xacro
 - add a scaling parameter to the base xacro file
 - update rviz launch file
     + option to use current urdf file
@@ -35,12 +30,9 @@ catkin build
     + pass in world file
 - add words to _gazebo package (and launch files)
 - once simulation is complete start working on physical device
-- check_urdf
 - every needs to add themselves as authors to appropriate packages
 - adabot empty world needs to use xacro file
-- split-up the readme into separate files
 - add script for the simple startup
-- add installation of hub on linux
 - add info about setting up ssh keys on github
 - add general info about using git (git workflow with adabot)
 - change wegs so that that are placed and sizes correctly (currently they are the diameter of the wheel--they should be less than the radius)

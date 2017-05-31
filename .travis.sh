@@ -3,6 +3,11 @@
 # Error if any command fails
 set -e
 
+
+# ---------------------------------------------------------
+printf "\nInstall testing tools.\n"
+sudo pip install -U catkin_tools
+
 # ---------------------------------------------------------
 printf "\nCreating the catkin workspace.\n"
 
