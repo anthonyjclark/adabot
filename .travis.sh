@@ -3,13 +3,33 @@
 # Error if any command fails
 set -e
 
+# ---------------------------------------------------------
 printf "\nCreating the catkin workspace.\n"
 
+mkdir -p ~/ros_workspaces/adabot_ws/src/
+ln -s /home/travis/build/anthony-jclark/adabot ~/ros_workspaces/adabot_ws/src/
+cd ~/ros_workspaces/adabot_ws/
+catkin init
+catkin config --cmake-args -DCMAKE_BUILD_TYPE=Debug
+
+# ---------------------------------------------------------
+printf "\nBuilding the source tree.\n"
+
+catkin build
+
+# ---------------------------------------------------------
+printf "\nSourcing the workspace setup file.\n"
+
+source ~/ros_workspaces/adabot_ws/devel/setup.bash
+
+# ---------------------------------------------------------
 printf "\nTesting the XACRO files.\n"
 
+rosrun xacro xacro --inorder $(rospack find adabot_description)/urdf/adabot.xacro > tmp.urdf
+check_urdf tmp.urdf
 
-find_output=$(find . -name "*adabot*")
-printf "\n$find_output\n"
+# find_output=$(find . -name "*adabot*")
+# printf "\n$find_output\n"
 
 exit 0
 
