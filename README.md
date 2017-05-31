@@ -9,6 +9,7 @@ This is a stack for the adabot robot. Below are instructions for setting up the 
 mkdir -p ~/.ros_repos/
 cd ~/.ros_repos/
 hub clone anthony-jclark/adabot.git
+hub fork
 mkdir -p ~/ros_workspaces/adabot_ws/src/
 ln -s ~/.ros_repos/adabot ~/ros_workspaces/adabot_ws/src/
 cd ~/ros_workspaces/adabot_ws/
