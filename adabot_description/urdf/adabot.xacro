@@ -153,11 +153,11 @@
                 (4) pass the value to the wheel macro
                 (5) have some ugly conditionals below
         -->
-        <xacro:weg wheel="${suffix}" number="1" parent="${wh_name}" />
-        <xacro:weg wheel="${suffix}" number="2" parent="${wh_name}" />
-        <xacro:weg wheel="${suffix}" number="3" parent="${wh_name}" />
-        <xacro:weg wheel="${suffix}" number="4" parent="${wh_name}" />
-        <xacro:weg wheel="${suffix}" number="5" parent="${wh_name}" />
+        <xacro:weg wheel="${suffix}" number="1" parent="${wh_name}" total="5" />
+        <xacro:weg wheel="${suffix}" number="2" parent="${wh_name}" total="5" />
+        <xacro:weg wheel="${suffix}" number="3" parent="${wh_name}" total="5" />
+        <xacro:weg wheel="${suffix}" number="4" parent="${wh_name}" total="5" />
+        <xacro:weg wheel="${suffix}" number="5" parent="${wh_name}" total="5" />
 
     </xacro:macro>
 

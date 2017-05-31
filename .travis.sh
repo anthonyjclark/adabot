@@ -5,7 +5,10 @@ set -e
 
 printf "\nCreating the catkin workspace.\n"
 
-find_output=$(find . -name "*adabot*") 
+printf "\nTesting the XACRO files.\n"
+
+
+find_output=$(find . -name "*adabot*")
 printf "\n$find_output\n"
 
 exit 0
