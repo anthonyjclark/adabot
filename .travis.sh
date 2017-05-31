@@ -3,15 +3,17 @@
 # Error if any command fails
 set -e
 
+# Echo commands and expand variables
+set -x
 
 # ---------------------------------------------------------
 printf "\nInstall testing tools.\n"
 apt-get update
-apt-get install wget
+apt-get -y install wget
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list'
 wget http://packages.ros.org/ros.key -O - | apt-key add -
 apt-get update
-apt-get install python-catkin-tools
+apt-get -y install python-catkin-tools
 
 # ---------------------------------------------------------
 printf "\nCreating the catkin workspace.\n"
