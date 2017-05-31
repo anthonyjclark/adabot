@@ -38,6 +38,5 @@ catkin build
 - change wegs so that that are placed and sizes correctly (currently they are the diameter of the wheel--they should be less than the radius)
 - investigate weg joint parameters (effort and velocity)
 - parameterize weg size
-
-
+- fix CI to use custom docker file
 
