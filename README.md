@@ -43,7 +43,9 @@ catkin build
 - add installation of hub on linux
 - add info about setting up ssh keys on github
 - add general info about using git (git workflow with adabot)
-
+- change wegs so that that are placed and sizes correctly (currently they are the diameter of the wheel--they should be less than the radius)
+- investigate weg joint parameters (effort and velocity)
+- parameterize weg size
 
 
 
