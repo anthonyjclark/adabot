@@ -16,7 +16,7 @@
   <arg name="gui"          default="true"/>
   <arg name="headless"     default="false"/>
   <arg name="debug"        default="false"/>
-  <arg name="model"        default="$(find adabot_description)/urdf/adabot.base.xacro"/>
+  <arg name="model"        default="$(find adabot_description)/urdf/adabot.main.xacro"/>
 
   <!--  -->
   <!-- Start with the empty_world.launch file -->
