@@ -39,4 +39,4 @@ catkin build
 - [ ] investigate weg joint parameters (effort and velocity)
 - [ ] parameterize weg size
 - [ ] fix CI to use custom docker file
-
+- [ ] add all users to the same group

@@ -48,9 +48,6 @@ printf "\nTesting the XACRO files.\n"
 rosrun xacro xacro --inorder $(rospack find adabot_description)/urdf/adabot.main.xacro > tmp.urdf
 check_urdf tmp.urdf
 
-# find_output=$(find . -name "*adabot*")
-# printf "\n$find_output\n"
-
 exit 0
 
 
