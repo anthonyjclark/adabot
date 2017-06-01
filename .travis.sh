@@ -4,7 +4,11 @@
 set -e
 
 # Echo commands and expand variables
-set -x
+echo_and_print() {
+    set -x
+    "$@"
+    set +x
+}
 
 # ---------------------------------------------------------
 printf "\nInstall testing tools.\n"
@@ -14,6 +18,8 @@ sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /e
 wget http://packages.ros.org/ros.key -O - | apt-key add -
 apt-get update
 apt-get -y install python-catkin-tools
+
+echo_and_print apt-get -y install ros-kinetic-xacro
 
 # ---------------------------------------------------------
 printf "\nCreating the catkin workspace.\n"
