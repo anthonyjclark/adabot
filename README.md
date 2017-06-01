@@ -22,21 +22,21 @@ catkin build
 
 ## TODO
 
-- add a scaling parameter to the base xacro file
-- update rviz launch file
-    + option to use current urdf file
-- update rviz config file
-- update gazebo launch file
-    + pass in world file
-- add words to _gazebo package (and launch files)
-- once simulation is complete start working on physical device
-- every needs to add themselves as authors to appropriate packages
-- adabot empty world needs to use xacro file
-- add script for the simple startup
-- add info about setting up ssh keys on github
-- add general info about using git (git workflow with adabot)
-- change wegs so that that are placed and sizes correctly (currently they are the diameter of the wheel--they should be less than the radius)
-- investigate weg joint parameters (effort and velocity)
-- parameterize weg size
-- fix CI to use custom docker file
+- [ ] add a scaling parameter to the base xacro file
+- [ ] update rviz launch file
+    + [ ] option to use current urdf file
+- [ ] update rviz config file
+- [ ] update gazebo launch file
+    + [ ] pass in world file
+- [ ] add words to _gazebo package (and launch files)
+- [ ] once simulation is complete start working on physical device
+- [ ] every needs to add themselves as authors to appropriate packages
+- [ ] adabot empty world needs to use xacro file
+- [ ] add script for the simple startup
+- [ ] add info about setting up ssh keys on github
+- [ ] add general info about using git (git workflow with adabot)
+- [ ] change wegs so that that are placed and sizes correctly (currently they are the diameter of the wheel--they should be less than the radius)
+- [ ] investigate weg joint parameters (effort and velocity)
+- [ ] parameterize weg size
+- [ ] fix CI to use custom docker file
 
