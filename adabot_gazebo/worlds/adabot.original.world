@@ -1,0 +1,1984 @@
+<sdf version='1.6'>
+  <world name='default'>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>4.99167 0.331362 1.45588 0 0.199643 3.13619</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='adabot'>
+      <link name='base_link'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.1225</mass>
+          <inertia>
+            <ixx>6.2526e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000114589</iyy>
+            <iyz>0</iyz>
+            <izz>0.000152104</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose frame=''>0 0 0.011 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.1 0.07 0.035</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose frame=''>0 0 0.011 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.1 0.07 0.035</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <link name='wh-back-left'>
+        <pose frame=''>-0.05 -0.0375 0.011 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.00314593</mass>
+          <inertia>
+            <ixx>3.21147e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.21147e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.29185e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='wh-back-left_collision'>
+          <pose frame=''>0 0 0 1.57075 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.005</length>
+              <radius>0.02</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wh-back-left_visual'>
+          <pose frame=''>0 0 0 1.57075 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.005</length>
+              <radius>0.02</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='ax-back-left' type='revolute'>
+        <child>wh-back-left</child>
+        <parent>base_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-left-1'>
+        <pose frame=''>-0.05 -0.0375 0.011 0 1.25664 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-left-1_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-left-1_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-left-1-joint' type='prismatic'>
+        <child>wg-back-left-1</child>
+        <parent>wh-back-left</parent>
+        <axis>
+          <xyz>0.309017 0 -0.951057</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-left-2'>
+        <pose frame=''>-0.05 -0.0375 0.011 3.14159 0.628319 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-left-2_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-left-2_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-left-2-joint' type='prismatic'>
+        <child>wg-back-left-2</child>
+        <parent>wh-back-left</parent>
+        <axis>
+          <xyz>-0.809017 0 -0.587785</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-left-3'>
+        <pose frame=''>-0.05 -0.0375 0.011 3.14159 -0.628319 -3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-left-3_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-left-3_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-left-3-joint' type='prismatic'>
+        <child>wg-back-left-3</child>
+        <parent>wh-back-left</parent>
+        <axis>
+          <xyz>-0.809017 0 0.587785</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-left-4'>
+        <pose frame=''>-0.05 -0.0375 0.011 0 -1.25664 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-left-4_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-left-4_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-left-4-joint' type='prismatic'>
+        <child>wg-back-left-4</child>
+        <parent>wh-back-left</parent>
+        <axis>
+          <xyz>0.309017 0 0.951057</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-left-5'>
+        <pose frame=''>-0.05 -0.0375 0.011 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-left-5_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-left-5_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-left-5-joint' type='prismatic'>
+        <child>wg-back-left-5</child>
+        <parent>wh-back-left</parent>
+        <axis>
+          <xyz>1 -0 -0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wh-back-right'>
+        <pose frame=''>-0.05 0.0375 0.011 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.00314593</mass>
+          <inertia>
+            <ixx>3.21147e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.21147e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.29185e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='wh-back-right_collision'>
+          <pose frame=''>0 0 0 1.57075 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.005</length>
+              <radius>0.02</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wh-back-right_visual'>
+          <pose frame=''>0 0 0 1.57075 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.005</length>
+              <radius>0.02</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='ax-back-right' type='revolute'>
+        <child>wh-back-right</child>
+        <parent>base_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-right-1'>
+        <pose frame=''>-0.05 0.0375 0.011 0 1.25664 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-right-1_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-right-1_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-right-1-joint' type='prismatic'>
+        <child>wg-back-right-1</child>
+        <parent>wh-back-right</parent>
+        <axis>
+          <xyz>0.309017 0 -0.951057</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-right-2'>
+        <pose frame=''>-0.05 0.0375 0.011 3.14159 0.628319 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-right-2_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-right-2_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-right-2-joint' type='prismatic'>
+        <child>wg-back-right-2</child>
+        <parent>wh-back-right</parent>
+        <axis>
+          <xyz>-0.809017 0 -0.587785</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-right-3'>
+        <pose frame=''>-0.05 0.0375 0.011 3.14159 -0.628319 -3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-right-3_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-right-3_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-right-3-joint' type='prismatic'>
+        <child>wg-back-right-3</child>
+        <parent>wh-back-right</parent>
+        <axis>
+          <xyz>-0.809017 0 0.587785</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-right-4'>
+        <pose frame=''>-0.05 0.0375 0.011 0 -1.25664 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-right-4_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-right-4_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-right-4-joint' type='prismatic'>
+        <child>wg-back-right-4</child>
+        <parent>wh-back-right</parent>
+        <axis>
+          <xyz>0.309017 0 0.951057</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-back-right-5'>
+        <pose frame=''>-0.05 0.0375 0.011 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-back-right-5_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-back-right-5_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-back-right-5-joint' type='prismatic'>
+        <child>wg-back-right-5</child>
+        <parent>wh-back-right</parent>
+        <axis>
+          <xyz>1 -0 -0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wh-front-left'>
+        <pose frame=''>0.05 -0.0375 0.011 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.00314593</mass>
+          <inertia>
+            <ixx>3.21147e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.21147e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.29185e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='wh-front-left_collision'>
+          <pose frame=''>0 0 0 1.57075 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.005</length>
+              <radius>0.02</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wh-front-left_visual'>
+          <pose frame=''>0 0 0 1.57075 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.005</length>
+              <radius>0.02</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='ax-front-left' type='revolute'>
+        <child>wh-front-left</child>
+        <parent>base_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-left-1'>
+        <pose frame=''>0.05 -0.0375 0.011 0 1.25664 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-left-1_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-left-1_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-left-1-joint' type='prismatic'>
+        <child>wg-front-left-1</child>
+        <parent>wh-front-left</parent>
+        <axis>
+          <xyz>0.309017 0 -0.951057</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-left-2'>
+        <pose frame=''>0.05 -0.0375 0.011 3.14159 0.628319 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-left-2_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-left-2_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-left-2-joint' type='prismatic'>
+        <child>wg-front-left-2</child>
+        <parent>wh-front-left</parent>
+        <axis>
+          <xyz>-0.809017 0 -0.587785</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-left-3'>
+        <pose frame=''>0.05 -0.0375 0.011 3.14159 -0.628319 -3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-left-3_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-left-3_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-left-3-joint' type='prismatic'>
+        <child>wg-front-left-3</child>
+        <parent>wh-front-left</parent>
+        <axis>
+          <xyz>-0.809017 0 0.587785</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-left-4'>
+        <pose frame=''>0.05 -0.0375 0.011 0 -1.25664 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-left-4_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-left-4_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-left-4-joint' type='prismatic'>
+        <child>wg-front-left-4</child>
+        <parent>wh-front-left</parent>
+        <axis>
+          <xyz>0.309017 0 0.951057</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-left-5'>
+        <pose frame=''>0.05 -0.0375 0.011 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-left-5_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-left-5_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-left-5-joint' type='prismatic'>
+        <child>wg-front-left-5</child>
+        <parent>wh-front-left</parent>
+        <axis>
+          <xyz>1 -0 -0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wh-front-right'>
+        <pose frame=''>0.05 0.0375 0.011 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.00314593</mass>
+          <inertia>
+            <ixx>3.21147e-07</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>3.21147e-07</iyy>
+            <iyz>0</iyz>
+            <izz>6.29185e-07</izz>
+          </inertia>
+        </inertial>
+        <collision name='wh-front-right_collision'>
+          <pose frame=''>0 0 0 1.57075 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.005</length>
+              <radius>0.02</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wh-front-right_visual'>
+          <pose frame=''>0 0 0 1.57075 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.005</length>
+              <radius>0.02</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='ax-front-right' type='revolute'>
+        <child>wh-front-right</child>
+        <parent>base_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-right-1'>
+        <pose frame=''>0.05 0.0375 0.011 0 1.25664 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-right-1_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-right-1_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-right-1-joint' type='prismatic'>
+        <child>wg-front-right-1</child>
+        <parent>wh-front-right</parent>
+        <axis>
+          <xyz>0.309017 0 -0.951057</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-right-2'>
+        <pose frame=''>0.05 0.0375 0.011 3.14159 0.628319 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-right-2_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-right-2_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-right-2-joint' type='prismatic'>
+        <child>wg-front-right-2</child>
+        <parent>wh-front-right</parent>
+        <axis>
+          <xyz>-0.809017 0 -0.587785</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-right-3'>
+        <pose frame=''>0.05 0.0375 0.011 3.14159 -0.628319 -3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-right-3_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-right-3_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-right-3-joint' type='prismatic'>
+        <child>wg-front-right-3</child>
+        <parent>wh-front-right</parent>
+        <axis>
+          <xyz>-0.809017 0 0.587785</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-right-4'>
+        <pose frame=''>0.05 0.0375 0.011 0 -1.25664 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-right-4_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-right-4_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-right-4-joint' type='prismatic'>
+        <child>wg-front-right-4</child>
+        <parent>wh-front-right</parent>
+        <axis>
+          <xyz>0.309017 0 0.951057</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wg-front-right-5'>
+        <pose frame=''>0.05 0.0375 0.011 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>4e-05</mass>
+          <inertia>
+            <ixx>1.66667e-11</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>5.34667e-09</iyy>
+            <iyz>0</iyz>
+            <izz>5.33667e-09</izz>
+          </inertia>
+        </inertial>
+        <collision name='wg-front-right-5_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='wg-front-right-5_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.04 0.001 0.002</size>
+            </box>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <joint name='wg-front-right-5-joint' type='prismatic'>
+        <child>wg-front-right-5</child>
+        <parent>wh-front-right</parent>
+        <axis>
+          <xyz>1 -0 -0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.008</upper>
+            <effort>1</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </model>
+    <model name='rockySurface'>
+      <link name='link_0'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+        </inertial>
+        <visual name='visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/home/dillonflohr/blenderFiles/rockySurfaceGood.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <lighting>1</lighting>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.01 0.01 0.01 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <cast_shadows>1</cast_shadows>
+          <transparency>0</transparency>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>/home/dillonflohr/blenderFiles/rockySurfaceGood.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>16 372000000</sim_time>
+      <real_time>16 750209467</real_time>
+      <wall_time>1492988372 831373476</wall_time>
+      <iterations>16372</iterations>
+      <model name='adabot'>
+        <pose frame=''>-0.002489 -0.000814 0.009 3e-06 0 -0.000232</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose frame=''>-0.002489 -0.000814 0.009 3e-06 0 -0.000232</pose>
+          <velocity>5.2e-05 -1e-06 0 4.4e-05 4e-06 -0.000136</velocity>
+          <acceleration>0.011013 -0.002965 0.001569 0.082497 0.00688 0.060382</acceleration>
+          <wrench>0.001349 -0.000363 0.000192 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-left-1'>
+          <pose frame=''>-0.051771 -0.038303 0.01848 0.000274 1.1254 -0.000258</pose>
+          <velocity>-0.000175 5.6e-05 0.000411 -0.19966 0.004606 0.467568</velocity>
+          <acceleration>-0.066468 0.033771 1.06973 1.57666 0.488299 1.22477</acceleration>
+          <wrench>-3e-06 1e-06 4.3e-05 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-left-2'>
+          <pose frame=''>-0.058301 -0.038301 0.014493 -3.14123 0.759232 3.14134</pose>
+          <velocity>0.000205 -8e-06 1.4e-05 0.070643 -0.014612 0.071018</velocity>
+          <acceleration>-0.012323 0.002709 -0.019637 -0.133368 -1.21071 0.548972</acceleration>
+          <wrench>0 0 -1e-06 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-left-3'>
+          <pose frame=''>-0.052498 -0.038302 0.02 3.14157 -0.497341 3.14137</pose>
+          <velocity>4.7e-05 5e-06 -2e-06 -9.9e-05 0.001802 -9.6e-05</velocity>
+          <acceleration>0.01354 -0.00709 -0.001524 2.75815 -0.402805 2.57071</acceleration>
+          <wrench>1e-06 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-left-4'>
+          <pose frame=''>-0.052498 -0.038302 0.02 -6.6e-05 -1.38762 -0.000165</pose>
+          <velocity>4.7e-05 5e-06 -2e-06 0.000127 0.001802 -0.000118</velocity>
+          <acceleration>0.013543 -0.007092 -0.001524 -1.36654 -0.407137 1.49169</acceleration>
+          <wrench>1e-06 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-left-5'>
+          <pose frame=''>-0.052498 -0.038302 0.02 -1.3e-05 -0.130978 -0.00023</pose>
+          <velocity>4.9e-05 5e-06 -1e-06 0.000207 0.001802 -0.000128</velocity>
+          <acceleration>0.013072 -0.007095 -0.001587 -3.05588 -0.40689 0.497882</acceleration>
+          <wrench>1e-06 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-right-1'>
+          <pose frame=''>-0.051751 0.036698 0.018477 0.000506 1.12518 -0.000276</pose>
+          <velocity>0.000306 1e-05 -0.001484 -0.061357 0.067382 0.132576</velocity>
+          <acceleration>2.83031 0.126921 -8.44786 1.23671 -1.18302 2.67705</acceleration>
+          <wrench>0.000113 5e-06 -0.000338 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-right-2'>
+          <pose frame=''>-0.058284 0.0367 0.014494 3.14066 0.759227 3.14143</pose>
+          <velocity>0.000301 -5.4e-05 -0.000195 -0.204982 -0.069836 -0.18978</velocity>
+          <acceleration>-2.67783 0.196773 -4.24755 -0.559415 -0.436728 -0.294817</acceleration>
+          <wrench>-0.000107 8e-06 -0.00017 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-right-3'>
+          <pose frame=''>-0.05248 0.036698 0.02 3.14159 -0.497124 3.14137</pose>
+          <velocity>-5.3e-05 5e-06 6.2e-05 -0.000174 0.001832 -0.000113</velocity>
+          <acceleration>0.037863 -0.00701 -0.009528 -2.1716 0.544661 -3.04651</acceleration>
+          <wrench>2e-06 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-right-4'>
+          <pose frame=''>-0.05248 0.036698 0.02 9.7e-05 -1.38783 -0.000327</pose>
+          <velocity>5.8e-05 5e-06 2e-06 1.8e-05 0.001832 -0.000128</velocity>
+          <acceleration>0.010273 -0.007006 0.005433 0.134038 0.548449 2.05124</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-back-right-5'>
+          <pose frame=''>-0.05248 0.036698 0.02 1.8e-05 -0.131195 -0.000234</pose>
+          <velocity>5.8e-05 5e-06 2e-06 0.0001 0.001832 -0.000139</velocity>
+          <acceleration>0.010269 -0.007009 0.005436 -0.899418 0.547956 -2.80229</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-left-1'>
+          <pose frame=''>0.048233 -0.038326 0.018475 0.000115 1.12472 -0.000237</pose>
+          <velocity>-0.000698 6.5e-05 0.001882 -0.278397 -0.017948 0.651871</velocity>
+          <acceleration>-1.21315 0.061719 3.8429 2.92709 -0.060335 0.339091</acceleration>
+          <wrench>-4.9e-05 2e-06 0.000154 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-left-2'>
+          <pose frame=''>0.041705 -0.038324 0.014498 -3.14087 0.759448 3.14132</pose>
+          <velocity>0.00206 0.000216 0.002685 -0.9724 0.10367 -0.999706</velocity>
+          <acceleration>4.0745 0.29574 5.39683 -2.3099 -0.347172 2.08531</acceleration>
+          <wrench>0.000163 1.2e-05 0.000216 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-left-3'>
+          <pose frame=''>0.047502 -0.038325 0.02 3.14157 -0.49668 3.14137</pose>
+          <velocity>1e-05 -8e-06 1.7e-05 -0.000116 0.005023 -0.000124</velocity>
+          <acceleration>0.021206 -0.00092 -0.006763 3.10709 -0.896824 -1.08903</acceleration>
+          <wrench>1e-06 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-left-4'>
+          <pose frame=''>0.047502 -0.038325 0.02 -6.6e-05 -1.38828 -0.000165</pose>
+          <velocity>4.6e-05 -8e-06 -2e-06 6.6e-05 0.005023 -0.000151</velocity>
+          <acceleration>0.012145 -0.000915 -0.001849 1.91596 -0.899157 -2.153</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-left-5'>
+          <pose frame=''>0.047502 -0.038325 0.02 -1.3e-05 -0.131639 -0.00023</pose>
+          <velocity>4.6e-05 -8e-06 -2e-06 0.000151 0.005023 -0.000149</velocity>
+          <acceleration>0.012148 -0.000913 -0.00185 1.276 -0.898984 0.204966</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-right-1'>
+          <pose frame=''>0.048251 0.036675 0.018475 -0.00081 1.12466 -0.000103</pose>
+          <velocity>-0.002556 0.000119 0.007074 -0.442744 -0.106027 1.03229</velocity>
+          <acceleration>-5.47842 0.124724 13.9283 -0.287323 1.2664 1.41934</acceleration>
+          <wrench>-0.000219 5e-06 0.000557 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-right-2'>
+          <pose frame=''>0.041723 0.036676 0.014498 3.14086 0.759461 3.14133</pose>
+          <velocity>0.001898 -0.000224 0.002436 0.952549 0.092877 0.978602</velocity>
+          <acceleration>3.71221 -0.292866 4.96545 1.98321 -1.25751 -0.119011</acceleration>
+          <wrench>0.000148 -1.2e-05 0.000199 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-right-3'>
+          <pose frame=''>0.04752 0.036674 0.02 3.14152 -0.496671 3.14137</pose>
+          <velocity>4.3e-05 -7e-06 5e-06 4.3e-05 0.003682 -0.000109</velocity>
+          <acceleration>0.017325 -0.001198 -0.004754 1.03707 -0.420851 -1.98796</acceleration>
+          <wrench>1e-06 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-right-4'>
+          <pose frame=''>0.04752 0.036674 0.02 -0.000247 -1.38829 1.1e-05</pose>
+          <velocity>5.8e-05 -7e-06 -3e-06 0.000232 0.003682 -0.000111</velocity>
+          <acceleration>0.013597 -0.001195 -0.002733 -1.69318 -0.420317 -1.55164</acceleration>
+          <wrench>1e-06 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wg-front-right-5'>
+          <pose frame=''>0.04752 0.036674 0.02 -4.8e-05 -0.131648 -0.00023</pose>
+          <velocity>5.8e-05 -7e-06 -3e-06 0.000307 0.003682 -0.000134</velocity>
+          <acceleration>0.013597 -0.001193 -0.002733 2.71669 -0.420315 3.07874</acceleration>
+          <wrench>1e-06 0 0 0 -0 0</wrench>
+        </link>
+        <link name='wh-back-left'>
+          <pose frame=''>-0.052498 -0.038301 0.02 0.000196 -0.130975 -0.000244</pose>
+          <velocity>4.5e-05 1e-06 -2e-06 -0.000742 0.002175 -0.000224</velocity>
+          <acceleration>0.008949 -0.005826 -0.000205 0.28785 0.429046 0.019852</acceleration>
+          <wrench>2.8e-05 -1.8e-05 -1e-06 0 -0 0</wrench>
+        </link>
+        <link name='wh-back-right'>
+          <pose frame=''>-0.05248 0.036697 0.02 -0.000184 -0.131197 -0.00022</pose>
+          <velocity>5.2e-05 6e-06 2e-06 0.000354 0.002591 -4.5e-05</velocity>
+          <acceleration>-0.011151 -0.006484 0.003708 0.363405 -0.667121 0.383301</acceleration>
+          <wrench>-3.5e-05 -2e-05 1.2e-05 0 -0 0</wrench>
+        </link>
+        <link name='wh-front-left'>
+          <pose frame=''>0.047502 -0.038324 0.02 0.000196 -0.131646 -0.000243</pose>
+          <velocity>5.9e-05 -1e-05 -2e-06 -0.000189 0.003038 3.2e-05</velocity>
+          <acceleration>0.03544 -0.00189 -0.003033 -2.99669 1.24187 -2.75365</acceleration>
+          <wrench>0.000111 -6e-06 -1e-05 0 -0 0</wrench>
+        </link>
+        <link name='wh-front-right'>
+          <pose frame=''>0.04752 0.036674 0.02 -0.000184 -0.131654 -0.000221</pose>
+          <velocity>6.1e-05 -4e-06 -3e-06 0.000865 0.003109 -0.00013</velocity>
+          <acceleration>0.025009 -0.000727 -0.002735 0.011629 1.31744 -0.150113</acceleration>
+          <wrench>7.9e-05 -2e-06 -9e-06 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='rockySurface'>
+        <pose frame=''>1.1507 0.098487 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link_0'>
+          <pose frame=''>1.1507 0.098487 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+  </world>
+</sdf>

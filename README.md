@@ -1,72 +1,42 @@
+
+[![Build Status](https://travis-ci.org/anthony-jclark/adabot.svg?branch=master)](https://travis-ci.org/anthony-jclark/adabot)
+
 # adabot
 
+This is a stack for the adabot robot. Below are instructions for setting up the adabot workspace; they assume that you have correctly setup your development environment. Visit [the adabot wiki](https://github.com/anthony-jclark/adabot/wiki) for more detailed instructions.
 
-## Install virtual machine software
-
-I am currently using VirtualBox Version 5.0.26 r108824.
-
-## Install a guest operating system
-
-I am currently using ubuntu-16.04.1-desktop with the following properties:
-
-- 4 GB RAM
-- 50 GB fixed storage
-
-*Note: I also cloned the image at this point to give myself something easy to fall back on if I manage to mess up the ROS installatin.*
-
-I had a corrupted display during my installation process, so I had to use [this fix from **askubuntu**](http://askubuntu.com/questions/541006/ubuntu-14-10-does-not-install-in-virtualbox)
-
-`Left Cmd` + `fn` + `F1` and then `Left Cmd` + `fn` + `F7`
-
->This works by forcing the kernel's graphics buffer / X / XRandR to re-detect the monitor and display in the proper resolution.
-
-## Install ROS
-
-Follow the [ROS instructions](http://wiki.ros.org/kinetic/Installation/Ubuntu) to install ROS from packages. The previous link is the *current* release version of ROS as of this writing, which is called **Kinetic**.
-
-### Follow some of the tutorials to test out ROS
-
-I went through the following [tutorials on the wiki](http://wiki.ros.org/ROS/Tutorials).
-
-I also went through the [URDF tutorials](http://wiki.ros.org/urdf/Tutorials) on the wiki.
-
-Finally, the [Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urdf) was also quite useful.
-
-## Creating Robot Model
-
-1. Write Xacro/URDF
-    + `rosrun xacro xacro --inorder model.xacro > model.urdf`
-    + `check_urdf model.urdf`
-    + `urdf_to_graphiz model.urdf`
-    + `evince test_robot.pdf`
-2. Setup workspace
-    + `mkdir src`
-    + `cd src`
-    + `catkin_init_workspace`
-    + `cd ..`
-    + `catkin_make`
-    + `. devel/setup.bash`
-3. Create package
-    + `cd src`
-    + `catkin_create_pkg <name> <list-of-depends>`
-    + edit package.xml (author, maintainer, license, etc.)
-4. Editing package
-    + `cd <package>/src`
-    + add/edit source files
-    + `cd ..`
-    + update CMakeLists.txt
-    + `cd ..`
-    + `catkin_make -DCMAKE_BUILD_TYPE=release`
-5. Viewing with RViz
-    + create launch file
-    + create rviz config file
-    + `roslaunch <package> <launch-script>`
+```bash
+mkdir -p ~/.ros_repos/
+cd ~/.ros_repos/
+hub clone anthony-jclark/adabot.git
+hub fork
+mkdir -p ~/ros_workspaces/adabot_ws/src/
+ln -s ~/.ros_repos/adabot ~/ros_workspaces/adabot_ws/src/
+cd ~/ros_workspaces/adabot_ws/
+catkin init
+catkin config --profile debug -x _debug --cmake-args -DCMAKE_BUILD_TYPE=Debug
+catkin config --profile release -x _release --cmake-args -DCMAKE_BUILD_TYPE=Release
+catkin profile set debug
+catkin build
+```
 
 ## TODO
 
-- get it working in Gazebo
-
-## Note
-
-I left off working with the `rrbot_gazebo` launch file.
+- add a scaling parameter to the base xacro file
+- update rviz launch file
+    + option to use current urdf file
+- update rviz config file
+- update gazebo launch file
+    + pass in world file
+- add words to _gazebo package (and launch files)
+- once simulation is complete start working on physical device
+- every needs to add themselves as authors to appropriate packages
+- adabot empty world needs to use xacro file
+- add script for the simple startup
+- add info about setting up ssh keys on github
+- add general info about using git (git workflow with adabot)
+- change wegs so that that are placed and sizes correctly (currently they are the diameter of the wheel--they should be less than the radius)
+- investigate weg joint parameters (effort and velocity)
+- parameterize weg size
+- fix CI to use custom docker file
 
