@@ -21,7 +21,7 @@ wget http://packages.ros.org/ros.key -O - | apt-key add -
 apt-get update
 apt-get -y install python-catkin-tools
 apt-get -y install ros-kinetic-xacro
-apt-get -y install ros-kinetic-urdf
+apt-get -y install liburdfdom-tools
 
 # ---------------------------------------------------------
 printf "\nCreating the catkin workspace.\n"
