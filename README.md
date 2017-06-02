@@ -40,3 +40,6 @@ catkin build
 - [ ] parameterize weg size
 - [ ] fix CI to use custom docker file
 - [ ] add all users to the same group
+- [ ] figure out why "<--" doesn't work in xacro files (in comments)
+- [ ] document: apt list -a --installed "ros-kinetic*control*"
+- [ ] consider making adabot a macro so that more than one can be imported

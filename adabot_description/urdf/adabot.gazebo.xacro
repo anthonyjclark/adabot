@@ -21,10 +21,22 @@
         <material>Gazebo/White</material>
     </gazebo>
 
+    <xacro:macro name="gz_wheel_material" params="name">
+        <gazebo reference="${name}">
+            <material>Gazebo/Black</material>
+        </gazebo>
+    </xacro:macro>
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/adabot</robotNamespace>
+        </plugin>
+    </gazebo>
+
     <!-- Add colors for other links -->
     <!-- Add simulated IMU:
             gazeborosimu
-            gazeborosimusensor <-- probably this one
+            gazeborosimusensor  *probably this one*
     -->
     <!-- Add simulated wheel encoders -->
     <!-- Add wheel motors and control -->

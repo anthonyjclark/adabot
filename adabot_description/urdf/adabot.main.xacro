@@ -4,33 +4,34 @@
     <!--
          Properties for the robot bodies
     -->
-    <xacro:property name="PI" value="3.1415926535897931"/>
+    <xacro:property name="PI" value="3.1415926535897931 "/>
+    <xacro:property name="SCALE" value="2" />
 
     <!-- Typical density of plastics -->
     <xacro:property name="mat_density" value="1000.0" />
 
     <!-- Wheel parameters -->
-    <xacro:property name="wh_radius" value="0.02" />
-    <xacro:property name="wh_length" value="0.005" />
-    <xacro:property name="wh_mass" value="${mat_density*PI*(wh_radius**2)*wh_length}" />
+    <xacro:property name="wh_radius" value="${0.020 * SCALE}" />
+    <xacro:property name="wh_length" value="${0.005 * SCALE}" />
+    <xacro:property name="wh_mass"   value="${mat_density*PI*(wh_radius**2)*wh_length}" />
 
     <!-- Axle parameters -->
     <xacro:property name="ax_axis" value="0 1 0" />
 
     <!-- Chassis parameters -->
-    <xacro:property name="ch_length" value="0.1" />
-    <xacro:property name="ch_width" value="0.07" />
-    <xacro:property name="ch_height" value="0.035" />
-    <xacro:property name="ch_mass" value="${mat_density*ch_length*ch_width*ch_height}" />
+    <xacro:property name="ch_length" value="${0.100 * SCALE}" />
+    <xacro:property name="ch_width"  value="${0.070 * SCALE}" />
+    <xacro:property name="ch_height" value="${0.035 * SCALE}" />
+    <xacro:property name="ch_mass"   value="${mat_density*ch_length*ch_width*ch_height}" />
 
     <!-- Weg parameters -->
     <xacro:property name="wg_length" value="${wh_radius*2}" />
-    <xacro:property name="wg_width" value="0.001" />
-    <xacro:property name="wg_height" value="0.002" />
-    <xacro:property name="wg_mass" value="${mat_density*wg_length*wg_width*wg_height}" />
+    <xacro:property name="wg_width"  value="${0.001 * SCALE}" />
+    <xacro:property name="wg_height" value="${0.002 * SCALE}" />
+    <xacro:property name="wg_mass"   value="${mat_density*wg_length*wg_width*wg_height}" />
 
     <!-- Vertical offset so that the robot starts above ground -->
-    <xacro:property name="zoffset" value="${wh_radius*1.1/2}" />
+    <xacro:property name="zoffset" value="${wh_radius*1.1/2 * 10}" />
 
     <!--
          Properties for names, colors, and Gazebo
@@ -64,7 +65,7 @@
     -->
     <xacro:macro name="weg" params="wheel number parent total">
 
-        <xacro:property name="wg_name" value="wg-${wheel}-${number}" />
+        <xacro:property name="wg_name" value="wg_${wheel}_${number}" />
 
         <link name="${wg_name}">
             <visual>
@@ -87,7 +88,7 @@
             </inertial>
         </link>
 
-        <joint name="${wg_name}-joint" type="prismatic">
+        <joint name="${wg_name}_joint" type="prismatic">
             <parent link="${parent}" />
             <child link="${wg_name}" />
             <origin rpy="0 ${2*PI*(number/total)} 0" xyz="0 0 0" />
@@ -116,7 +117,9 @@
     -->
     <xacro:macro name="wheel" params="reflect_lr reflect_fb suffix parent">
 
-        <xacro:property name="wh_name" value="wh-${suffix}" />
+        <xacro:property name="wh_name" value="wh_${suffix}" />
+
+        <xacro:gz_wheel_material name="${wh_name}" />
 
         <link name="${wh_name}">
             <visual>
@@ -128,6 +131,7 @@
             </collision>
             <inertial>
                 <mass value="${wh_mass}" />
+                <origin rpy="1.57075 0 0" xyz="0 0 0" />
                 <inertia
                     ixx="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
                     ixy="0"
@@ -139,7 +143,7 @@
             </inertial>
         </link>
 
-        <joint name="ax-${suffix}" type="continuous">
+        <joint name="ax_${suffix}" type="continuous">
             <parent link="${parent}" />
             <child link="${wh_name}" />
             <origin rpy="0 0 0" xyz="${ch_length/2*reflect_fb} ${(wh_length+ch_width)/2*reflect_lr} ${zoffset}" />
@@ -184,6 +188,7 @@
         </collision>
         <inertial>
             <mass value="${ch_mass}" />
+            <origin xyz="0 0 ${zoffset}" rpy="0 0 0"/>
             <inertia
                 ixx="${(1/12)*ch_mass*(ch_width**2 + ch_height**2)}"
                 ixy="0"
@@ -198,10 +203,30 @@
     <!--
          Macro calls for creating wheels
     -->
-    <xacro:wheel reflect_lr="-1" reflect_fb="1" suffix="front-left" parent="${chassisname}" />
-    <xacro:wheel reflect_lr="1" reflect_fb="1" suffix="front-right" parent="${chassisname}" />
-    <xacro:wheel reflect_lr="-1" reflect_fb="-1" suffix="back-left" parent="${chassisname}" />
-    <xacro:wheel reflect_lr="1" reflect_fb="-1" suffix="back-right" parent="${chassisname}" />
+    <xacro:wheel reflect_lr="-1" reflect_fb="1" suffix="front_left" parent="${chassisname}" />
+    <xacro:wheel reflect_lr="1" reflect_fb="1" suffix="front_right" parent="${chassisname}" />
+    <xacro:wheel reflect_lr="-1" reflect_fb="-1" suffix="back_left" parent="${chassisname}" />
+    <xacro:wheel reflect_lr="1" reflect_fb="-1" suffix="back_right" parent="${chassisname}" />
+
+    <!-- 
+         Add a transmission for ros_control so that it can control the wheel motors
+    -->
+    <transmission name="tran1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="ax_front_left">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor1">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <!--
+         Add a Gazebo world element as a reference
+    -->
+
 
 </robot>
+
 
