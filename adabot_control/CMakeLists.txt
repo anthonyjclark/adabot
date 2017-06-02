@@ -8,8 +8,8 @@ project(adabot_control)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  ros_control
-  ros_controllers
+	#  ros_control
+	#  ros_controllers
 )
 
 ## System dependencies are found with CMake's conventions

@@ -17,7 +17,7 @@
         By conventions, units should be specified in meters and kilograms.
     -->
 
-    <gazebo reference="${chassisname}">
+    <gazebo reference="chassis">
         <material>Gazebo/White</material>
     </gazebo>
 
@@ -30,6 +30,7 @@
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
             <robotNamespace>/adabot</robotNamespace>
+            <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
         </plugin>
     </gazebo>
 

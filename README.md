@@ -23,6 +23,8 @@ catkin build
 ## TODO
 
 - [ ] add a scaling parameter to the base xacro file
+	+ [x] add scale factor
+	+ [ ] set scale factor as argument to xacro flie
 - [ ] update rviz launch file
     + [ ] option to use current urdf file
 - [ ] update rviz config file
@@ -43,3 +45,4 @@ catkin build
 - [ ] figure out why "<--" doesn't work in xacro files (in comments)
 - [ ] document: apt list -a --installed "ros-kinetic*control*"
 - [ ] consider making adabot a macro so that more than one can be imported
+- [ ] work on urdf naming scheme (ax vs joint, etc.)
