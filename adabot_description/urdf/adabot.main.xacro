@@ -101,7 +101,7 @@
     <!--
          Macro for creating wheel geoms
     -->
-    <xacro:property name="wh_orig_geom">
+    <xacro:property name="wh_origin_geom">
         <!-- Cylinders default with their height along the z axis -->
         <origin rpy="1.57075 0 0" xyz="0 0 0" />
         <geometry>
@@ -124,11 +124,11 @@
 
         <link name="${wh_name}">
             <visual>
-                <xacro:insert_block name="wh_orig_geom" />
+                <xacro:insert_block name="wh_origin_geom" />
                 <material name="black" />
             </visual>
             <collision>
-                <xacro:insert_block name="wh_orig_geom" />
+                <xacro:insert_block name="wh_origin_geom" />
             </collision>
             <inertial>
                 <mass value="${wh_mass}" />
@@ -170,7 +170,7 @@
     <!--
          Macro for creating the chassis' geom
     -->
-    <xacro:property name="ch_orig_geom">
+    <xacro:property name="ch_origin_geom">
         <!-- <origin rpy="0 0 0" xyz="0 0 ${zoffset}" /> -->
         <origin rpy="0 0 0" xyz="0 0 0" />
         <geometry>
@@ -187,11 +187,11 @@
     <link name="world" />
     <link name="chassis">
         <visual>
-            <xacro:insert_block name="ch_orig_geom" />
+            <xacro:insert_block name="ch_origin_geom" />
             <material name="white" />
         </visual>
         <collision>
-            <xacro:insert_block name="ch_orig_geom" />
+            <xacro:insert_block name="ch_origin_geom" />
         </collision>
         <inertial>
             <mass value="${ch_mass}" />
@@ -207,8 +207,9 @@
         </inertial>
     </link>
 
-    <joint name="world_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="0 0 0" />
+    <joint name="world_joint" type="floating">
+        <!-- <origin xyz="0 0 0" rpy="0 0 0" /> -->
+        <origin xyz="0 0 ${zoffset}" rpy="0 0 0" />
         <parent link="world" />
         <child link="chassis" />
     </joint>
