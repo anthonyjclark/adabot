@@ -4,16 +4,24 @@
 set -e
 
 # Echo commands and expand variables
-set -x
+echo_and_print() {
+    set -x
+    "$@"
+    set +x
+}
 
 # ---------------------------------------------------------
 printf "\nInstall testing tools.\n"
 apt-get update
 apt-get -y install wget
+
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list'
 wget http://packages.ros.org/ros.key -O - | apt-key add -
+
 apt-get update
 apt-get -y install python-catkin-tools
+apt-get -y install ros-kinetic-xacro
+apt-get -y install liburdfdom-tools
 
 # ---------------------------------------------------------
 printf "\nCreating the catkin workspace.\n"
@@ -37,11 +45,8 @@ source ~/ros_workspaces/adabot_ws/devel/setup.bash
 # ---------------------------------------------------------
 printf "\nTesting the XACRO files.\n"
 
-rosrun xacro xacro --inorder $(rospack find adabot_description)/urdf/adabot.xacro > tmp.urdf
+rosrun xacro xacro --inorder $(rospack find adabot_description)/urdf/adabot.main.xacro > tmp.urdf
 check_urdf tmp.urdf
-
-# find_output=$(find . -name "*adabot*")
-# printf "\n$find_output\n"
 
 exit 0
 

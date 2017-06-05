@@ -1,0 +1,11 @@
+adabot:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Velocity controllers ---------------------------------------
+  ax_front_left_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: ax_front_left
+    pid: {p: 0.001, i: 0.0, d: 0.0}
