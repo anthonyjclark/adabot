@@ -5,7 +5,19 @@ adabot:
     publish_rate: 50  
 
   # Velocity controllers ---------------------------------------
-  ax_front_left_velocity_controller:
+  front_left_wheel_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
-    joint: ax_front_left
-    pid: {p: 0.001, i: 0.0, d: 0.0}
+    joint: front_left_wheel_joint
+    pid: {p: -100.0, i: 0.01, d: 10.0, i_clamp: 0.0}
+  front_right_wheel_joint_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: front_right_wheel_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0, i_clamp: 0.0}
+  back_left_wheel_joint_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: back_left_wheel_joint
+    pid: {p: -100.0, i: 0.01, d: 10.0, i_clamp: 0.0}
+  back_right_wheel_joint_velocity_controller:
+    type: effort_controllers/JointVelocityController
+    joint: back_right_wheel_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0, i_clamp: 0.0}

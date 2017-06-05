@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
 
+
     <!--
          Properties for the robot bodies
     -->
     <xacro:property name="PI" value="3.1415926535897931 "/>
-    <xacro:property name="SCALE" value="2" />
+    <xacro:property name="SCALE" value="4" />
 
     <!-- Typical density of plastics -->
     <xacro:property name="mat_density" value="1000.0" />
@@ -25,17 +26,13 @@
     <xacro:property name="wh_length"  value="${0.005 * SCALE}" />
     <xacro:property name="wh_mass"    value="${wh_density * PI * (wh_radius**2) * wh_length}" />
 
-    <!-- Weg parameters -->
-    <xacro:property name="wg_length" value="${wh_radius*2}" />
-    <xacro:property name="wg_width"  value="${0.001 * SCALE}" />
-    <xacro:property name="wg_height" value="${0.002 * SCALE}" />
-    <xacro:property name="wg_mass"   value="${mat_density * wg_length * wg_width * wg_height}" />
-
-    <!-- Axle parameters -->
-    <xacro:property name="ax_axis" value="0 1 0" />
-
     <!-- Vertical offset so that the robot starts above ground -->
     <xacro:property name="zoffset" value="${wh_radius*1.1/2 * 10}" />
+
+
+
+
+
 
     <!--
          Properties for names, colors, and Gazebo
@@ -47,136 +44,10 @@
     <!-- Import tags needed by Gazebo -->
     <xacro:include filename="$(find adabot_description)/urdf/adabot.gazebo.xacro" />
 
-    <!--
-         Macro for creating weg geoms
-    -->
-    <xacro:property name="wg_origin_geom">
-        <origin rpy="0 0 0" xyz="0 0 0" />
-        <geometry>
-            <box size="${wg_length} ${wg_width} ${wg_height}" />
-        </geometry>
-    </xacro:property>
 
-    <!--
-         Macro for creating wegs
-            wheel  : the suffix of the parent wheel
-            number : a unique identifier for each weg
-            parent : the full name of the parent link
-            total  : the number of wegs (used to calculate angles)
-    -->
-    <xacro:macro name="weg" params="wheel number parent total">
 
-        <xacro:property name="wg_name" value="wg_${wheel}_${number}" />
 
-        <link name="${wg_name}">
-            <visual>
-                <xacro:insert_block name="wg_origin_geom" />
-                <material name="white" />
-            </visual>
-            <collision>
-                <xacro:insert_block name="wg_origin_geom" />
-            </collision>
-            <inertial>
-                <mass value="${wg_mass}" />
-                <inertia
-                    ixx="${(1/12)*wg_mass*(wg_width**2 + wg_height**2)}"
-                    ixy="0"
-                    ixz="0"
-                    iyy="${(1/12)*wg_mass*(wg_length**2 + wg_height**2)}"
-                    iyz="0"
-                    izz="${(1/12)*wg_mass*(wg_length**2 + wg_width**2)}"
-                    />
-            </inertial>
-        </link>
 
-        <joint name="${wg_name}_joint" type="prismatic">
-            <parent link="${parent}" />
-            <child link="${wg_name}" />
-            <origin rpy="0 ${2*PI*(number/total)} 0" xyz="0 0 0" />
-            <limit upper="${wg_length*.2}" lower="0" effort="1" velocity="1" />
-        </joint>
-
-    </xacro:macro>
-
-    <!--
-         Macro for creating wheel geoms
-    -->
-    <xacro:property name="wh_origin_geom">
-        <!-- Cylinders default with their height along the z axis -->
-        <origin rpy="1.57075 0 0" xyz="0 0 0" />
-        <geometry>
-            <cylinder radius="${wh_radius}" length="${wh_length}" />
-        </geometry>
-    </xacro:property>
-
-    <!--
-         Macro for creating wheels
-            reflect_lr : is the wheel left (-1) or right (1)
-            reflect_fb : is the wheel front (1) or back (-1)
-            suffix     : give the wheel a unique name
-            parent     : to what link is this wheel attached
-    -->
-    <xacro:macro name="wheel" params="reflect_lr reflect_fb suffix parent">
-
-        <xacro:property name="wh_name" value="wh_${suffix}" />
-
-        <xacro:gz_wheel_material name="${wh_name}" />
-
-        <link name="${wh_name}">
-            <visual>
-                <xacro:insert_block name="wh_origin_geom" />
-                <material name="black" />
-            </visual>
-            <collision>
-                <xacro:insert_block name="wh_origin_geom" />
-            </collision>
-            <inertial>
-                <mass value="${wh_mass}" />
-                <origin rpy="1.57075 0 0" xyz="0 0 0" />
-                <inertia
-                    ixx="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
-                    ixy="0"
-                    ixz="0"
-                    iyy="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
-                    iyz="0"
-                    izz="${(1/2)*wh_mass*wh_radius**2}"
-                    />
-            </inertial>
-        </link>
-
-        <joint name="ax_${suffix}" type="continuous">
-            <parent link="${parent}" />
-            <child link="${wh_name}" />
-            <!-- <origin rpy="0 0 0" xyz="${ch_length/2*reflect_fb} ${(wh_length+ch_width)/2*reflect_lr} ${zoffset}" /> -->
-            <origin rpy="0 0 0" xyz="${ch_length/2*reflect_fb} ${(wh_length+ch_width)/2*reflect_lr} 0" />
-            <axis xyz="${ax_axis}" />
-        </joint>
-
-        <!-- http://answers.ros.org/question/38956/pass-parameters-to-xacro-in-launch-file/
-                (1) add a parameter to the launch files
-                (2) pass the parameter to xacro.py (the above link)
-                (3) set a default value in this file
-                (4) pass the value to the wheel macro
-                (5) have some ugly conditionals below
-        -->
-        <xacro:weg wheel="${suffix}" number="1" parent="${wh_name}" total="5" />
-        <xacro:weg wheel="${suffix}" number="2" parent="${wh_name}" total="5" />
-        <xacro:weg wheel="${suffix}" number="3" parent="${wh_name}" total="5" />
-        <xacro:weg wheel="${suffix}" number="4" parent="${wh_name}" total="5" />
-        <xacro:weg wheel="${suffix}" number="5" parent="${wh_name}" total="5" />
-
-    </xacro:macro>
-
-    <!--
-         Macro for creating the chassis' geom
-    -->
-    <xacro:property name="ch_origin_geom">
-        <!-- <origin rpy="0 0 0" xyz="0 0 ${zoffset}" /> -->
-        <origin rpy="0 0 0" xyz="0 0 0" />
-        <geometry>
-            <box size="${ch_length} ${ch_width} ${ch_height}" />
-        </geometry>
-    </xacro:property>
 
     <!--
          The main chassis/body
@@ -184,18 +55,31 @@
             easier to visualize. This will also help when we start to include multiple
             robots.
     -->
+    <xacro:property name="chassis_geometry">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="${ch_length} ${ch_width} ${ch_height}" />
+        </geometry>
+    </xacro:property>
+
     <link name="world" />
+
     <link name="chassis">
         <visual>
-            <xacro:insert_block name="ch_origin_geom" />
+            <xacro:insert_block name="chassis_geometry" />
             <material name="white" />
         </visual>
-        <collision>
-            <xacro:insert_block name="ch_origin_geom" />
-        </collision>
+    </link>
+
+    <joint name="world_joint" type="floating">
+        <origin xyz="0 0 ${zoffset}" rpy="0 0 0" />
+        <parent link="world" />
+        <child link="chassis" />
+    </joint>
+
+    <link name="chassis_inertia">
         <inertial>
             <mass value="${ch_mass}" />
-            <!-- <origin xyz="0 0 ${zoffset}" rpy="0 0 0"/> -->
             <inertia
                 ixx="${(1/12)*ch_mass*(ch_width**2 + ch_height**2)}"
                 ixy="0"
@@ -207,39 +91,89 @@
         </inertial>
     </link>
 
-    <joint name="world_joint" type="floating">
-        <!-- <origin xyz="0 0 0" rpy="0 0 0" /> -->
-        <origin xyz="0 0 ${zoffset}" rpy="0 0 0" />
-        <parent link="world" />
-        <child link="chassis" />
+    <joint name="chassis_inertia_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="chassis" />
+        <child link="chassis_inertia" />
     </joint>
 
-    <!--
-         Macro calls for creating wheels
-    -->
-    <xacro:wheel reflect_lr="-1" reflect_fb="1"  suffix="front_left"  parent="chassis" />
-    <xacro:wheel reflect_lr="1"  reflect_fb="1"  suffix="front_right" parent="chassis" />
-    <xacro:wheel reflect_lr="-1" reflect_fb="-1" suffix="back_left"   parent="chassis" />
-    <xacro:wheel reflect_lr="1"  reflect_fb="-1" suffix="back_right"  parent="chassis" />
 
-    <!-- 
-         Add a transmission for ros_control so that it can control the wheel motors
+<!-- <collision>
+            <xacro:insert_block name="chassis_geometry" />
+        </collision>
+        -->
+
+
+
+
+
+
+    <!--
+         Macro for creating wheels
+            reflect_lr : is the wheel left (-1) or right (1)
+            reflect_fb : is the wheel front (1) or back (-1)
+            suffix     : give the wheel a unique name
     -->
-    <transmission name="tran_front_left" type="SimpleTransmission">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="ax_front_left">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <xacro:property name="wheel_geometry">
+        <!-- Cylinders default with their height along the z axis -->
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+        <geometry>
+            <cylinder length="${wh_length}" radius="${wh_radius}" />
+        </geometry>
+    </xacro:property>
+
+    <xacro:macro name="wheel" params="reflect_lr reflect_fb suffix">
+        <xacro:property name="wheel_name" value="${suffix}_wheel" />
+        <xacro:gz_wheel_material name="${wheel_name}" />
+
+        <link name="${wheel_name}">
+            <visual>
+                <xacro:insert_block name="wheel_geometry" />
+                <material name="black" />
+            </visual>
+            <collision>
+                <xacro:insert_block name="wheel_geometry" />
+            </collision>
+            <inertial>
+                <mass value="${wh_mass}" />
+                <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+                <inertia
+                    ixx="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
+                    iyz="0"
+                    izz="${(1/2)*wh_mass*wh_radius**2}"
+                    />
+            </inertial>
+        </link>
+
+        <joint name="${wheel_name}_joint" type="continuous">
+            <parent link="chassis" />
+            <child link="${wheel_name}" />
+            <origin xyz="${ch_length/2*reflect_fb} ${(wh_length+ch_width)/2*reflect_lr} 0" rpy="0 0 0" />
+            <axis xyz="0 -1 0" />
+            <limit effort="10" velocity="100" />
         </joint>
-        <actuator name="motor_front_left">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-        </actuator>
-    </transmission>
 
-    <!--
-         Add a Gazebo world element as a reference
-    -->
+        <transmission name="${wheel_name}_transmission" type="SimpleTransmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${wheel_name}_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${wheel_name}_motor">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
 
+    </xacro:macro>
+
+    <!-- Macro calls for creating wheels -->
+    <xacro:wheel reflect_lr="1"  reflect_fb="1"  suffix="front_left"  />
+    <xacro:wheel reflect_lr="-1" reflect_fb="1"  suffix="front_right" />
+    <xacro:wheel reflect_lr="1"  reflect_fb="-1" suffix="back_left"   />
+    <xacro:wheel reflect_lr="-1" reflect_fb="-1" suffix="back_right"  />
 
 </robot>
 
