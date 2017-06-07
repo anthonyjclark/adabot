@@ -49,3 +49,11 @@ catkin build
 - [ ] -z argument for urdf_spawner in the gazebo launch file
 - [ ] checkout Gazebo's skid steer plugin
 - [ ] generate the control yaml file depending on the number of wegs per wheel
+
+
+- [ ] wegs
+    - [ ] tune PID values
+    - [ ] tune effort values
+
+- [ ] all bodies
+    - [ ] select friction model

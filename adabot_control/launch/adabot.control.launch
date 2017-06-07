@@ -6,18 +6,35 @@
 
   <!-- Load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-        output="screen" ns="/adabot" args="
-                                           front_right_wheel_joint_velocity_controller
-                                           rear_left_wheel_joint_velocity_controller
-                                           rear_right_wheel_joint_velocity_controller
-                                           joint_state_controller
+        output="screen" ns="/adabot" args="joint_state_controller
 
                                            front_left_wheel_joint_velocity_controller
                                            front_left_weg_1_joint_position_controller
                                            front_left_weg_2_joint_position_controller
                                            front_left_weg_3_joint_position_controller
                                            front_left_weg_4_joint_position_controller
-                                           front_left_weg_5_joint_position_controller"/>
+                                           front_left_weg_5_joint_position_controller
+
+                                           front_right_wheel_joint_velocity_controller
+                                           front_right_weg_1_joint_position_controller
+                                           front_right_weg_2_joint_position_controller
+                                           front_right_weg_3_joint_position_controller
+                                           front_right_weg_4_joint_position_controller
+                                           front_right_weg_5_joint_position_controller
+
+                                           rear_left_wheel_joint_velocity_controller
+                                           rear_left_weg_1_joint_position_controller
+                                           rear_left_weg_2_joint_position_controller
+                                           rear_left_weg_3_joint_position_controller
+                                           rear_left_weg_4_joint_position_controller
+                                           rear_left_weg_5_joint_position_controller
+
+                                           rear_right_wheel_joint_velocity_controller
+                                           rear_right_weg_1_joint_position_controller
+                                           rear_right_weg_2_joint_position_controller
+                                           rear_right_weg_3_joint_position_controller
+                                           rear_right_weg_4_joint_position_controller
+                                           rear_right_weg_5_joint_position_controller"/>
 
   <!-- Convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher"
