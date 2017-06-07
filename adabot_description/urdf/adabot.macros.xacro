@@ -14,14 +14,22 @@
 
 
     <!-- Create the wheel geometry (for visuals and collisions) -->
-    <xacro:property name="wheel_geometry">
+    <!-- <xacro:property name="wheel_geometry"> -->
         <!-- Cylinders default with their height along the z axis -->
-        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+<!--         <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
         <geometry>
             <cylinder length="${wh_length}" radius="${wh_radius}" />
         </geometry>
     </xacro:property>
-
+ -->
+    <xacro:property name="wheel_geometry">
+        <!-- Cylinders default with their height along the z axis -->
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+        <geometry>
+            <!-- <cylinder length="${wh_length}" radius="${wh_radius}" /> -->
+            <sphere radius="${wh_radius}" />
+        </geometry>
+    </xacro:property>
 
 
 
@@ -100,14 +108,29 @@
 
 
     <!-- Create the weg geometry (for visuals and collisions) -->
-    <xacro:property name="wg_origin_geom">
+<!--     <xacro:property name="weg_geometry">
         <origin xyz="${wh_radius/2} 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="${wg_length} ${wg_width} ${wg_height}" />
+        </geometry>
+    </xacro:property> -->
+    <xacro:property name="weg_geometry">
+        <origin xyz="${wh_radius} 0 0" rpy="0 0 0" />
         <geometry>
             <box size="${wg_length} ${wg_width} ${wg_height}" />
         </geometry>
     </xacro:property>
 
 
+
+
+    <!-- Create a geometry for the weg tip -->
+    <xacro:property name="weg_tip_geometry">
+        <!-- <origin xyz="${wh_radius} 0 0" rpy="0 0 0" /> -->
+        <geometry>
+            <sphere radius="${wt_radius}" />
+        </geometry>
+    </xacro:property>
 
 
     <!--
@@ -125,11 +148,11 @@
         <!-- The weg's rigid body -->
         <link name="${weg_name}">
             <visual>
-                <xacro:insert_block name="wg_origin_geom" />
+                <xacro:insert_block name="weg_geometry" />
                 <material name="white" />
             </visual>
             <collision>
-                <xacro:insert_block name="wg_origin_geom" />
+                <xacro:insert_block name="weg_geometry" />
             </collision>
             <inertial>
                 <mass value="${wg_mass}" />
@@ -145,13 +168,18 @@
         </link>
 
         <!-- Connect the weg to the wheel with a prismatic joint -->
-        <joint name="${weg_name}_joint" type="prismatic">
+<!--         <joint name="${weg_name}_joint" type="prismatic">
             <parent link="${parent}" />
             <child link="${weg_name}" />
             <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" />
             <limit upper="${wh_radius * 0.7}" lower="0" effort="10" velocity="10" />
+        </joint> -->
+        <joint name="${weg_name}_joint" type="fixed">
+            <parent link="${parent}" />
+            <child link="${weg_name}" />
+            <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" />
+            <!-- <limit upper="${wh_radius * 0.7}" lower="0" effort="10" velocity="10" /> -->
         </joint>
-
         <!--
              Attach a POSITION controller to each weg prismatic joint
                 Any changes to the wheel joint's name will need to be reflected
@@ -161,7 +189,7 @@
                   However, I do not think this will be possible given that the transmission
                   interface requires a single process value for each motor.
         -->
-        <transmission name="${weg_name}_transmission" type="SimpleTransmission">
+<!--         <transmission name="${weg_name}_transmission" type="SimpleTransmission">
             <type>transmission_interface/SimpleTransmission</type>
             <joint name="${weg_name}_joint">
                 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
@@ -170,7 +198,39 @@
                 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>
-        </transmission>
+        </transmission> -->
+
+
+        <!-- Attach a sphere to the end of the weg for better physics (less jitter) -->
+        <link name="${weg_name}_tip">
+            <visual>
+                <xacro:insert_block name="weg_tip_geometry" />
+                <material name="black" />
+            </visual>
+            <collision>
+                <xacro:insert_block name="weg_tip_geometry" />
+            </collision>
+            <inertial>
+                <mass value="${wt_mass}" />
+                <inertia
+                    ixx="${(2/5) * wt_mass * wt_radius * wt_radius}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(2/5) * wt_mass * wt_radius * wt_radius}"
+                    iyz="0"
+                    izz="${(2/5) * wt_mass * wt_radius * wt_radius}"
+                    />
+            </inertial>
+        </link>
+
+        <!-- Connect the weg tip to the weg -->
+        <joint name="${weg_name}_tip_joint" type="fixed">
+            <parent link="${weg_name}" />
+            <child link="${weg_name}_tip" />
+            <origin xyz="${wg_length/2 + wh_radius} 0 0" rpy="0 0 0" />
+            <!-- <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" /> -->
+            <!-- <limit upper="${wh_radius * 0.7}" lower="0" effort="10" velocity="10" /> -->
+        </joint>
 
     </xacro:macro>
 
