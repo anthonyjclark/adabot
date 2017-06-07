@@ -49,7 +49,7 @@
 
 
 
-    <!-- Add the wheels -->
+    <!-- Add the wheels (note, wegs are created with the wheels) -->
     <xacro:wheel reflect_lr="1"  reflect_fr="1"  suffix="front_left"  />
     <xacro:wheel reflect_lr="-1" reflect_fr="1"  suffix="front_right" />
     <xacro:wheel reflect_lr="1"  reflect_fr="-1" suffix="rear_left"   />

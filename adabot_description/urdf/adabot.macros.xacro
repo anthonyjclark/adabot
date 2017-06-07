@@ -68,11 +68,11 @@
             <child link="${wheel_name}" />
             <origin xyz="${ch_length/2*reflect_fr} ${(wh_length+ch_width)/2*reflect_lr} 0" rpy="0 0 0" />
             <axis xyz="0 1 0" />
-            <limit effort="10" velocity="100" />
+            <limit effort="10" velocity="10" />
         </joint>
 
         <!--
-             Attach a velocity controller to the wheel's joint
+             Attach a VELOCITY controller to the wheel's joint
                 Any changes to the wheel joint's name will need to be reflected
                   in 'adabot.control.yaml' and 'adabot.control.launch'.
         -->
@@ -88,11 +88,11 @@
         </transmission>
 
         <!-- Add wegs to this wheel -->
-        <xacro:weg wheel="${suffix}" number="1" parent="${wh_name}" total="5" />
-        <xacro:weg wheel="${suffix}" number="2" parent="${wh_name}" total="5" />
-        <xacro:weg wheel="${suffix}" number="3" parent="${wh_name}" total="5" />
-        <xacro:weg wheel="${suffix}" number="4" parent="${wh_name}" total="5" />
-        <xacro:weg wheel="${suffix}" number="5" parent="${wh_name}" total="5" />
+        <xacro:weg wheel="${suffix}" number="1" parent="${wheel_name}" total="5" />
+        <xacro:weg wheel="${suffix}" number="2" parent="${wheel_name}" total="5" />
+        <xacro:weg wheel="${suffix}" number="3" parent="${wheel_name}" total="5" />
+        <xacro:weg wheel="${suffix}" number="4" parent="${wheel_name}" total="5" />
+        <xacro:weg wheel="${suffix}" number="5" parent="${wheel_name}" total="5" />
 
     </xacro:macro>
 
@@ -101,7 +101,7 @@
 
     <!-- Create the weg geometry (for visuals and collisions) -->
     <xacro:property name="wg_origin_geom">
-        <origin rpy="0 0 0" xyz="0 0 0" />
+        <origin xyz="${wh_radius/2} 0 0" rpy="0 0 0" />
         <geometry>
             <box size="${wg_length} ${wg_width} ${wg_height}" />
         </geometry>
@@ -120,10 +120,10 @@
     <xacro:macro name="weg" params="wheel number parent total">
 
         <!-- The name of the current weg (based on the parent wheel's name) -->
-        <xacro:property name="wg_name" value="wg_${wheel}_${number}" />
+        <xacro:property name="weg_name" value="${wheel}_weg_${number}" />
 
         <!-- The weg's rigid body -->
-        <link name="${wg_name}">
+        <link name="${weg_name}">
             <visual>
                 <xacro:insert_block name="wg_origin_geom" />
                 <material name="white" />
@@ -145,12 +145,33 @@
         </link>
 
         <!-- Connect the weg to the wheel with a prismatic joint -->
-        <joint name="${wg_name}_joint" type="prismatic">
+        <joint name="${weg_name}_joint" type="prismatic">
             <parent link="${parent}" />
-            <child link="${wg_name}" />
-            <origin rpy="0 ${2*PI*(number/total)} 0" xyz="0 0 0" />
-            <limit upper="${wg_length*.2}" lower="0" effort="1" velocity="1" />
+            <child link="${weg_name}" />
+            <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" />
+            <limit upper="${wh_radius * 0.7}" lower="0" effort="10" velocity="10" />
         </joint>
 
+        <!--
+             Attach a POSITION controller to each weg prismatic joint
+                Any changes to the wheel joint's name will need to be reflected
+                  in 'adabot.control.yaml' and 'adabot.control.launch'.
+                Also note that, technically, all wegs for a single joint should be
+                  controlled together (a single transimission for each weg set).
+                  However, I do not think this will be possible given that the transmission
+                  interface requires a single process value for each motor.
+        -->
+        <transmission name="${weg_name}_transmission" type="SimpleTransmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${weg_name}_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${weg_name}_motor">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
     </xacro:macro>
+
 </robot>

@@ -48,3 +48,4 @@ catkin build
 - [ ] work on urdf naming scheme (ax vs joint, etc.)
 - [ ] -z argument for urdf_spawner in the gazebo launch file
 - [ ] checkout Gazebo's skid steer plugin
+- [ ] generate the control yaml file depending on the number of wegs per wheel

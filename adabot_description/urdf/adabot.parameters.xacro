@@ -27,7 +27,7 @@
     <xacro:property name="wh_mass"    value="${wh_density * PI * (wh_radius**2) * wh_length}" />
 
     <!-- Weg parameters -->
-    <xacro:property name="wg_length" value="${wh_radius*2}" />
+    <xacro:property name="wg_length" value="${wh_radius}" />
     <xacro:property name="wg_width"  value="${0.001 * SCALE}" />
     <xacro:property name="wg_height" value="${0.002 * SCALE}" />
     <xacro:property name="wg_mass"   value="${mat_density * wg_length * wg_width * wg_height}" />
