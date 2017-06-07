@@ -173,7 +173,7 @@
                   However, I do not think this will be possible given that the transmission
                   interface requires a single process value for each motor.
         -->
-<!--         <transmission name="${weg_name}_transmission" type="SimpleTransmission">
+        <transmission name="${weg_name}_transmission" type="SimpleTransmission">
             <type>transmission_interface/SimpleTransmission</type>
             <joint name="${weg_name}_joint">
                 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
@@ -182,7 +182,7 @@
                 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>
-        </transmission> -->
+        </transmission>
 
 
         <!-- Attach a sphere to the end of the weg for better physics (less jitter) -->
