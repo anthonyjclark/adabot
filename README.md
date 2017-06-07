@@ -54,6 +54,10 @@ catkin build
 - [ ] wegs
     - [ ] tune PID values
     - [ ] tune effort values
-
+- [ ] wheels
+    - [ ] add option to display wheel as cylinder instead of sphere
 - [ ] all bodies
     - [ ] select friction model
+    - [ ] adjust inertia tensor independent of mass (for jitter)
+- [ ] all joints
+    - [ ] adjust limits, velocity, and effort

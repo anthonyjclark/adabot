@@ -14,14 +14,6 @@
 
 
     <!-- Create the wheel geometry (for visuals and collisions) -->
-    <!-- <xacro:property name="wheel_geometry"> -->
-        <!-- Cylinders default with their height along the z axis -->
-<!--         <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-            <cylinder length="${wh_length}" radius="${wh_radius}" />
-        </geometry>
-    </xacro:property>
- -->
     <xacro:property name="wheel_geometry">
         <!-- Cylinders default with their height along the z axis -->
         <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
@@ -30,6 +22,7 @@
             <sphere radius="${wh_radius}" />
         </geometry>
     </xacro:property>
+
 
 
 
@@ -108,14 +101,9 @@
 
 
     <!-- Create the weg geometry (for visuals and collisions) -->
-<!--     <xacro:property name="weg_geometry">
-        <origin xyz="${wh_radius/2} 0 0" rpy="0 0 0" />
-        <geometry>
-            <box size="${wg_length} ${wg_width} ${wg_height}" />
-        </geometry>
-    </xacro:property> -->
     <xacro:property name="weg_geometry">
-        <origin xyz="${wh_radius} 0 0" rpy="0 0 0" />
+        <origin xyz="${wh_radius/2} 0 0" rpy="0 0 0" />
+        <!-- <origin xyz="${wh_radius} 0 0" rpy="0 0 0" /> -->
         <geometry>
             <box size="${wg_length} ${wg_width} ${wg_height}" />
         </geometry>
@@ -168,18 +156,14 @@
         </link>
 
         <!-- Connect the weg to the wheel with a prismatic joint -->
-<!--         <joint name="${weg_name}_joint" type="prismatic">
+        <joint name="${weg_name}_joint" type="prismatic">
+        <!-- <joint name="${weg_name}_joint" type="fixed"> -->
             <parent link="${parent}" />
             <child link="${weg_name}" />
             <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" />
             <limit upper="${wh_radius * 0.7}" lower="0" effort="10" velocity="10" />
-        </joint> -->
-        <joint name="${weg_name}_joint" type="fixed">
-            <parent link="${parent}" />
-            <child link="${weg_name}" />
-            <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" />
-            <!-- <limit upper="${wh_radius * 0.7}" lower="0" effort="10" velocity="10" /> -->
         </joint>
+
         <!--
              Attach a POSITION controller to each weg prismatic joint
                 Any changes to the wheel joint's name will need to be reflected
@@ -227,9 +211,9 @@
         <joint name="${weg_name}_tip_joint" type="fixed">
             <parent link="${weg_name}" />
             <child link="${weg_name}_tip" />
-            <origin xyz="${wg_length/2 + wh_radius} 0 0" rpy="0 0 0" />
-            <!-- <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" /> -->
-            <!-- <limit upper="${wh_radius * 0.7}" lower="0" effort="10" velocity="10" /> -->
+            <!-- The 0.95 is a fudge factor so that weg tips are not aligned with the
+                 wheel radius when commanded to zero. -->
+            <origin xyz="${wh_radius * 0.95 - wt_radius} 0 0" rpy="0 0 0" />
         </joint>
 
     </xacro:macro>
