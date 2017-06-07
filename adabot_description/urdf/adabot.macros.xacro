@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
+
+
+    <!-- Create the chassis geometry (for visuals and collisions) -->
+    <xacro:property name="chassis_geometry">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="${ch_length} ${ch_width} ${ch_height}" />
+        </geometry>
+    </xacro:property>
+
+
+
+
+    <!-- Create the wheel geometry (for visuals and collisions) -->
+    <xacro:property name="wheel_geometry">
+        <!-- Cylinders default with their height along the z axis -->
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+        <geometry>
+            <cylinder length="${wh_length}" radius="${wh_radius}" />
+        </geometry>
+    </xacro:property>
+
+
+
+
+    <!--
+         Macro for creating wheels
+            reflect_lr : is the wheel left (-1) or right (1)
+            reflect_fr : is the wheel front (1) or rear (-1)
+            suffix     : give the wheel a unique name
+    -->
+    <xacro:macro name="wheel" params="reflect_lr reflect_fr suffix">
+        <xacro:property name="wheel_name" value="${suffix}_wheel" />
+        <xacro:gz_wheel_material name="${wheel_name}" />
+
+        <link name="${wheel_name}">
+            <visual>
+                <xacro:insert_block name="wheel_geometry" />
+                <material name="black" />
+            </visual>
+            <collision>
+                <xacro:insert_block name="wheel_geometry" />
+            </collision>
+            <inertial>
+                <mass value="${wh_mass}" />
+                <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+                <inertia
+                    ixx="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
+                    iyz="0"
+                    izz="${(1/2)*wh_mass*wh_radius**2}"
+                    />
+            </inertial>
+        </link>
+
+        <joint name="${wheel_name}_joint" type="continuous">
+            <parent link="chassis" />
+            <child link="${wheel_name}" />
+            <origin xyz="${ch_length/2*reflect_fr} ${(wh_length+ch_width)/2*reflect_lr} 0" rpy="0 0 0" />
+            <axis xyz="0 1 0" />
+            <limit effort="10" velocity="100" />
+        </joint>
+
+        <transmission name="${wheel_name}_transmission" type="SimpleTransmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${wheel_name}_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${wheel_name}_motor">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+    </xacro:macro>
+
+</robot>

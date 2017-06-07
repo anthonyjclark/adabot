@@ -47,3 +47,4 @@ catkin build
 - [ ] consider making adabot a macro so that more than one can be imported
 - [ ] work on urdf naming scheme (ax vs joint, etc.)
 - [ ] -z argument for urdf_spawner in the gazebo launch file
+- [ ] checkout Gazebo's skid steer plugin

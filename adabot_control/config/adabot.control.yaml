@@ -2,22 +2,24 @@ adabot:
   # Publish all joint states -----------------------------------
   joint_state_controller:
     type: joint_state_controller/JointStateController
-    publish_rate: 50  
+    publish_rate: 50
 
-  # Velocity controllers ---------------------------------------
+
+  # Velocity Controllers ---------------------------------------
   front_left_wheel_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
     joint: front_left_wheel_joint
-    pid: {p: -100.0, i: 0.01, d: 10.0, i_clamp: 0.0}
+    pid: {p: 0.5, i: 0.0, d: 0.0, i_clamp: 0.0}
   front_right_wheel_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
     joint: front_right_wheel_joint
-    pid: {p: 100.0, i: 0.01, d: 10.0, i_clamp: 0.0}
-  back_left_wheel_joint_velocity_controller:
+    pid: {p: 0.5, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_left_wheel_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
-    joint: back_left_wheel_joint
-    pid: {p: -100.0, i: 0.01, d: 10.0, i_clamp: 0.0}
-  back_right_wheel_joint_velocity_controller:
+    joint: rear_left_wheel_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_right_wheel_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
-    joint: back_right_wheel_joint
-    pid: {p: 100.0, i: 0.01, d: 10.0, i_clamp: 0.0}
+    joint: rear_right_wheel_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0, i_clamp: 0.0}
+

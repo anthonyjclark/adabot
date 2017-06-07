@@ -34,9 +34,10 @@
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
 
   <!-- Spawn a robot into Gazebo from the ROS Parameter Server -->
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model adabot" />
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
+        args="-param robot_description -urdf -model adabot" />
 
   <!-- ros_control adabot launch file -->
-  <!--include file="$(find adabot_control)/launch/adabot.control.launch" /-->
+  <include file="$(find adabot_control)/launch/adabot.control.launch" ns="/" />
 
 </launch>

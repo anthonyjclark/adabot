@@ -2,82 +2,31 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
 
 
-    <!--
-         Properties for the robot bodies
-    -->
-    <xacro:property name="PI" value="3.1415926535897931 "/>
-    <xacro:property name="SCALE" value="4" />
-
-    <!-- Typical density of plastics -->
-    <xacro:property name="mat_density" value="1000.0" />
-
-    <!-- Chassis parameters -->
-    <xacro:property name="ch_density_factor" value="0.4" />
-    <xacro:property name="ch_density" value="${mat_density * ch_density_factor}" />
-    <xacro:property name="ch_length"  value="${0.100 * SCALE}" />
-    <xacro:property name="ch_width"   value="${0.070 * SCALE}" />
-    <xacro:property name="ch_height"  value="${0.035 * SCALE}" />
-    <xacro:property name="ch_mass"    value="${ch_density * ch_length * ch_width * ch_height}" />
-
-    <!-- Wheel parameters -->
-    <xacro:property name="wh_density_factor" value="0.4" />
-    <xacro:property name="wh_density" value="${mat_density * wh_density_factor}" />
-    <xacro:property name="wh_radius"  value="${0.020 * SCALE}" />
-    <xacro:property name="wh_length"  value="${0.005 * SCALE}" />
-    <xacro:property name="wh_mass"    value="${wh_density * PI * (wh_radius**2) * wh_length}" />
-
-    <!-- Vertical offset so that the robot starts above ground -->
-    <xacro:property name="zoffset" value="${wh_radius*1.1/2 * 10}" />
-
-
-
-
-
-
-    <!--
-         Properties for names, colors, and Gazebo
-    -->
+    <!-- Include the parameters xacro flie -->
+    <xacro:include filename="$(find adabot_description)/urdf/adabot.parameters.xacro" />
 
     <!-- Import colors defined for Rviz -->
     <xacro:include filename="$(find adabot_description)/urdf/adabot.materials.xacro" />
 
-    <!-- Import tags needed by Gazebo -->
+    <!-- Include macros for creating all links and joints -->
+    <xacro:include filename="$(find adabot_description)/urdf/adabot.macros.xacro" />
+
+    <!-- Add the Gazebo related elements -->
     <xacro:include filename="$(find adabot_description)/urdf/adabot.gazebo.xacro" />
 
 
 
 
-
-
-    <!--
-         The main chassis/body
-            Note: the chassis is connect to the world link so that it's link frame is 
-            easier to visualize. This will also help when we start to include multiple
-            robots.
-    -->
-    <xacro:property name="chassis_geometry">
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-            <box size="${ch_length} ${ch_width} ${ch_height}" />
-        </geometry>
-    </xacro:property>
-
-    <link name="world" />
-
+    <!-- Add the base_link (needed by Gazebo) and the chassis -->
+    <link name="base_link" />
     <link name="chassis">
         <visual>
             <xacro:insert_block name="chassis_geometry" />
             <material name="white" />
         </visual>
-    </link>
-
-    <joint name="world_joint" type="floating">
-        <origin xyz="0 0 ${zoffset}" rpy="0 0 0" />
-        <parent link="world" />
-        <child link="chassis" />
-    </joint>
-
-    <link name="chassis_inertia">
+        <collision>
+            <xacro:insert_block name="chassis_geometry" />
+        </collision>
         <inertial>
             <mass value="${ch_mass}" />
             <inertia
@@ -91,90 +40,20 @@
         </inertial>
     </link>
 
-    <joint name="chassis_inertia_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <parent link="chassis" />
-        <child link="chassis_inertia" />
+    <joint name="base_link_joint" type="fixed">
+        <origin xyz="0 0 ${z_offset}" rpy="0 0 0" />
+        <parent link="base_link" />
+        <child link="chassis" />
     </joint>
 
 
-<!-- <collision>
-            <xacro:insert_block name="chassis_geometry" />
-        </collision>
-        -->
 
 
+    <!-- Add the wheels -->
+    <xacro:wheel reflect_lr="1"  reflect_fr="1"  suffix="front_left"  />
+    <xacro:wheel reflect_lr="-1" reflect_fr="1"  suffix="front_right" />
+    <xacro:wheel reflect_lr="1"  reflect_fr="-1" suffix="rear_left"   />
+    <xacro:wheel reflect_lr="-1" reflect_fr="-1" suffix="rear_right"  />
 
-
-
-
-    <!--
-         Macro for creating wheels
-            reflect_lr : is the wheel left (-1) or right (1)
-            reflect_fb : is the wheel front (1) or back (-1)
-            suffix     : give the wheel a unique name
-    -->
-    <xacro:property name="wheel_geometry">
-        <!-- Cylinders default with their height along the z axis -->
-        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-            <cylinder length="${wh_length}" radius="${wh_radius}" />
-        </geometry>
-    </xacro:property>
-
-    <xacro:macro name="wheel" params="reflect_lr reflect_fb suffix">
-        <xacro:property name="wheel_name" value="${suffix}_wheel" />
-        <xacro:gz_wheel_material name="${wheel_name}" />
-
-        <link name="${wheel_name}">
-            <visual>
-                <xacro:insert_block name="wheel_geometry" />
-                <material name="black" />
-            </visual>
-            <collision>
-                <xacro:insert_block name="wheel_geometry" />
-            </collision>
-            <inertial>
-                <mass value="${wh_mass}" />
-                <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-                <inertia
-                    ixx="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
-                    ixy="0"
-                    ixz="0"
-                    iyy="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
-                    iyz="0"
-                    izz="${(1/2)*wh_mass*wh_radius**2}"
-                    />
-            </inertial>
-        </link>
-
-        <joint name="${wheel_name}_joint" type="continuous">
-            <parent link="chassis" />
-            <child link="${wheel_name}" />
-            <origin xyz="${ch_length/2*reflect_fb} ${(wh_length+ch_width)/2*reflect_lr} 0" rpy="0 0 0" />
-            <axis xyz="0 -1 0" />
-            <limit effort="10" velocity="100" />
-        </joint>
-
-        <transmission name="${wheel_name}_transmission" type="SimpleTransmission">
-            <type>transmission_interface/SimpleTransmission</type>
-            <joint name="${wheel_name}_joint">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            </joint>
-            <actuator name="${wheel_name}_motor">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-                <mechanicalReduction>1</mechanicalReduction>
-            </actuator>
-        </transmission>
-
-    </xacro:macro>
-
-    <!-- Macro calls for creating wheels -->
-    <xacro:wheel reflect_lr="1"  reflect_fb="1"  suffix="front_left"  />
-    <xacro:wheel reflect_lr="-1" reflect_fb="1"  suffix="front_right" />
-    <xacro:wheel reflect_lr="1"  reflect_fb="-1" suffix="back_left"   />
-    <xacro:wheel reflect_lr="-1" reflect_fb="-1" suffix="back_right"  />
 
 </robot>
-
-

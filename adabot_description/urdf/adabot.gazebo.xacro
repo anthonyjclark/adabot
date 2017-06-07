@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
 
+
     <!--
         Gazebo requires the following:
             An <inertia> element within each <link> (handled in adabot.main.xacro).
@@ -27,12 +28,60 @@
         </gazebo>
     </xacro:macro>
 
+
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
             <robotNamespace>/adabot</robotNamespace>
             <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
         </plugin>
     </gazebo>
+
+
+<!-- <gazebo reference="chassis">
+  <mu1 value="0.0"/>
+  <mu2 value="0.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <material>Gazebo/Blue</material>
+</gazebo>
+
+<gazebo reference="left_rear_wheel">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <fdir1 value="1 0 0"/>
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<gazebo reference="right_rear_wheel">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <fdir1 value="1 0 0"/>
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<gazebo reference="left_front_wheel">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <fdir1 value="0 0 1"/>
+  <material>Gazebo/Black</material>
+</gazebo>
+
+<gazebo reference="right_front_wheel">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <fdir1 value="0 0 1"/>
+  <material>Gazebo/Black</material>
+</gazebo> -->
+
+
 
     <!-- Add colors for other links -->
     <!-- Add simulated IMU:
@@ -42,22 +91,5 @@
     <!-- Add simulated wheel encoders -->
     <!-- Add wheel motors and control -->
     <!-- Add linear servo motors and control -->
-
-<!--     <gazebo>
-        <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
-            <updateRate>100.0</updateRate>
-            <robotNamespace>/</robotNamespace>
-            <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
-            <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
-            <leftRearJoint>back_left_wheel_joint</leftRearJoint>
-            <rightRearJoint>back_right_wheel_joint</rightRearJoint>
-            <wheelSeparation>0.4</wheelSeparation>
-            <wheelDiameter>0.215</wheelDiameter>
-            <robotBaseFrame>base_link</robotBaseFrame>
-            <torque>20</torque>
-            <topicName>cmd_vel</topicName>
-            <broadcastTF>false</broadcastTF>
-        </plugin>
-    </gazebo> -->
 
 </robot>
