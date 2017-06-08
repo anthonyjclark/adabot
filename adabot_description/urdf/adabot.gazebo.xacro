@@ -18,15 +18,7 @@
         By conventions, units should be specified in meters and kilograms.
     -->
 
-    <gazebo reference="chassis">
-        <material>Gazebo/White</material>
-    </gazebo>
 
-    <xacro:macro name="gz_wheel_material" params="name">
-        <gazebo reference="${name}">
-            <material>Gazebo/Black</material>
-        </gazebo>
-    </xacro:macro>
 
 
     <gazebo>
@@ -37,51 +29,41 @@
     </gazebo>
 
 
-<!-- <gazebo reference="chassis">
-  <mu1 value="0.0"/>
-  <mu2 value="0.0"/>
-  <kp  value="10000000.0" />
-  <kd  value="1.0" />
-  <material>Gazebo/Blue</material>
-</gazebo>
-
-<gazebo reference="left_rear_wheel">
-  <mu1 value="1.0"/>
-  <mu2 value="1.0"/>
-  <kp  value="10000000.0" />
-  <kd  value="1.0" />
-  <fdir1 value="1 0 0"/>
-  <material>Gazebo/Black</material>
-</gazebo>
-
-<gazebo reference="right_rear_wheel">
-  <mu1 value="1.0"/>
-  <mu2 value="1.0"/>
-  <kp  value="10000000.0" />
-  <kd  value="1.0" />
-  <fdir1 value="1 0 0"/>
-  <material>Gazebo/Black</material>
-</gazebo>
-
-<gazebo reference="left_front_wheel">
-  <mu1 value="1.0"/>
-  <mu2 value="1.0"/>
-  <kp  value="10000000.0" />
-  <kd  value="1.0" />
-  <fdir1 value="0 0 1"/>
-  <material>Gazebo/Black</material>
-</gazebo>
-
-<gazebo reference="right_front_wheel">
-  <mu1 value="1.0"/>
-  <mu2 value="1.0"/>
-  <kp  value="10000000.0" />
-  <kd  value="1.0" />
-  <fdir1 value="0 0 1"/>
-  <material>Gazebo/Black</material>
-</gazebo> -->
 
 
+    <!-- http://wiki.ros.org/simulator_gazebo/Tutorials/ListOfMaterials -->
+    <xacro:macro name="gz_black_material" params="name">
+        <gazebo reference="${name}">
+            <material>Gazebo/FlatBlack</material>
+        </gazebo>
+    </xacro:macro>
+
+    <xacro:macro name="gz_white_material" params="name">
+        <gazebo reference="${name}">
+            <!-- <material>Gazebo/White</material> -->
+            <material>Gazebo/GreenEmissive</material>
+        </gazebo>
+    </xacro:macro>
+
+    <xacro:macro name="gz_blue_material" params="name">
+        <gazebo reference="${name}">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+    </xacro:macro>
+
+
+
+
+    <!-- Material frictions -->
+    <xacro:macro name="gz_high_friction" params="name">
+        <gazebo reference="${name}">
+            <mu1 value="100.0"/>
+            <mu2 value="100.0"/>
+            <!-- <kp  value="10000000.0" /> -->
+            <!-- <kd  value="1.0" /> -->
+            <!-- <fdir1 value="1 0 0"/> -->
+        </gazebo>
+    </xacro:macro>
 
     <!-- Add colors for other links -->
     <!-- Add simulated IMU:

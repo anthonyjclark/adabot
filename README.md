@@ -56,8 +56,18 @@ catkin build
     - [ ] tune effort values
 - [ ] wheels
     - [ ] add option to display wheel as cylinder instead of sphere
-- [ ] all bodies
+- [ ] all links
     - [ ] select friction model
     - [ ] adjust inertia tensor independent of mass (for jitter)
+    - [ ] mu1, mu2, fdir1, kp, kd
 - [ ] all joints
     - [ ] adjust limits, velocity, and effort
+    - [ ] stopCfm, stopErp, implicitSpringDamper, cfmDamping, fudgeFactor
+
+- run script from launch file to create control yaml and control launch files
+- reduce time step
+- collision vs inertia vs visual geometries
+- inertia macros for different primitives
+- dymamic reconfigure to tune PID
+
+- jitter due to high joint forces for low masses

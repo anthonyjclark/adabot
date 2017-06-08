@@ -38,7 +38,7 @@
         <xacro:property name="wheel_name" value="${suffix}_wheel" />
 
         <!-- Add the wheel's Gazebo material -->
-        <xacro:gz_wheel_material name="${wheel_name}" />
+        <xacro:gz_black_material name="${wheel_name}" />
 
         <!-- The wheel's rigid body -->
         <link name="${wheel_name}">
@@ -133,6 +133,10 @@
         <!-- The name of the current weg (based on the parent wheel's name) -->
         <xacro:property name="weg_name" value="${wheel}_weg_${number}" />
 
+        <!-- Add the weg's Gazebo material -->
+        <xacro:gz_white_material name="${weg_name}" />
+        <xacro:gz_black_material name="${weg_name}_tip" />
+
         <!-- The weg's rigid body -->
         <link name="${weg_name}">
             <visual>
@@ -161,7 +165,7 @@
             <parent link="${parent}" />
             <child link="${weg_name}" />
             <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" />
-            <limit upper="${wh_radius * 0.7}" lower="0" effort="10" velocity="10" />
+            <limit upper="${wh_radius * 0.7}" lower="0" effort="100" velocity="10" />
         </joint>
 
         <!--
@@ -206,6 +210,9 @@
                     />
             </inertial>
         </link>
+
+        <!-- Make the weg tip high friction -->
+        <xacro:gz_high_friction name="${weg_name}_tip" />
 
         <!-- Connect the weg tip to the weg -->
         <joint name="${weg_name}_tip_joint" type="fixed">
