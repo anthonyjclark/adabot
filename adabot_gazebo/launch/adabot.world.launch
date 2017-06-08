@@ -11,22 +11,23 @@
   <!--  debug        : start gzserver in debug mode using gdb -->
   <!--  model        : xacro file for adabot -->
   <!--  -->
-  <arg name="paused"       default="true"/>
-  <arg name="use_sim_time" default="true"/>
-  <arg name="gui"          default="true"/>
-  <arg name="headless"     default="false"/>
-  <arg name="debug"        default="false"/>
-  <arg name="model"        default="$(find adabot_description)/urdf/adabot.main.xacro"/>
+  <arg name="paused"       default="true" />
+  <arg name="use_sim_time" default="true" />
+  <arg name="gui"          default="true" />
+  <arg name="headless"     default="false" />
+  <arg name="debug"        default="false" />
+  <arg name="model"        default="$(find adabot_description)/urdf/adabot.main.xacro" />
+  <arg name="world"        default="$(find adabot_gazebo)/worlds/adabot.empty.world" />
 
   <!--  -->
   <!-- Start with the empty_world.launch file -->
   <!--  -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name"   value="$(find adabot_gazebo)/worlds/adabot.empty.world"/>
-    <arg name="paused"       value="$(arg paused)"/>
-    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="world_name"   value="$(arg world)" />
+    <arg name="paused"       value="$(arg paused)" />
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
     <arg name="gui"          value="$(arg gui)" />
-    <arg name="headless"     value="$(arg headless)"/>
+    <arg name="headless"     value="$(arg headless)" />
     <arg name="debug"        value="$(arg debug)" />
   </include>
 
@@ -34,7 +35,7 @@
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
 
   <!-- Spawn a robot into Gazebo from the ROS Parameter Server -->
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
         args="-param robot_description -urdf -model adabot" />
 
   <!-- ros_control adabot launch file -->

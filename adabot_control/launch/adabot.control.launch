@@ -2,7 +2,7 @@
 <launch>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find adabot_control)/config/adabot.control.yaml" command="load"/>
+  <rosparam file="$(find adabot_control)/config/adabot.control.yaml" command="load" />
 
   <!-- Load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
@@ -34,7 +34,7 @@
                                            rear_right_weg_2_joint_position_controller
                                            rear_right_weg_3_joint_position_controller
                                            rear_right_weg_4_joint_position_controller
-                                           rear_right_weg_5_joint_position_controller"/>
+                                           rear_right_weg_5_joint_position_controller" />
 
 <!--   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         output="screen" ns="/adabot" args="joint_state_controller
@@ -48,7 +48,7 @@
 
                                            front_right_wheel_joint_velocity_controller
                                            rear_left_wheel_joint_velocity_controller
-                                           rear_right_wheel_joint_velocity_controller"/> -->
+                                           rear_right_wheel_joint_velocity_controller" /> -->
 
 <!--   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         output="screen" ns="/adabot" args="joint_state_controller
@@ -69,6 +69,6 @@
   </node>
 
   <!-- Allow for Gazebo to broadcast odom -->
-  <!-- <node pkg="adabot_gazebo" name="gazebo_odometry_node" type="gazebo_odometry.py"/> -->
+  <!-- <node pkg="adabot_gazebo" name="gazebo_odometry_node" type="gazebo_odometry.py" /> -->
 
 </launch>

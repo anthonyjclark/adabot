@@ -19,8 +19,8 @@
 
     <!-- Add the base_link and the chassis. The base_link helps with positioning. -->
     <link name="base_link" />
+    <xacro:gz_white_material name="chassis" />
     <link name="chassis">
-        <xacro:gz_white_material name="chassis" />
         <visual>
             <xacro:insert_block name="chassis_geometry" />
             <material name="white" />

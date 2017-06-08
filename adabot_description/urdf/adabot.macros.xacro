@@ -40,6 +40,9 @@
         <!-- Add the wheel's Gazebo material -->
         <xacro:gz_black_material name="${wheel_name}" />
 
+        <!-- Make the wheel have lower friction -->
+        <xacro:gz_low_friction name="${wheel_name}" />
+
         <!-- The wheel's rigid body -->
         <link name="${wheel_name}">
             <visual>
@@ -137,6 +140,9 @@
         <xacro:gz_white_material name="${weg_name}" />
         <xacro:gz_black_material name="${weg_name}_tip" />
 
+        <!-- Make the weg tip high friction -->
+        <xacro:gz_high_friction name="${weg_name}_tip" />
+
         <!-- The weg's rigid body -->
         <link name="${weg_name}">
             <visual>
@@ -210,9 +216,6 @@
                     />
             </inertial>
         </link>
-
-        <!-- Make the weg tip high friction -->
-        <xacro:gz_high_friction name="${weg_name}_tip" />
 
         <!-- Connect the weg tip to the weg -->
         <joint name="${weg_name}_tip_joint" type="fixed">

@@ -5,7 +5,7 @@
     <!--
          Properties for the robot bodies
     -->
-    <xacro:property name="PI" value="3.1415926535897931 "/>
+    <xacro:property name="PI" value="3.1415926535897931 " />
     <xacro:property name="SCALE" value="4" />
 
     <!-- Typical density of plastics -->
@@ -14,7 +14,7 @@
     <!-- Chassis parameters -->
     <xacro:property name="ch_density_factor" value="0.4" />
     <xacro:property name="ch_density" value="${mat_density * ch_density_factor}" />
-    <xacro:property name="ch_length"  value="${0.100 * SCALE}" />
+    <xacro:property name="ch_length"  value="${0.100 * SCALE * 0.65}" />
     <xacro:property name="ch_width"   value="${0.070 * SCALE}" />
     <xacro:property name="ch_height"  value="${0.025 * SCALE}" />
     <xacro:property name="ch_mass"    value="${ch_density * ch_length * ch_width * ch_height}" />
