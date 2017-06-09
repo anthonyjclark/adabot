@@ -68,6 +68,9 @@ catkin build
 - reduce time step
 - collision vs inertia vs visual geometries
 - inertia macros for different primitives
-- dymamic reconfigure to tune PID
+- dynamic reconfigure to tune PID
 
 - jitter due to high joint forces for low masses
+
+- look at wheel control
+- get joint outputs
