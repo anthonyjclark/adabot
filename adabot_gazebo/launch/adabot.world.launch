@@ -41,4 +41,7 @@
   <!-- ros_control adabot launch file -->
   <include file="$(find adabot_control)/launch/adabot.control.launch" ns="/" />
 
+  <!-- robot_localization adabot launch file -->
+  <include file="$(find adabot_localization)/launch/adabot.localization.launch" ns="/" />
+
 </launch>

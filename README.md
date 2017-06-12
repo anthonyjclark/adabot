@@ -74,3 +74,11 @@ catkin build
 
 - look at wheel control
 - get joint outputs
+
+
+- starting with a simple process of detecting slippage
+
+- frequencies of sensor and actuator nodes
+
+git clone -b lunar-devel https://github.com/cra-ros-pkg/robot_localization.git
+sudo apt-get install ros-lunar-geographic-msgs 
