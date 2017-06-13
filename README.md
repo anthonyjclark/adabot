@@ -87,3 +87,5 @@ sudo apt-get install ros-lunar-geographic-msgs
 - node params (n.getParam)
 
 - average /adabot/odom/filtered/twist/twist/linear/x
+
+rqt_plot /adabot/odom/filtered/twist/twist/linear/x /adabot/odometry/twist/twist/linear/x
