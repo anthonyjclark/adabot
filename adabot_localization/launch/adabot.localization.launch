@@ -4,10 +4,13 @@
     <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
         <rosparam command="load" file="$(find adabot_localization)/config/adabot.localization.yaml" />
 
-        <remap from="odometry/filtered" to="/adabot/odometry/filtered"/>
+        <remap from="odometry/filtered" to="/adabot/odom/filtered"/>
         <!-- <remap from="accel/filtered" to=""/> -->
 
 
     </node>
+
+    <node pkg="adabot_localization" name="gazebo_odometry_node" type="wheel_encoder_odom_pub.py" />
+
 
 </launch>

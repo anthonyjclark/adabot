@@ -82,3 +82,8 @@ catkin build
 
 git clone -b lunar-devel https://github.com/cra-ros-pkg/robot_localization.git
 sudo apt-get install ros-lunar-geographic-msgs 
+
+
+- node params (n.getParam)
+
+- average /adabot/odom/filtered/twist/twist/linear/x

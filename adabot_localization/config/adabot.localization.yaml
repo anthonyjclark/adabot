@@ -70,7 +70,7 @@ world_frame: odom             # Defaults to the value of odom_frame if unspecifi
 # # sensor_msgs/Imu). To add an input, simply append the next number in the sequence to its "base" name, e.g., odom0,
 # # odom1, twist0, twist1, imu0, imu1, imu2, etc. The value should be the topic name. These parameters obviously have no
 # # default values, and must be specified.
-# odom0: example/odom
+odom0: adabot/odometry
 
 # # Each sensor reading updates some or all of the filter's state. These options give you greater control over which
 # # values from each measurement are fed to the filter. For example, if you have an odometry message as input, but only
@@ -79,17 +79,11 @@ world_frame: odom             # Defaults to the value of odom_frame if unspecifi
 # # do not provide some of the state variables estimated by the filter. For example, a TwistWithCovarianceStamped message
 # # has no pose information, so the first six values would be meaningless in that case. Each vector defaults to all false
 # # if unspecified, effectively making this parameter required for each sensor.
-# odom0_config: [true,  true, false,
-#                          false, false, false,
-#                          false, false, false,
-#                          false, false,  true,
-#                          false, false, false]
-
-# [false, false, false,
-# false, false, false,
-# true, true, false,
-# false, false, true,
-# false, false, false]
+odom0_config: [false, false, false,
+               false, false, false,
+                true,  true, false,
+               false, false,  true,
+               false, false, false]
 
 # # If you have high-frequency data or are running with a low frequency parameter value, then you may want to increase
 # # the size of the subscription queue so that more measurements are fused.
