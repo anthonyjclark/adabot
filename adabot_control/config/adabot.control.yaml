@@ -44,6 +44,22 @@ adabot:
     type: effort_controllers/JointPositionController
     joint: front_left_weg_5_joint
     pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  front_left_weg_6_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: front_left_weg_6_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  front_left_weg_7_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: front_left_weg_7_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  front_left_weg_8_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: front_left_weg_8_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  front_left_weg_9_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: front_left_weg_9_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
 
   # Front Right Wheel Weg Controllers ---------------------------
   front_right_weg_1_joint_position_controller:
@@ -65,6 +81,22 @@ adabot:
   front_right_weg_5_joint_position_controller:
     type: effort_controllers/JointPositionController
     joint: front_right_weg_5_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  front_right_weg_6_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: front_right_weg_6_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  front_right_weg_7_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: front_right_weg_7_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  front_right_weg_8_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: front_right_weg_8_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  front_right_weg_9_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: front_right_weg_9_joint
     pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
 
   # Rear Left Wheel Weg Controllers ---------------------------
@@ -88,6 +120,22 @@ adabot:
     type: effort_controllers/JointPositionController
     joint: rear_left_weg_5_joint
     pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_left_weg_6_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rear_left_weg_6_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_left_weg_7_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rear_left_weg_7_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_left_weg_8_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rear_left_weg_8_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_left_weg_9_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rear_left_weg_9_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
 
   # Rear Right Wheel Weg Controllers ---------------------------
   rear_right_weg_1_joint_position_controller:
@@ -109,4 +157,20 @@ adabot:
   rear_right_weg_5_joint_position_controller:
     type: effort_controllers/JointPositionController
     joint: rear_right_weg_5_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_right_weg_6_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rear_right_weg_6_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_right_weg_7_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rear_right_weg_7_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_right_weg_8_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rear_right_weg_8_joint
+    pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}
+  rear_right_weg_9_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rear_right_weg_9_joint
     pid: {p: 500.0, i: 0.0, d: 0.0, i_clamp: 0.0}

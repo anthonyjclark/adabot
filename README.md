@@ -89,3 +89,7 @@ sudo apt-get install ros-lunar-geographic-msgs
 - average /adabot/odom/filtered/twist/twist/linear/x
 
 rqt_plot /adabot/odom/filtered/twist/twist/linear/x /adabot/odometry/twist/twist/linear/x
+
+show how to manually tweak PID values
+
+normalize number of spaces in launch files, etc.

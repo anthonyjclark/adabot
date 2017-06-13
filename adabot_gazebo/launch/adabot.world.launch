@@ -41,7 +41,9 @@
         args="-param robot_description -urdf -model adabot" />
 
   <!-- ros_control adabot launch file -->
-  <include file="$(find adabot_control)/launch/adabot.control.launch" ns="/" />
+  <include file="$(find adabot_control)/launch/adabot.control.launch" ns="/">
+    <arg name="wg_per_wheel" value="$(arg wg_per_wheel)" />
+  </include>
 
   <!-- robot_localization adabot launch file -->
   <include file="$(find adabot_localization)/launch/adabot.localization.launch" ns="/" />
