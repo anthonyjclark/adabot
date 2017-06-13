@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
+
+
+    <!-- Include the parameters xacro flie -->
+    <xacro:include filename="$(find adabot_description)/urdf/adabot.parameters.xacro" />
+
+    <!-- Import colors defined for Rviz -->
+    <xacro:include filename="$(find adabot_description)/urdf/adabot.materials.xacro" />
+
+    <!-- Include macros for creating all links and joints -->
+    <xacro:include filename="$(find adabot_description)/urdf/adabot.macros.xacro" />
+
+    <!-- Add the Gazebo related elements -->
+    <xacro:include filename="$(find adabot_description)/urdf/adabot.gazebo.xacro" />
+
+
+
+
+    <!-- Add the base_link and the chassis. The base_link helps with positioning. -->
+    <link name="base_link" />
+    <xacro:gz_white_material name="chassis" />
+    <link name="chassis">
+        <visual>
+            <xacro:insert_block name="chassis_geometry" />
+            <material name="white" />
+        </visual>
+        <collision>
+            <xacro:insert_block name="chassis_geometry" />
+        </collision>
+        <inertial>
+            <mass value="${ch_mass}" />
+            <inertia
+                ixx="${(1/12)*ch_mass*(ch_width**2 + ch_height**2)}"
+                ixy="0"
+                ixz="0"
+                iyy="${(1/12)*ch_mass*(ch_length**2 + ch_height**2)}"
+                iyz="0"
+                izz="${(1/12)*ch_mass*(ch_length**2 + ch_width**2)}"
+                />
+        </inertial>
+    </link>
+
+    <joint name="base_link_joint" type="fixed">
+        <origin xyz="0 0 ${z_offset}" rpy="0 0 0" />
+        <parent link="base_link" />
+        <child link="chassis" />
+    </joint>
+
+
+
+
+    <!-- Add the wheels (note, wegs are created with the wheels) -->
+    <xacro:wheel reflect_lr="1"  reflect_fr="1"  suffix="front_left"  />
+    <xacro:wheel reflect_lr="-1" reflect_fr="1"  suffix="front_right" />
+    <xacro:wheel reflect_lr="1"  reflect_fr="-1" suffix="rear_left"   />
+    <xacro:wheel reflect_lr="-1" reflect_fr="-1" suffix="rear_right"  />
+
+
+</robot>

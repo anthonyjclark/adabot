@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Custom default camera pose -->
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>0.988075 -1.38036 0.814254 0 0.423643 2.1642</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+    <!-- Custom physics settings -->
+    <physics type='ode'>
+      <max_step_size>0.0005</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>2000</real_time_update_rate>
+      <!-- <ode>
+        <solver>
+          <type>world</type>
+          <iters>200</iters>
+        </solver>
+      </ode> -->
+    </physics>
+
+  </world>
+</sdf>

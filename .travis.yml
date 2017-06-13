@@ -1,5 +1,51 @@
-install:
-  - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config
+
+# NOTE: The build lifecycle on Travis.ci:
+#
+#   checkout git repository and cd into repo
+#   install apt addons
+#   cache components
+#
+#   before_install : install dependencies (Ubuntu packages or services)
+#   install        : install/setup project
+#   before_script  : setup script's environment
+#   script         : run the build script
+#   before_cache   : for cleaning up cache
+#   after_           (can access $TRAVIS_TEST_RESULT env)
+#     success      : e.g., build documentation or deploy to server
+#     failure      : e.g., upload log files
+#   before_deploy
+#   deploy         : Deploy code to Heroku, Engine Yard, etc.
+#   after_deploy
+#   after_script
+
+###########################################################
+# Configuration
+###########################################################
+sudo: required
+language:
+  - generic
+cache:
+  - apt
+services:
+  - docker
+env:
+  global:
+    - CI_SOURCE_PATH=$(pwd)
+    - ROSINSTALL_FILE=$CI_SOURCE_PATH/dependencies.rosinstall
+    - CATKIN_OPTIONS=$CI_SOURCE_PATH/catkin.options
+
+before_install:
+  # Docker is required to run Ubuntu 16.04.2 LTS (Xenial Xerus) and,
+  # therefore, ROS Kinetic
+  - docker pull ros:kinetic-ros-core
+
 script:
-  - .ci_config/travis.sh
-  
+  # Run the build test script in the docker container
+  # docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+  #   run : run a command in the new container
+  #     -v $(pwd):$(pwd) : mount the current directory in the container
+  #     ros:kinetic-ros-base : is the image
+  #     /bin/bash -c "source $(pwd)/.travis.sh" : the command to run in the container
+  #       the -c flag tells bash to execute commands from the given string
+  #         the source built-in command executes the script **in the current shell**
+  - docker run -v $(pwd):$(pwd) ros:kinetic-ros-base /bin/bash -c "source $(pwd)/.travis.sh"

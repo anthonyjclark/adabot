@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- This list of arguments are not used in this file.
+            They are provided because ROS complains about unused args when
+            we use the pass_all_args="true" option while including this file.
+            This is an inelegant solution, but I'd rather not duplicate arguments
+            in all other launch files.
+    -->
+    <arg name="rvizconfig" />
+    <arg name="gui" />
+    <arg name="paused" />
+    <arg name="use_sim_time" />
+    <arg name="gui" />
+    <arg name="headless" />
+    <arg name="debug" />
+    <arg name="world" />
+
+
+    <!-- Pass the model as a command line argument -->
+    <arg name="model" default="$(find adabot_description)/urdf/adabot.main.xacro" />
+
+    <!-- These arguments are used to adjust parameters in the adabot xacro file -->
+    <!--  ch_length     : length of chasis -->
+    <!--  ch_width      : width of chasis -->
+    <!--  wg_per_wheel  : number of wegs on each of wheels -->
+    <!--  wh_radius     : radius of each wheel -->
+    <arg name="ch_length"     default="0.100" />
+    <arg name="ch_width"      default="0.070" />
+    <arg name="wg_per_wheel"  default="5"     />
+    <arg name="wh_radius"     default="0.020" />
+    <arg name="scale"         default="4"     />
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <!-- (expose the URDF model to {joint,robot}_state_publisher) -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)
+        ch_length:=$(arg ch_length)
+        ch_width:=$(arg ch_width)
+        wg_per_wheel:=$(arg wg_per_wheel)
+        wh_radius:=$(arg wh_radius)" />
+
+</launch>
