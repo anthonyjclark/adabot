@@ -93,3 +93,5 @@ rqt_plot /adabot/odom/filtered/twist/twist/linear/x /adabot/odometry/twist/twist
 show how to manually tweak PID values
 
 normalize number of spaces in launch files, etc.
+
+find a better way to implement variable numbers of motors (for wegs)
