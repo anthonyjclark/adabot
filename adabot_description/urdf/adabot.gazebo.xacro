@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
 
+
     <!--
         Gazebo requires the following:
             An <inertia> element within each <link> (handled in adabot.main.xacro).
@@ -17,15 +18,8 @@
         By conventions, units should be specified in meters and kilograms.
     -->
 
-    <gazebo reference="chassis">
-        <material>Gazebo/White</material>
-    </gazebo>
 
-    <xacro:macro name="gz_wheel_material" params="name">
-        <gazebo reference="${name}">
-            <material>Gazebo/Black</material>
-        </gazebo>
-    </xacro:macro>
+
 
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -34,30 +28,104 @@
         </plugin>
     </gazebo>
 
-    <!-- Add colors for other links -->
-    <!-- Add simulated IMU:
-            gazeborosimu
-            gazeborosimusensor  *probably this one*
-    -->
-    <!-- Add simulated wheel encoders -->
-    <!-- Add wheel motors and control -->
-    <!-- Add linear servo motors and control -->
 
-<!--     <gazebo>
-        <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
-            <updateRate>100.0</updateRate>
-            <robotNamespace>/</robotNamespace>
-            <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
-            <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
-            <leftRearJoint>back_left_wheel_joint</leftRearJoint>
-            <rightRearJoint>back_right_wheel_joint</rightRearJoint>
-            <wheelSeparation>0.4</wheelSeparation>
-            <wheelDiameter>0.215</wheelDiameter>
-            <robotBaseFrame>base_link</robotBaseFrame>
-            <torque>20</torque>
-            <topicName>cmd_vel</topicName>
-            <broadcastTF>false</broadcastTF>
+
+
+    <!-- http://wiki.ros.org/simulator_gazebo/Tutorials/ListOfMaterials -->
+    <xacro:macro name="gz_black_material" params="name">
+        <gazebo reference="${name}">
+            <material>Gazebo/FlatBlack</material>
+        </gazebo>
+    </xacro:macro>
+
+    <xacro:macro name="gz_white_material" params="name">
+        <gazebo reference="${name}">
+            <material>Gazebo/White</material>
+        </gazebo>
+    </xacro:macro>
+
+    <xacro:macro name="gz_blue_material" params="name">
+        <gazebo reference="${name}">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+    </xacro:macro>
+
+
+
+
+    <!-- Material frictions -->
+    <xacro:macro name="gz_high_friction" params="name">
+        <gazebo reference="${name}">
+            <mu1 value="100.0" />
+            <mu2 value="100.0" />
+            <!-- <kp  value="10000000.0" /> -->
+            <!-- <kd  value="1.0" /> -->
+            <!-- <fdir1 value="1 0 0" /> -->
+        </gazebo>
+    </xacro:macro>
+
+    <xacro:macro name="gz_low_friction" params="name">
+        <gazebo reference="${name}">
+            <mu1 value="0.5" />
+            <mu2 value="0.5" />
+            <!-- <kp  value="10000000.0" /> -->
+            <!-- <kd  value="1.0" /> -->
+            <!-- <fdir1 value="1 0 0" /> -->
+        </gazebo>
+    </xacro:macro>
+
+
+<link name="imu_sensor_link">
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="0.02 0.02 0.02" />
+        </geometry>
+    </collision>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="0.02 0.02 0.02" />
+        </geometry>
+        <material name="red" />
+    </visual>
+    <inertial>
+        <mass value="0.001" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.00000015" ixy="0" ixz="0" iyy="0.00000015" iyz="0" izz="0.00000015" />
+    </inertial>
+</link>
+
+<joint name="imu_sensor_joint" type="fixed">
+    <axis xyz="0 0 1" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="chassis" />
+    <child link="imu_sensor_link" />
+</joint>
+
+<gazebo reference="imu_sensor_link">
+    <gravity>true</gravity>
+    <sensor name='imu_sensor' type='imu'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <visualize>1</visualize>
+        <topic>__default_topic__</topic>
+        <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+
+    <frameName>imu_sensor_link</frameName>
+    <robotNamespace>/adabot</robotNamespace>
+
+
+            <topicName>imu_data</topicName>
+            <!-- <bodyName>imu_sensor_link</bodyName> -->
+            <updateRateHZ>10.0</updateRateHZ>
+            <gaussianNoise>0.0</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
         </plugin>
-    </gazebo> -->
+        <pose>0 0 0 0 0 0</pose>
+    </sensor>
+</gazebo>
+
 
 </robot>

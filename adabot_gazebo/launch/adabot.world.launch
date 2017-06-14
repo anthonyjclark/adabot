@@ -9,34 +9,41 @@
   <!--  gui          : launch the user interface -->
   <!--  headless     : disable all rendering (does not work with gui:=true) -->
   <!--  debug        : start gzserver in debug mode using gdb -->
-  <!--  model        : xacro file for adabot -->
+  <!--  world        : the world file to pass to Gazebo for startup -->
+  <!--  model        : xacro file for adabot (passed onto the model launch file) -->
   <!--  -->
-  <arg name="paused"       default="true"/>
-  <arg name="use_sim_time" default="true"/>
-  <arg name="gui"          default="true"/>
-  <arg name="headless"     default="false"/>
-  <arg name="debug"        default="false"/>
-  <arg name="model"        default="$(find adabot_description)/urdf/adabot.main.xacro"/>
+  <arg name="paused"       default="true" />
+  <arg name="use_sim_time" default="true" />
+  <arg name="gui"          default="true" />
+  <arg name="headless"     default="false" />
+  <arg name="debug"        default="false" />
+  <arg name="world"        default="$(find adabot_gazebo)/worlds/adabot.empty.world" />
+
+  <!--  -->
+  <!-- Launch the robot_description node -->
+  <!--  -->
+  <include file="$(find adabot_description)/launch/adabot.model.launch" ns="/" pass_all_args="true" />
 
   <!--  -->
   <!-- Start with the empty_world.launch file -->
   <!--  -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name"   value="$(find adabot_gazebo)/worlds/adabot.empty.world"/>
-    <arg name="paused"       value="$(arg paused)"/>
-    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="world_name"   value="$(arg world)" />
+    <arg name="paused"       value="$(arg paused)" />
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
     <arg name="gui"          value="$(arg gui)" />
-    <arg name="headless"     value="$(arg headless)"/>
+    <arg name="headless"     value="$(arg headless)" />
     <arg name="debug"        value="$(arg debug)" />
   </include>
 
-  <!-- Load the URDF into the ROS Parameter Server -->
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
-
   <!-- Spawn a robot into Gazebo from the ROS Parameter Server -->
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model adabot" />
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description -urdf -model adabot" />
 
   <!-- ros_control adabot launch file -->
-  <!--include file="$(find adabot_control)/launch/adabot.control.launch" /-->
+  <include file="$(find adabot_control)/launch/adabot.control.$(arg wg_per_wheel).launch" ns="/" />
+
+  <!-- robot_localization adabot launch file -->
+  <include file="$(find adabot_localization)/launch/adabot.localization.launch" ns="/" />
 
 </launch>
