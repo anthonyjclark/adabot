@@ -104,3 +104,5 @@ dpkg -S ""
     similar to apt-file but works with ROS (without contents file)
 apt-cache policy ""
     display installed version and available versions
+
+rostopic hz and bw to test publish rate and bandwidth
