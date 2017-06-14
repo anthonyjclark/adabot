@@ -106,3 +106,5 @@ apt-cache policy ""
     display installed version and available versions
 
 rostopic hz and bw to test publish rate and bandwidth
+
+localization doesn't appear to use IMU data

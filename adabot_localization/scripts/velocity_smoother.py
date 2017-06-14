@@ -27,33 +27,14 @@ def odometry_callback(data):
     vxs.append(new_val)
 
 
-def publish_odometry():
+def publish_smoothed_velocity():
 
-    rate = rospy.Rate(50)
-    smooth_publisher = rospy.Publisher('adabot/smooth_speed', Float64, queue_size=10)
-    # odom_broadcaster = TransformBroadcaster()
+    rate = rospy.Rate(30)
+    smooth_publisher = rospy.Publisher('adabot/smooth_velocity', Float64, queue_size=10)
 
     while not rospy.is_shutdown():
 
-        # current_time = rospy.get_rostime()
-
-        # # Publish the transform over tf
-        # odom_transform = TransformStamped()
-        # odom_transform.header.stamp = current_time
-        # odom_transform.header.frame_id = 'odom'
-        # odom_transform.child_frame_id = 'base_link'
-        # odom_transform.transform.rotation.w = 1
-        # odom_broadcaster.sendTransform(odom_transform)
-
-        # # Publish the odometry message over ROS
-        # odom = Odometry()
-        # odom.header.stamp = current_time
-        # odom.header.frame_id = 'odom'
-        # odom.child_frame_id = 'base_link'
-        # # odom.pose.pose = 0
-        # odom.twist.twist.linear.x = vx
-        # odom_publisher.publish(odom)
-
+        # AJC: this should probably be a stamped message
         data = Float64()
         data.data = total / len(vxs)
         smooth_publisher.publish(data)
@@ -63,13 +44,13 @@ def publish_odometry():
 
 if __name__ == '__main__':
     # Initialize this node
-    rospy.init_node('adabot_smoother')
+    rospy.init_node('adabot_velocity_smoother')
 
     # Listen to the joint states published by ros_control
     rospy.Subscriber('adabot/filtered/odometry', Odometry, odometry_callback)
 
     # Go into the publish loop
     try:
-        publish_odometry()
+        publish_smoothed_velocity()
     except rospy.ROSInterruptException:
         pass

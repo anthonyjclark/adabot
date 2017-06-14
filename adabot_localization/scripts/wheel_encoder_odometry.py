@@ -57,7 +57,8 @@ def joint_state_callback(data):
 
 def publish_odometry():
 
-    rate = rospy.Rate(50)
+    # AJC: make this configurable
+    rate = rospy.Rate(30)
     odom_publisher = rospy.Publisher('adabot/odometry', Odometry, queue_size=10)
     odom_broadcaster = TransformBroadcaster()
 
