@@ -9,6 +9,7 @@
   <!--  gui          : launch the user interface -->
   <!--  headless     : disable all rendering (does not work with gui:=true) -->
   <!--  debug        : start gzserver in debug mode using gdb -->
+  <!--  wg_per_wheel : needed to launch the correct control launch file -->
   <!--  world        : the world file to pass to Gazebo for startup -->
   <!--  model        : xacro file for adabot (passed onto the model launch file) -->
   <!--  -->
@@ -17,6 +18,7 @@
   <arg name="gui"          default="true" />
   <arg name="headless"     default="false" />
   <arg name="debug"        default="false" />
+  <arg name="wg_per_wheel" default="5" />
   <arg name="world"        default="$(find adabot_gazebo)/worlds/adabot.empty.world" />
 
   <!--  -->
