@@ -95,3 +95,12 @@ show how to manually tweak PID values
 normalize number of spaces in launch files, etc.
 
 find a better way to implement variable numbers of motors (for wegs)
+
+apt-file search ""
+    search installed packages for owner of a file
+apt-cache search ""
+    grep on package descriptions
+dpkg -S ""
+    similar to apt-file but works with ROS (without contents file)
+apt-cache policy ""
+    display installed version and available versions
