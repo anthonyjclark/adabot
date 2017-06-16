@@ -30,7 +30,7 @@ def odometry_callback(data):
 def publish_smoothed_velocity():
 
     rate = rospy.Rate(30)
-    smooth_publisher = rospy.Publisher('adabot/smooth_velocity', Float64, queue_size=10)
+    smooth_publisher = rospy.Publisher('adabot/smooth_velocity', Float64, queue_size=1)
 
     while not rospy.is_shutdown():
 

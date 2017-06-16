@@ -108,3 +108,49 @@ apt-cache policy ""
 rostopic hz and bw to test publish rate and bandwidth
 
 localization doesn't appear to use IMU data
+
+controller tuning:
+- simulation time step and iterations
+- isolate the issue (pid gains, damping, friction)
+- low D
+- look for high mass differences between connected links
+- https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method
+- http://saba.kntu.ac.ir/eecd/pcl/download/PIDtutorial.pdf
+
+http://wiki.ros.org/UnitTesting
+http://gazebosim.org/tutorials?tut=contrib_code&cat=development#WriteTests
+
+reset:
+- can't call `rosservice call /gazebo/reset_simulation`
+    + this call causes all ROS nodes to stop updating for some time??
+- call `rosservice call /gazebo/reset_world`
+- call
+```
+rosservice call /set_pose "pose: 
+    header: 
+        seq: 0 
+        stamp: now 
+        frame_id: odom 
+    pose: 
+        pose: 
+            position: {x: 0.0, y: 0.0, z: 0.0} 
+            orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0} 
+        covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+```
+- call similar service on other nodes (create services for my nodes)
+- set weg extensions to 0
+- set wheel speed to 0
+
+- evolve
+    + chassis dimensions
+    + weg count
+    + weg extension amount
+    + wheel speed
+    + weg extension criteria
+    + weg retraction criteria
+
+
+weg extension based on all wheels
+check for bad simulation (timeout)
+
+teleop

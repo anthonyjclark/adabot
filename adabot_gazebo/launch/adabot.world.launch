@@ -45,6 +45,9 @@
     <!-- ros_control adabot launch file -->
     <include file="$(find adabot_control)/launch/adabot.control.$(arg wg_per_wheel).launch" ns="/" />
 
+    <!-- This really belongs in the control launch file... AJC: create master control launch file -->
+    <node pkg="adabot_control" name="adabot_extender" type="weg_extender.py" output="screen" />
+
     <!-- robot_localization adabot launch file -->
     <include file="$(find adabot_localization)/launch/adabot.localization.launch" ns="/" />
 

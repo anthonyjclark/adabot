@@ -49,12 +49,16 @@ weg_extender_topics = [
 
 
 command_velocity = 0
-low_velocity_count = 0
+low_velocity_count = 50
+tf = None
 
 def smooth_velocity_callback(data):
-    global low_velocity_count
+    global low_velocity_count, tf
 
-    if data.data < 0.95 * command_velocity and command_velocity > 0:
+    if tf == None:
+        tf = rospy.get_rostime() + rospy.Duration(4)
+
+    if data.data < 0.95 * command_velocity and command_velocity > 0 and rospy.get_rostime() > tf:
         low_velocity_count += 1
     else:
         low_velocity_count = 0
@@ -76,11 +80,9 @@ def publish_weg_extend():
 
         # Publish the odometry message over ROS
         if low_velocity_count > 50:
-            print 'Extending wegs.'
-            msg = Float64()
-            msg.data = 0.05
+            print('\n\n\n\n\nWEGS!!!!\n\n\n\n\n')
             for weg_publisher in weg_publishers:
-                weg_publisher.publish(msg)
+                weg_publisher.publish(Float64(0.05))
 
         rate.sleep()
 
