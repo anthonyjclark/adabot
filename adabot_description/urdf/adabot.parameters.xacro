@@ -5,10 +5,15 @@
     <!--
          Command line arguments for the adabot
     -->
-    <xacro:arg name="ch_length"    default="0.100 * 0.65" />
-    <xacro:arg name="ch_width"     default="0.070" />
+    <!-- These are factors so that they place nice with scaling -->
+    <xacro:arg name="ch_length_factor"    default="1" />
+    <xacro:arg name="ch_width_factor"     default="1" />
+    <xacro:arg name="wh_radius_factor"    default="1" />
+
+    <!-- Number of wegs per wheel -->
     <xacro:arg name="wg_per_wheel" default="5" />
-    <xacro:arg name="wh_radius"    default="0.020" />
+
+    <!-- Global size scaling factor -->
     <xacro:arg name="scale"        default="4" />
 
 
@@ -24,15 +29,15 @@
     <!-- Chassis parameters -->
     <xacro:property name="ch_density_factor" value="0.4" />
     <xacro:property name="ch_density" value="${mat_density * ch_density_factor}" />
-    <xacro:property name="ch_length"  value="${$(arg ch_length) * SCALE}" />
-    <xacro:property name="ch_width"   value="${$(arg ch_width) * SCALE}" />
+    <xacro:property name="ch_length"  value="${0.100 * 0.65 * $(arg ch_length_factor) * SCALE}" />
+    <xacro:property name="ch_width"   value="${0.070 * $(arg ch_width_factor) * SCALE}" />
     <xacro:property name="ch_height"  value="${0.025 * SCALE}" />
     <xacro:property name="ch_mass"    value="${ch_density * ch_length * ch_width * ch_height}" />
 
     <!-- Wheel parameters -->
     <xacro:property name="wh_density_factor" value="0.1" />
     <xacro:property name="wh_density" value="${mat_density * wh_density_factor}" />
-    <xacro:property name="wh_radius"  value="${$(arg wh_radius) * SCALE}" />
+    <xacro:property name="wh_radius"  value="${0.020 * $(arg wh_radius_factor) * SCALE}" />
     <xacro:property name="wh_length"  value="${0.005 * SCALE}" />
     <xacro:property name="wh_mass"    value="${wh_density * PI * (wh_radius**2) * wh_length}" />
 
