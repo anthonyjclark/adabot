@@ -156,6 +156,11 @@ weg extension based on all wheels
 check for bad simulation (timeout)
 
 teleop
+
+export GAZEBO_MODEL_PATH="$HOME/ros_workspaces/adabot_ws/src/adabot/adabot_gazebo/worlds/worldModels:$GAZEBO_MODEL_PATH"
+
+
+
 =======
 find a better way to implement variable numbers of motors (for wegs)
 
