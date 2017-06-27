@@ -22,7 +22,7 @@
     <!-- The rocky model -->
     <include>
       <pose>6.5 0 0 0 0 0</pose>
-      <uri>model://rocky</uri>
+      <uri>model://rocky3</uri>
     </include>
 
     <gui fullscreen='0'>
