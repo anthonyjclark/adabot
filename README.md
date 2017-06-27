@@ -166,3 +166,9 @@ find a better way to implement variable numbers of motors (for wegs)
 
 # Path to the models.
 export GAZEBO_MODEL_PATH=~/ros_workspaces/adabot_ws/src/adabot/adabot_gazebo/worlds/worldModels
+
+
+
+- reset world for multiple evaluations
+- update localization (wheel encoder model)
+- weg extension parameter (percentage)
