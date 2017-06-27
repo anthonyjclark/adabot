@@ -188,11 +188,10 @@
 
         <!-- Connect the weg to the wheel with a prismatic joint -->
         <joint name="${weg_name}_joint" type="prismatic">
-        <!-- <joint name="${weg_name}_joint" type="fixed"> -->
             <parent link="${parent}" />
             <child link="${weg_name}" />
             <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" />
-            <limit upper="${wh_radius * 0.7}" lower="0" effort="100" velocity="10" />
+            <limit upper="${wg_length}" lower="0" effort="100" velocity="10" />
         </joint>
 
         <!--

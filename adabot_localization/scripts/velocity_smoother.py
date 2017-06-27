@@ -11,6 +11,7 @@ import rospy
 from std_msgs.msg import Float64
 from nav_msgs.msg import Odometry
 
+
 MAX_LEN = 10
 vxs = deque(maxlen=MAX_LEN)
 vxs.append(0)
@@ -20,9 +21,13 @@ total = 0
 def odometry_callback(data):
     global total
 
+    # Get the oldest speed value (if it exists)
     old_val = vxs.popleft() if len(vxs) == MAX_LEN else 0
+
+    # Get the new speed value from the given data
     new_val = data.twist.twist.linear.x
 
+    # Replace the oldest value with the new value
     total = total - old_val + new_val
     vxs.append(new_val)
 

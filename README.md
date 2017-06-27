@@ -125,7 +125,7 @@ teleop
 
 find a better way to implement variable numbers of motors (for wegs)
 
-- reset world for multiple evaluations
-- update localization (wheel encoder model)
-- weg extension parameter (percentage)
-- test larger wheels
+- add undriven differential wheels for odometry
+
+- add channel to outside of wheels (for rubber bands)
+- offset wegs so that they do not touch each other
