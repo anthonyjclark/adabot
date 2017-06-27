@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
-  <model name='rocky'>
+  <model name='rocky3'>
     <link name='link_0'>
       <pose frame=''>-4 0 0 0 -0 0</pose>
       <inertial>
@@ -22,7 +22,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://rocky/meshes/rocky1.stl</uri>
+            <uri>model://rocky3/meshes/rocky1.stl</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -49,7 +49,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://rocky/meshes/rocky1.stl</uri>
+            <uri>model://rocky3/meshes/rocky1.stl</uri>
           </mesh>
         </geometry>
         <surface>
@@ -120,7 +120,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://rocky/meshes/rocky2.stl</uri>
+            <uri>model://rocky3/meshes/rocky2.stl</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -147,7 +147,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://rocky/meshes/rocky2.stl</uri>
+            <uri>model://rocky3/meshes/rocky2.stl</uri>
           </mesh>
         </geometry>
         <surface>
@@ -218,7 +218,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://rocky/meshes/rocky3.stl</uri>
+            <uri>model://rocky3/meshes/rocky3.stl</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -245,7 +245,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://rocky/meshes/rocky3.stl</uri>
+            <uri>model://rocky3/meshes/rocky3.stl</uri>
           </mesh>
         </geometry>
         <surface>
