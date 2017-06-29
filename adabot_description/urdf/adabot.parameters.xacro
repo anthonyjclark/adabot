@@ -36,6 +36,11 @@
     <xacro:property name="ch_height"  value="${0.025 * SCALE}" />
     <xacro:property name="ch_mass"    value="${ch_density * ch_length * ch_width * ch_height}" />
 
+    <xacro:property name="cg_density_factor" value="0.05" />
+    <xacro:property name="cg_density" value="${mat_density * cg_density_factor}" />
+    <xacro:property name="cg_radius"  value="${ch_height * 1.25}" />
+    <xacro:property name="cg_mass"    value="${cg_density * (4.0/3.0) * PI * cg_radius * cg_radius * cg_radius}" />
+
     <!-- Wheel parameters -->
     <xacro:property name="wh_density_factor" value="0.1" />
     <xacro:property name="wh_density" value="${mat_density * wh_density_factor}" />
@@ -57,7 +62,7 @@
     <xacro:property name="wt_density_factor" value="0.5" />
     <xacro:property name="wt_density" value="${mat_density * wt_density_factor}" />
     <xacro:property name="wt_radius"  value="${wg_height * 2}" />
-    <xacro:property name="wt_mass"    value="${wt_density * (4/3) * PI * wt_radius * wt_radius * wt_radius}" />
+    <xacro:property name="wt_mass"    value="${wt_density * (4.0/3.0) * PI * wt_radius * wt_radius * wt_radius}" />
 
     <!-- Vertical offset so that the robot starts above ground -->
     <xacro:property name="z_offset" value="${wh_radius * 2}" />
