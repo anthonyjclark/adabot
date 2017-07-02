@@ -10,7 +10,8 @@
 
     </node>
 
-    <node pkg="adabot_localization" name="gazebo_odometry_node" type="wheel_encoder_odom_pub.py" />
+    <node pkg="adabot_localization" name="adabot_odometry" type="wheel_encoder_odometry.py" output="screen" />
 
+    <node pkg="adabot_localization" name="adabot_velocity" type="velocity_smoother.py" output="screen" />
 
 </launch>

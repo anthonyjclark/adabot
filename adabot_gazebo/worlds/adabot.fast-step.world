@@ -14,7 +14,7 @@
     <!-- Custom default camera pose -->
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>0.988075 -1.38036 0.814254 0 0.423643 2.1642</pose>
+        <pose frame=''>4.66728 -8.31604 4.56421 0 0.467643 2.0362</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -24,7 +24,7 @@
     <physics type='ode'>
       <max_step_size>0.0005</max_step_size>
       <real_time_factor>1</real_time_factor>
-      <real_time_update_rate>1000</real_time_update_rate>
+      <real_time_update_rate>0.0</real_time_update_rate>
     </physics>
 
 

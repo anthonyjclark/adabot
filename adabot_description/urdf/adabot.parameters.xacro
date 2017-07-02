@@ -5,10 +5,17 @@
     <!--
          Command line arguments for the adabot
     -->
-    <xacro:arg name="ch_length"    default="0.100 * 0.65" />
-    <xacro:arg name="ch_width"     default="0.070" />
-    <xacro:arg name="wg_per_wheel" default="5" />
+    <!-- Dimensions of the robot (these will be scaled) -->
+    <xacro:arg name="ch_length"    default="0.070" />
+    <xacro:arg name="ch_width"     default="0.100" />
     <xacro:arg name="wh_radius"    default="0.020" />
+    <xacro:arg name="ax_radius"    default="0.008" />
+
+
+    <!-- Number of wegs per wheel -->
+    <xacro:arg name="wg_per_wheel" default="5" />
+
+    <!-- Global size scaling parameter -->
     <xacro:arg name="scale"        default="4" />
 
 
@@ -29,6 +36,11 @@
     <xacro:property name="ch_height"  value="${0.025 * SCALE}" />
     <xacro:property name="ch_mass"    value="${ch_density * ch_length * ch_width * ch_height}" />
 
+    <xacro:property name="cg_density_factor" value="0.05" />
+    <xacro:property name="cg_density" value="${mat_density * cg_density_factor}" />
+    <xacro:property name="cg_radius"  value="${ch_height * 1.25}" />
+    <xacro:property name="cg_mass"    value="${cg_density * (4.0/3.0) * PI * cg_radius * cg_radius * cg_radius}" />
+
     <!-- Wheel parameters -->
     <xacro:property name="wh_density_factor" value="0.1" />
     <xacro:property name="wh_density" value="${mat_density * wh_density_factor}" />
@@ -37,9 +49,10 @@
     <xacro:property name="wh_mass"    value="${wh_density * PI * (wh_radius**2) * wh_length}" />
 
     <!-- Weg parameters -->
+    <xacro:property name="ax_radius" value="${$(arg ax_radius) * SCALE}" />
     <xacro:property name="wg_density_factor" value="0.5" />
     <xacro:property name="wg_density"   value="${mat_density * wg_density_factor}" />
-    <xacro:property name="wg_length"    value="${wh_radius * 0.75}" />
+    <xacro:property name="wg_length"    value="${wh_radius - ax_radius}" />
     <xacro:property name="wg_width"     value="${0.001 * SCALE}" />
     <xacro:property name="wg_height"    value="${0.002 * SCALE}" />
     <xacro:property name="wg_mass"      value="${wg_density * wg_length * wg_width * wg_height}" />
@@ -49,7 +62,7 @@
     <xacro:property name="wt_density_factor" value="0.5" />
     <xacro:property name="wt_density" value="${mat_density * wt_density_factor}" />
     <xacro:property name="wt_radius"  value="${wg_height * 2}" />
-    <xacro:property name="wt_mass"    value="${wt_density * (4/3) * PI * wt_radius * wt_radius * wt_radius}" />
+    <xacro:property name="wt_mass"    value="${wt_density * (4.0/3.0) * PI * wt_radius * wt_radius * wt_radius}" />
 
     <!-- Vertical offset so that the robot starts above ground -->
     <xacro:property name="z_offset" value="${wh_radius * 2}" />

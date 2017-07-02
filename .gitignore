@@ -48,4 +48,4 @@ qtcreator-*
 CATKIN_IGNORE
 
 # Generated urdf files
-*.urdf
+# *.urdf

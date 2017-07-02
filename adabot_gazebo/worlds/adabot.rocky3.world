@@ -1,6 +1,6 @@
-<?xml version="1.0" ?>
-<sdf version="1.5">
-  <world name="default">
+<sdf version='1.6'>
+  <world name='default'>
+
 
     <!-- A global light source -->
     <include>
@@ -17,18 +17,17 @@
       <max_step_size>0.0005</max_step_size>
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>2000</real_time_update_rate>
-      <!-- <ode>
-        <solver>
-          <type>world</type>
-          <iters>200</iters>
-        </solver>
-      </ode> -->
     </physics>
 
-    <!-- Custom default camera pose -->
+    <!-- The rocky model -->
+    <include>
+      <pose>6.5 0 0 0 0 0</pose>
+      <uri>model://rocky3</uri>
+    </include>
+
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>0.988075 -1.38036 0.814254 0 0.423643 2.1642</pose>
+        <pose frame=''>13.5816 -16.4315 9.53389 0 0.395643 1.9842</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

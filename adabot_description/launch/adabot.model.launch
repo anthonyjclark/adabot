@@ -21,22 +21,34 @@
     <arg name="model" default="$(find adabot_description)/urdf/adabot.main.xacro" />
 
     <!-- These arguments are used to adjust parameters in the adabot xacro file -->
-    <!--  ch_length     : length of chasis -->
-    <!--  ch_width      : width of chasis -->
-    <!--  wg_per_wheel  : number of wegs on each of wheels -->
-    <!--  wh_radius     : radius of each wheel -->
-    <arg name="ch_length"     default="0.100" />
-    <arg name="ch_width"      default="0.070" />
-    <arg name="wg_per_wheel"  default="5"     />
-    <arg name="wh_radius"     default="0.020" />
-    <arg name="scale"         default="4"     />
+    <!--  ch_width      : width of the chasis                   -->
+    <!--  ch_length     : length of the chasis                  -->
+    <!--  wh_radius     : radius for each wheel                 -->
+    <!--  ax_radius     : radius of the axle (limits extnesion) -->
+    <!--  wg_per_wheel  : number of wegs on each of wheels      -->
+    <!--  scale         : scaling factor for the entire device  -->
+    <arg name="ch_width"     default="0.100" />
+    <arg name="ch_length"    default="0.070" />
+    <arg name="wh_radius"    default="0.020" />
+    <arg name="ax_radius"    default="0.008" />
+    <arg name="wg_per_wheel" default="5" />
+    <arg name="scale"        default="4" />
+
+    <!-- Store arguments on the parameter server for nodes -->
+    <param name="ch_width"     value="$(eval ch_width * scale)" />
+    <param name="ch_length"    value="$(eval ch_length * scale)" />
+    <param name="wh_radius"    value="$(eval wh_radius * scale)" />
+    <param name="ax_radius"    value="$(eval ax_radius * scale)" />
+    <param name="wg_per_wheel" value="$(arg wg_per_wheel)" />
 
     <!-- Load the URDF into the ROS Parameter Server -->
     <!-- (expose the URDF model to {joint,robot}_state_publisher) -->
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)
-        ch_length:=$(arg ch_length)
         ch_width:=$(arg ch_width)
+        ch_length:=$(arg ch_length)
+        wh_radius:=$(arg wh_radius)
+        ax_radius:=$(arg ax_radius)
         wg_per_wheel:=$(arg wg_per_wheel)
-        wh_radius:=$(arg wh_radius)" />
+        scale:=$(arg scale)" />
 
 </launch>
