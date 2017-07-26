@@ -1,7 +1,6 @@
 <sdf version='1.6'>
   <world name='default'>
 
-
     <!-- A global light source -->
     <include>
       <uri>model://sun</uri>
@@ -25,6 +24,7 @@
       <uri>model://rocky3</uri>
     </include>
 
+    <!-- Custom initial camera pose -->
     <gui fullscreen='0'>
       <camera name='user_camera'>
         <pose frame=''>13.5816 -16.4315 9.53389 0 0.395643 1.9842</pose>

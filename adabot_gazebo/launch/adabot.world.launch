@@ -20,7 +20,7 @@
     <arg name="debug"        default="false" />
     <arg name="wg_per_wheel" default="5"     />
     <arg name="verbose"      default="false" />
-    <arg name="world"        default="$(find adabot_gazebo)/worlds/adabot.empty.world" />
+    <arg name="world"        default="empty" />
 
     <!--  -->
     <!-- Launch the robot_description node -->
@@ -31,7 +31,7 @@
     <!-- Start with the empty_world.launch file -->
     <!--  -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name"   value="$(arg world)"        />
+        <arg name="world_name"   value="$(find adabot_gazebo)/worlds/adabot.$(arg world).world" />
         <arg name="paused"       value="$(arg paused)"       />
         <arg name="use_sim_time" value="$(arg use_sim_time)" />
         <arg name="gui"          value="$(arg gui)"          />
