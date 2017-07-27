@@ -4,7 +4,7 @@
 
     <!--
          Command line arguments for the adabot
-    -->    
+    -->
     <!-- Dimensions of the robot (these will be scaled) -->
     <xacro:arg name="ch_length"    default="0.070" />
     <xacro:arg name="ch_width"     default="0.100" />
