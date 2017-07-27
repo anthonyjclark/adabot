@@ -27,12 +27,14 @@
     <!--  ax_radius     : radius of the axle (limits extnesion) -->
     <!--  wg_per_wheel  : number of wegs on each of wheels      -->
     <!--  scale         : scaling factor for the entire device  -->
+    <!--  debug_visual  : if true uses geometry for visuals     -->
     <arg name="ch_width"     default="0.100" />
     <arg name="ch_length"    default="0.070" />
     <arg name="wh_radius"    default="0.020" />
     <arg name="ax_radius"    default="0.008" />
     <arg name="wg_per_wheel" default="5" />
     <arg name="scale"        default="4" />
+    <arg name="debug_visual" default="false" />
 
     <!-- Store arguments on the parameter server for nodes -->
     <param name="ch_width"     value="$(eval ch_width * scale)" />
@@ -40,6 +42,7 @@
     <param name="wh_radius"    value="$(eval wh_radius * scale)" />
     <param name="ax_radius"    value="$(eval ax_radius * scale)" />
     <param name="wg_per_wheel" value="$(arg wg_per_wheel)" />
+    <param name="debug_visual" value="$(arg debug_visual)" />
 
     <!-- Load the URDF into the ROS Parameter Server -->
     <!-- (expose the URDF model to {joint,robot}_state_publisher) -->
@@ -49,6 +52,7 @@
         wh_radius:=$(arg wh_radius)
         ax_radius:=$(arg ax_radius)
         wg_per_wheel:=$(arg wg_per_wheel)
-        scale:=$(arg scale)" />
+        scale:=$(arg scale)
+        debug_visual:=$(arg debug_visual)" />
 
 </launch>

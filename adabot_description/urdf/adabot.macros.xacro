@@ -2,30 +2,6 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
 
 
-    <!-- Create the chassis geometry (for visuals and collisions) -->
-    <xacro:property name="chassis_geometry">
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-            <box size="${ch_length} ${ch_width} ${ch_height}" />
-        </geometry>
-    </xacro:property>
-
-
-
-
-    <!-- Create the wheel geometry (for visuals and collisions) -->
-    <xacro:property name="wheel_geometry">
-        <!-- Cylinders default with their height along the z axis -->
-        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-        <geometry>
-            <!-- <cylinder length="${wh_length}" radius="${wh_radius}" /> -->
-            <sphere radius="${wh_radius}" />
-        </geometry>
-    </xacro:property>
-
-
-
-
     <!--
          Macro for creating wheels
             reflect_lr : is the wheel left (-1) or right (1)
@@ -36,30 +12,43 @@
 
         <!-- The name of the current wheel -->
         <xacro:property name="wheel_name" value="${suffix}_wheel" />
+        
+        <!-- Create the wheel geometry (for visual debug and collisions) -->
+        <xacro:property name="wheel_geometry">
+            <!-- Cylinders default with their height along the z axis -->
+            <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+            <geometry>
+                <!-- <cylinder length="${wh_length}" radius="${wh_radius}" /> -->
+                <sphere radius="${wh_radius}" />
+            </geometry>
+        </xacro:property>
 
         <!-- Add the wheel's Gazebo material -->
         <xacro:gz_black_material name="${wheel_name}" />
 
         <!-- Make the wheel have lower friction -->
         <xacro:gz_low_friction name="${wheel_name}" />
+        
 
         <!-- The wheel's rigid body -->
         <link name="${wheel_name}">
             <visual>
-                <!-- <xacro:insert_block name="wheel_geometry" /> -->
-                <!-- <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-                <geometry>
-                    <cylinder length="${wh_length}" radius="${wh_radius}" />
-                </geometry> -->
-                <origin xyz="0 0 0" rpy="0 0 0" />
-                <geometry>
-                    <mesh filename="package://adabot_description/meshes/wheel.stl" scale="0.004 0.004 0.004" />
-                </geometry>
+                <xacro:if value="${debug_visual == 'true'}">
+                    <xacro:insert_block name="wheel_geometry" />
+                </xacro:if>
+                <xacro:if value="${debug_visual == 'false'}">
+                    <origin xyz="0 0 0" rpy="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://adabot_description/meshes/wheel.stl" scale="0.004 0.004 0.004" />
+                    </geometry>
+                </xacro:if>
                 <material name="black" />
             </visual>
+            
             <collision>
                 <xacro:insert_block name="wheel_geometry" />
             </collision>
+            
             <inertial>
                 <mass value="${wh_mass}" />
                 <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
@@ -128,29 +117,7 @@
             <xacro:weg wheel="${suffix}" number="9" parent="${wheel_name}" total="${wg_per_wheel}" />
         </xacro:if>
     </xacro:macro>
-
-
-
-
-    <!-- Create the weg geometry (for visuals and collisions) -->
-    <xacro:property name="weg_geometry">
-        <origin xyz="${wh_radius/2} 0 0" rpy="0 0 0" />
-        <!-- <origin xyz="${wh_radius} 0 0" rpy="0 0 0" /> -->
-        <geometry>
-            <box size="${wg_length} ${wg_width} ${wg_height}" />
-        </geometry>
-    </xacro:property>
-
-
-
-
-    <!-- Create a geometry for the weg tip -->
-    <xacro:property name="weg_tip_geometry">
-        <!-- <origin xyz="${wh_radius} 0 0" rpy="0 0 0" /> -->
-        <geometry>
-            <sphere radius="${wt_radius}" />
-        </geometry>
-    </xacro:property>
+    
 
 
     <!--
@@ -161,9 +128,27 @@
             total  : the number of wegs (used to calculate angles)
     -->
     <xacro:macro name="weg" params="wheel number parent total">
-
+        
         <!-- The name of the current weg (based on the parent wheel's name) -->
         <xacro:property name="weg_name" value="${wheel}_weg_${number}" />
+
+        <!-- Create the weg geometry (for visuals and collisions) -->
+        <xacro:property name="weg_geometry">
+            <origin xyz="${wh_radius/2} 0 0" rpy="0 0 0" />
+            <!-- <origin xyz="${wh_radius} 0 0" rpy="0 0 0" /> -->
+            <geometry>
+                <box size="${wg_length} ${wg_width} ${wg_height}" />
+            </geometry>
+        </xacro:property>
+        
+        <!-- Create a geometry for the weg tip -->
+        <xacro:property name="weg_tip_geometry">
+            <!-- <origin xyz="${wh_radius} 0 0" rpy="0 0 0" /> -->
+            <geometry>
+                <sphere radius="${wt_radius}" />
+            </geometry>
+        </xacro:property>
+
 
         <!-- Add the weg's Gazebo material -->
         <xacro:gz_white_material name="${weg_name}" />
@@ -175,16 +160,22 @@
         <!-- The weg's rigid body -->
         <link name="${weg_name}">
             <visual>
-                <!-- <xacro:insert_block name="weg_geometry" /> -->
-                <origin xyz="0.024 0 0" rpy="0 ${PI/2} ${-PI/2}" />
-                <geometry>
-                    <mesh filename="package://adabot_description/meshes/weg.stl" scale="0.004 0.004 0.004" />
-                </geometry>
+                <xacro:if value="${debug_visual == 'true'}">
+                    <xacro:insert_block name="weg_geometry" />
+                </xacro:if>
+                <xacro:if value="${debug_visual == 'false'}">
+                    <origin xyz="0.024 0 0" rpy="0 ${PI/2} ${-PI/2}" />
+                    <geometry>
+                        <mesh filename="package://adabot_description/meshes/weg.stl" scale="0.004 0.004 0.004" />
+                    </geometry>
+                </xacro:if>
                 <material name="white" />
             </visual>
+            
             <collision>
                 <xacro:insert_block name="weg_geometry" />
             </collision>
+            
             <inertial>
                 <mass value="${wg_mass}" />
                 <inertia
@@ -229,17 +220,17 @@
 
         <!-- Attach a sphere to the end of the weg for better physics (less jitter) -->
         <link name="${weg_name}_tip">
-            <!-- <visual>
-                <xacro:insert_block name="weg_tip_geometry" />
-                <geometry>
-                    <sphere radius="${wt_radius * 0.5}" />
-                </geometry>
-
-                <material name="black" />
-            </visual> -->
+            <xacro:if value="${debug_visual == 'true'}">
+                <visual>
+                    <xacro:insert_block name="weg_tip_geometry" />
+                    <material name="black" />
+                </visual>
+            </xacro:if>                
+            
             <collision>
                 <xacro:insert_block name="weg_tip_geometry" />
             </collision>
+            
             <inertial>
                 <mass value="${wt_mass}" />
                 <inertia
