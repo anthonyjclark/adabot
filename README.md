@@ -102,15 +102,15 @@ reset:
 - call `rosservice call /gazebo/reset_world`
 - call
 ```
-rosservice call /set_pose "pose: 
-    header: 
-        seq: 0 
-        stamp: now 
-        frame_id: odom 
-    pose: 
-        pose: 
-            position: {x: 0.0, y: 0.0, z: 0.0} 
-            orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0} 
+rosservice call /set_pose "pose:
+    header:
+        seq: 0
+        stamp: now
+        frame_id: odom
+    pose:
+        pose:
+            position: {x: 0.0, y: 0.0, z: 0.0}
+            orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}
         covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
 ```
 - call similar service on other nodes (create services for my nodes)
@@ -129,3 +129,5 @@ find a better way to implement variable numbers of motors (for wegs)
 
 - add channel to outside of wheels (for rubber bands)
 - offset wegs so that they do not touch each other
+
+- wrap config yaml and control spawner in group namespace

@@ -15,7 +15,7 @@
     <arg name="headless" />
     <arg name="debug" />
     <arg name="world" />
-
+    <arg name="verbose" />
 
     <!-- Pass the model as a command line argument -->
     <arg name="model" default="$(find adabot_description)/urdf/adabot.main.xacro" />

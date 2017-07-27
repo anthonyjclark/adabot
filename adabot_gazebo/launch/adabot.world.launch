@@ -10,15 +10,16 @@
     <!--  headless     : disable all rendering (does not work with gui:=true) -->
     <!--  debug        : start gzserver in debug mode using gdb -->
     <!--  wg_per_wheel : needed to launch the correct control launch file -->
+    <!--  verbose      : tell gazebo to print extra information -->
     <!--  world        : the world file to pass to Gazebo for startup -->
-    <!--  model        : xacro file for adabot (passed onto the model launch file) -->
     <!--  -->
-    <arg name="paused"       default="true" />
-    <arg name="use_sim_time" default="true" />
-    <arg name="gui"          default="true" />
+    <arg name="paused"       default="true"  />
+    <arg name="use_sim_time" default="true"  />
+    <arg name="gui"          default="true"  />
     <arg name="headless"     default="false" />
     <arg name="debug"        default="false" />
-    <arg name="wg_per_wheel" default="5" />
+    <arg name="wg_per_wheel" default="5"     />
+    <arg name="verbose"      default="false" />
     <arg name="world"        default="empty" />
 
     <!--  -->
@@ -31,11 +32,12 @@
     <!--  -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name"   value="$(find adabot_gazebo)/worlds/adabot.$(arg world).world" />
-        <arg name="paused"       value="$(arg paused)" />
+        <arg name="paused"       value="$(arg paused)"       />
         <arg name="use_sim_time" value="$(arg use_sim_time)" />
-        <arg name="gui"          value="$(arg gui)" />
-        <arg name="headless"     value="$(arg headless)" />
-        <arg name="debug"        value="$(arg debug)" />
+        <arg name="gui"          value="$(arg gui)"          />
+        <arg name="headless"     value="$(arg headless)"     />
+        <arg name="debug"        value="$(arg debug)"        />
+        <arg name="verbose"      value="$(arg verbose)"      />
     </include>
 
     <!-- Spawn a robot into Gazebo from the ROS Parameter Server -->
