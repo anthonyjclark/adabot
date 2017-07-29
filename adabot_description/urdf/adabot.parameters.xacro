@@ -6,19 +6,19 @@
          Command line arguments for the adabot
     -->
     <!-- Dimensions of the robot (these will be scaled) -->
-    <xacro:arg name="ch_length"    default="0.070" />
-    <xacro:arg name="ch_width"     default="0.100" />
-    <xacro:arg name="wh_radius"    default="0.020" />
-    <xacro:arg name="ax_radius"    default="0.008" />
+    <xacro:arg name="ch_length"     default="0.070" />
+    <xacro:arg name="ch_width"      default="0.100" />
+    <xacro:arg name="wh_radius"     default="0.020" />
+    <xacro:arg name="ax_radius"     default="0.008" />
 
     <!-- Number of wegs per wheel -->
-    <xacro:arg name="wg_per_wheel" default="5" />
+    <xacro:arg name="wg_per_wheel"  default="5" />
 
     <!-- Global size scaling parameter -->
-    <xacro:arg name="scale"        default="4" />
+    <xacro:arg name="scale"         default="4" />
 
     <!-- Visual debug mode -->
-    <xacro:arg name="debug_visual" default="false" />
+    <xacro:arg name="debug_visuals" default="false" />
     
 
     <!--
@@ -70,7 +70,7 @@
     <xacro:property name="z_offset" value="${wh_radius * 2}" />
     
     <!-- Visual debug mode -->
-    <xacro:property name="debug_visual" value="$(arg debug_visual)" />
+    <xacro:property name="debug_visuals" value="$(arg debug_visuals)" />
 
 </robot>
 

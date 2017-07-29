@@ -31,10 +31,10 @@
         <!-- The wheel's rigid body -->
         <link name="${wheel_name}">
             <visual>
-                <xacro:if value="${debug_visual == 'true'}">
+                <xacro:if value="${debug_visuals == 'true'}">
                     <xacro:insert_block name="wheel_geometry" />
                 </xacro:if>
-                <xacro:if value="${debug_visual == 'false'}">
+                <xacro:if value="${debug_visuals == 'false'}">
                     <origin xyz="0 0 0" rpy="0 0 0" />
                     <geometry>
                         <mesh filename="package://adabot_description/meshes/wheel.stl"
@@ -157,10 +157,10 @@
         <!-- The weg's rigid body -->
         <link name="${weg_name}">
             <visual>
-                <xacro:if value="${debug_visual == 'true'}">
+                <xacro:if value="${debug_visuals == 'true'}">
                     <xacro:insert_block name="weg_geometry" />
                 </xacro:if>
-                <xacro:if value="${debug_visual == 'false'}">
+                <xacro:if value="${debug_visuals == 'false'}">
                     <origin xyz="0.024 0 0" rpy="0 ${PI/2} ${-PI/2}" />
                     <geometry>
                         <mesh filename="package://adabot_description/meshes/weg.stl"
@@ -218,7 +218,7 @@
 
         <!-- Attach a sphere to the end of the weg for better physics (less jitter) -->
         <link name="${weg_name}_tip">
-            <xacro:if value="${debug_visual == 'true'}">
+            <xacro:if value="${debug_visuals == 'true'}">
                 <visual>
                     <xacro:insert_block name="weg_tip_geometry" />
                     <material name="black" />

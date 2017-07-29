@@ -30,10 +30,10 @@
     <xacro:gz_white_material name="chassis" />
     <link name="chassis">
         <visual>
-            <xacro:if value="${debug_visual == 'true'}">
+            <xacro:if value="${debug_visuals == 'true'}">
                 <xacro:insert_block name="chassis_geometry" />
             </xacro:if>
-            <xacro:if value="${debug_visual == 'false'}">
+            <xacro:if value="${debug_visuals == 'false'}">
                 <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}" />
                 <geometry>
                     <mesh filename="package://adabot_description/meshes/chassis.stl"
@@ -88,7 +88,7 @@
 
     <!-- Add a roll cage -->
     <link name="chassis_cage">
-        <xacro:if value="${debug_visual == 'true'}">
+        <xacro:if value="${debug_visuals == 'true'}">
             <visual>
                 <xacro:insert_block name="roll_cage_geometry" />
             </visual>
