@@ -37,7 +37,6 @@
     <arg name="scale"        default="4" />
 
     <!-- Store arguments on the parameter server for nodes -->
-    <param name="debug_visual" value="$(arg debug_visual)" />
     <param name="ch_width"     value="$(eval ch_width * scale)" />
     <param name="ch_length"    value="$(eval ch_length * scale)" />
     <param name="wh_radius"    value="$(eval wh_radius * scale)" />

@@ -36,7 +36,8 @@
             <xacro:if value="${debug_visual == 'false'}">
                 <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}" />
                 <geometry>
-                    <mesh filename="package://adabot_description/meshes/chassis.stl" scale="0.004 0.004 0.004" />
+                    <mesh filename="package://adabot_description/meshes/chassis.stl"
+                          scale="${0.001 * SCALE} ${0.001 * SCALE} ${0.001 * SCALE}" />
                 </geometry>
             </xacro:if>
             <material name="white" />

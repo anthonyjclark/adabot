@@ -15,10 +15,8 @@
         
         <!-- Create the wheel geometry (for visual debug and collisions) -->
         <xacro:property name="wheel_geometry">
-            <!-- Cylinders default with their height along the z axis -->
             <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
             <geometry>
-                <!-- <cylinder length="${wh_length}" radius="${wh_radius}" /> -->
                 <sphere radius="${wh_radius}" />
             </geometry>
         </xacro:property>
@@ -39,7 +37,8 @@
                 <xacro:if value="${debug_visual == 'false'}">
                     <origin xyz="0 0 0" rpy="0 0 0" />
                     <geometry>
-                        <mesh filename="package://adabot_description/meshes/wheel.stl" scale="0.004 0.004 0.004" />
+                        <mesh filename="package://adabot_description/meshes/wheel.stl"
+                                scale="${0.001 * SCALE} ${0.001 * SCALE} ${0.001 * SCALE}" />
                     </geometry>
                 </xacro:if>
                 <material name="black" />
@@ -135,7 +134,6 @@
         <!-- Create the weg geometry (for visuals and collisions) -->
         <xacro:property name="weg_geometry">
             <origin xyz="${wh_radius/2} 0 0" rpy="0 0 0" />
-            <!-- <origin xyz="${wh_radius} 0 0" rpy="0 0 0" /> -->
             <geometry>
                 <box size="${wg_length} ${wg_width} ${wg_height}" />
             </geometry>
@@ -143,7 +141,6 @@
         
         <!-- Create a geometry for the weg tip -->
         <xacro:property name="weg_tip_geometry">
-            <!-- <origin xyz="${wh_radius} 0 0" rpy="0 0 0" /> -->
             <geometry>
                 <sphere radius="${wt_radius}" />
             </geometry>
@@ -166,7 +163,8 @@
                 <xacro:if value="${debug_visual == 'false'}">
                     <origin xyz="0.024 0 0" rpy="0 ${PI/2} ${-PI/2}" />
                     <geometry>
-                        <mesh filename="package://adabot_description/meshes/weg.stl" scale="0.004 0.004 0.004" />
+                        <mesh filename="package://adabot_description/meshes/weg.stl"
+                                scale="${0.001 * SCALE} ${0.001 * SCALE} ${0.001 * SCALE}" />
                     </geometry>
                 </xacro:if>
                 <material name="white" />
