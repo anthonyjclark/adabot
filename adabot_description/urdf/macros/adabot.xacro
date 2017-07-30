@@ -13,63 +13,74 @@
 
     <!-- Include macros for creating all links and joints -->
     <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.chassis.xacro" />
+    <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.rollcage.xacro" />
+    <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.imusensor.xacro" />
     <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.wheel.xacro" />
     <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.weg.xacro" />
-    <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.rollcage.xacro" />
     
     
 
 
     <!-- Macro -->
-    <xacro:macro name="adabot">
+    <xacro:macro name="adabot" params="bot_name">
     
         <!-- Add a base_link to help with positioning -->
-        <link name="base_link" />
+        <link name="${bot_name}_base_link" />
         
         <!-- Add the chassis to the base_link -->
-        <xacro:chassis chassis_name="chassis"/>
-        <joint name="base_link_joint" type="fixed">
+        <xacro:property name="chassis_name" value="${bot_name}_chassis" />
+        <xacro:chassis chassis_name="${chassis_name}"/>
+        <joint name="${bot_name}_base_link_joint" type="fixed">
             <origin xyz="0 0 ${z_offset}" rpy="0 0 0" />
-            <parent link="base_link" />
-            <child link="chassis" />
+            <parent link="${bot_name}_base_link" />
+            <child link="${chassis_name}" />
         </joint>
         
         <!-- Add a roll cage to the chassis -->
-        <xacro:roll_cage roll_cage_name="roll_cage"/>
-        <joint name="chassis_cage_joint" type="fixed">
+        <xacro:roll_cage roll_cage_name="${bot_name}_roll_cage"/>
+        <joint name="${bot_name}_chassis_cage_joint" type="fixed">
             <origin xyz="0 0 ${cg_radius}" rpy="0 0 0" />
-            <parent link="chassis" />
-            <child link="roll_cage" />
+            <parent link="${chassis_name}" />
+            <child link="${bot_name}_roll_cage" />
+        </joint>
+        
+        <!-- Add an imu sensor to the chassis -->
+        <xacro:imu_sensor bot_name="${bot_name}" />
+        <joint name="${bot_name}_imu_sensor_joint" type="fixed">
+            <axis xyz="0 0 1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <parent link="${chassis_name}" />
+            <child link="${bot_name}_imu_sensor" />
         </joint>
     
         <!-- Add the wheels (note, wegs are created with the wheels) -->
         
         <!-- Wheel joint macro -->
         <xacro:macro name="wheel_joint" params="wheel_name reflect_fr reflect_lr">
-            <joint name="${wheel_name}_joint" type="continuous">
-                <parent link="chassis" />
+            <joint name="${bot_name}_${wheel_name}_joint" type="continuous">
+                <parent link="${chassis_name}" />
                 <child link="${wheel_name}" />
                 <origin xyz="${ch_length/2*reflect_fr} ${(wh_length+ch_width)/2*reflect_lr} 0" rpy="0 0 0" />
                 <axis xyz="0 1 0" />
-                <limit effort="10" velocity="10" />
+                <limit effort="${wh_jnt_effort}" velocity="${wh_jnt_velocity}" />
             </joint>
         </xacro:macro>
         
         <!--Front Left Wheel-->
-        <xacro:wheel suffix="front_left" />
-        <xacro:wheel_joint wheel_name="front_left_wheel" reflect_lr="1"  reflect_fr="1" />
+        <xacro:wheel suffix="front_left" bot_name="${bot_name}" />
+        <xacro:wheel_joint wheel_name="${bot_name}_front_left_wheel" reflect_lr="1"  reflect_fr="1" />
         
         <!--Front Right Wheel-->
-        <xacro:wheel suffix="front_right" />
-        <xacro:wheel_joint wheel_name="front_right_wheel" reflect_lr="-1"  reflect_fr="1" />
+        <xacro:wheel suffix="front_right" bot_name="${bot_name}" />
+        <xacro:wheel_joint wheel_name="${bot_name}_front_right_wheel" reflect_lr="-1"  reflect_fr="1" />
         
         <!--Rear Left Wheel-->
-        <xacro:wheel suffix="rear_left" />
-        <xacro:wheel_joint wheel_name="rear_left_wheel" reflect_lr="1"  reflect_fr="-1" />
+        <xacro:wheel suffix="rear_left" bot_name="${bot_name}" />
+        <xacro:wheel_joint wheel_name="${bot_name}_rear_left_wheel" reflect_lr="1"  reflect_fr="-1" />
         
         <!--Rear Right Wheel-->
-        <xacro:wheel suffix="rear_right" />
-        <xacro:wheel_joint wheel_name="rear_right_wheel" reflect_lr="-1"  reflect_fr="-1" />
+        <xacro:wheel suffix="rear_right" bot_name="${bot_name}" />
+        <xacro:wheel_joint wheel_name="${bot_name}_rear_right_wheel" reflect_lr="-1"  reflect_fr="-1" />
     
     </xacro:macro>
 

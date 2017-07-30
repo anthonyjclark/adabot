@@ -8,6 +8,6 @@
     
     
     <!-- Create an adabot -->
-    <xacro:adabot />
+    <xacro:adabot bot_name="a01" />
 
 </robot>

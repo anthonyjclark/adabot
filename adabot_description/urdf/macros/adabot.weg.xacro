@@ -24,14 +24,13 @@
          Macro for creating wegs
             wheel  : the suffix of the parent wheel
             number : a unique identifier for each weg
-            parent : the full name of the parent link
             total  : the number of wegs (used to calculate angles)
     -->
-    <xacro:macro name="weg" params="wheel number parent total">
+    <xacro:macro name="weg" params="wheel number total bot_name">
         
         <!-- The name of the current weg (based on the parent wheel's name) -->
-        <xacro:property name="weg_name" value="${wheel}_weg_${number}" />
-
+        <xacro:property name="weg_name" value="${bot_name}_${wheel}_weg_${number}" />
+        
 
         <!-- Add the weg's Gazebo material -->
         <xacro:gz_white_material name="${weg_name}" />
@@ -50,7 +49,7 @@
                     <origin xyz="0.024 0 0" rpy="0 ${PI/2} ${-PI/2}" />
                     <geometry>
                         <mesh filename="package://adabot_description/meshes/weg.stl"
-                                scale="${0.001 * SCALE} ${0.001 * SCALE} ${0.001 * SCALE}" />
+                                scale="${MM_to_M * SCALE} ${MM_to_M * SCALE} ${MM_to_M * SCALE}" />
                     </geometry>
                 </xacro:if>
                 <material name="white" />
@@ -71,15 +70,7 @@
                     izz="${(1/12)*wg_mass*(wg_length**2 + wg_width**2)}"
                     />
             </inertial>
-        </link>
-
-        <!-- Connect the weg to the wheel with a prismatic joint -->
-        <joint name="${weg_name}_joint" type="prismatic">
-            <parent link="${parent}" />
-            <child link="${weg_name}" />
-            <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/total)} 0" />
-            <limit upper="${wg_length}" lower="0" effort="100" velocity="10" />
-        </joint>
+        </link>        
 
         <!--
              Attach a POSITION controller to each weg prismatic joint

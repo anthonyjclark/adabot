@@ -24,8 +24,9 @@
     <!--
          Properties for the robot bodies
     -->
-    <xacro:property name="PI" value="3.1415926535897931 " />
-    <xacro:property name="SCALE" value="$(arg scale)" />
+    <xacro:property name="PI"       value="3.1415926535897931 " />
+    <xacro:property name="SCALE"    value="$(arg scale)" />
+    <xacro:property name="MM_to_M"  value="0.001" />
 
     <!-- Typical density of plastics -->
     <xacro:property name="mat_density" value="1000.0" />
@@ -49,6 +50,10 @@
     <xacro:property name="wh_radius"  value="${$(arg wh_radius) * SCALE}" />
     <xacro:property name="wh_length"  value="${0.005 * SCALE}" />
     <xacro:property name="wh_mass"    value="${wh_density * PI * (wh_radius**2) * wh_length}" />
+    
+    <!-- Wheel-Chassis joint parameters -->
+    <xacro:property name="wh_jnt_effort"    value="10" />
+    <xacro:property name="wh_jnt_velocity"  value="10" />
 
     <!-- Weg parameters -->
     <xacro:property name="ax_radius" value="${$(arg ax_radius) * SCALE}" />
@@ -59,6 +64,11 @@
     <xacro:property name="wg_height"    value="${0.002 * SCALE}" />
     <xacro:property name="wg_mass"      value="${wg_density * wg_length * wg_width * wg_height}" />
     <xacro:property name="wg_per_wheel" value="$(arg wg_per_wheel)" />
+    
+    <!-- Weg-Wheel joint parameters -->
+    <xacro:property name="wg_jnt_lower_limit"   value="0" />
+    <xacro:property name="wg_jnt_effort"        value="100" />
+    <xacro:property name="wg_jnt_velocity"      value="10" />
 
     <!-- Weg tip parameters -->
     <xacro:property name="wt_density_factor" value="0.5" />

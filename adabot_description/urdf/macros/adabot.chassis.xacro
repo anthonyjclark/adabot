@@ -13,10 +13,14 @@
         </geometry>
     </xacro:property>
     
-    <!-- Macro -->
+    <!--
+        Macro for creating chassis
+            chassis_name:   name used for the chasis link
+    -->
     <xacro:macro name="chassis" params="chassis_name">
         
-        <xacro:gz_white_material name="chassis" />
+        <!-- Add the roll cage's Gazebo material -->
+        <xacro:gz_white_material name="${chassis_name}" />
 
         <link name="${chassis_name}">
             <visual>
@@ -27,7 +31,7 @@
                     <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}" />
                     <geometry>
                         <mesh filename="package://adabot_description/meshes/chassis.stl"
-                              scale="${0.001 * SCALE} ${0.001 * SCALE} ${0.001 * SCALE}" />
+                              scale="${MM_to_M * SCALE} ${MM_to_M * SCALE} ${MM_to_M * SCALE}" />
                     </geometry>
                 </xacro:if>
                 <material name="white" />
