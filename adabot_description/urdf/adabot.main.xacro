@@ -17,21 +17,36 @@
 
 
 
+    <!-- Create the chassis geometry (for visual debug and collisions) -->
+    <xacro:property name="chassis_geometry">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="${ch_length} ${ch_width} ${ch_height}" />
+        </geometry>
+    </xacro:property>
+
     <!-- Add the base_link and the chassis. The base_link helps with positioning. -->
     <link name="base_link" />
     <xacro:gz_white_material name="chassis" />
     <link name="chassis">
         <visual>
-            <!-- <xacro:insert_block name="chassis_geometry" /> -->
-            <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}" />
-            <geometry>
-                <mesh filename="package://adabot_description/meshes/chassis.stl" scale="0.004 0.004 0.004" />
-            </geometry>
+            <xacro:if value="${debug_visuals == 'true'}">
+                <xacro:insert_block name="chassis_geometry" />
+            </xacro:if>
+            <xacro:if value="${debug_visuals == 'false'}">
+                <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}" />
+                <geometry>
+                    <mesh filename="package://adabot_description/meshes/chassis.stl"
+                          scale="${0.001 * SCALE} ${0.001 * SCALE} ${0.001 * SCALE}" />
+                </geometry>
+            </xacro:if>
             <material name="white" />
         </visual>
+        
         <collision>
             <xacro:insert_block name="chassis_geometry" />
         </collision>
+        
         <inertial>
             <mass value="${ch_mass}" />
             <inertia
@@ -63,20 +78,26 @@
 
 
 
+    <!-- Create the roll cage (for visual debug and collisions) -->
+    <xacro:property name="roll_cage_geometry">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="${cg_radius}" />
+        </geometry>
+    </xacro:property>
+
     <!-- Add a roll cage -->
     <link name="chassis_cage">
-        <!-- <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <sphere radius="${cg_radius}" />
-            </geometry>
-        </visual> -->
+        <xacro:if value="${debug_visuals == 'true'}">
+            <visual>
+                <xacro:insert_block name="roll_cage_geometry" />
+            </visual>
+        </xacro:if>
+        
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <sphere radius="${cg_radius}" />
-            </geometry>
+            <xacro:insert_block name="roll_cage_geometry" />
         </collision>
+        
         <inertial>
             <mass value="${cg_mass}" />
             <inertia
