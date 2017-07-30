@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
+
+
+    <!-- Include the parameters xacro flie -->
+    <xacro:include filename="$(find adabot_description)/urdf/adabot.parameters.xacro" />
+
+    <!-- Import colors defined for Rviz -->
+    <xacro:include filename="$(find adabot_description)/urdf/adabot.materials.xacro" />
+    
+    <!-- Import Gazebo related elements -->
+    <xacro:include filename="$(find adabot_description)/urdf/adabot.gazebo.xacro" />
+
+    <!-- Include macros for creating all links and joints -->
+    <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.chassis.xacro" />
+    <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.wheel.xacro" />
+    <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.weg.xacro" />
+    <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.rollcage.xacro" />
+    
+    
+
+
+    <!-- Macro -->
+    <xacro:macro name="adabot">
+    
+        <!-- Add a base_link to help with positioning -->
+        <link name="base_link" />
+        
+        <!-- Add the chassis to the base_link -->
+        <xacro:chassis chassis_name="chassis"/>
+        <joint name="base_link_joint" type="fixed">
+            <origin xyz="0 0 ${z_offset}" rpy="0 0 0" />
+            <parent link="base_link" />
+            <child link="chassis" />
+        </joint>
+        
+        <!-- Add a roll cage to the chassis -->
+        <xacro:roll_cage roll_cage_name="roll_cage"/>
+        <joint name="chassis_cage_joint" type="fixed">
+            <origin xyz="0 0 ${cg_radius}" rpy="0 0 0" />
+            <parent link="chassis" />
+            <child link="roll_cage" />
+        </joint>
+    
+        <!-- Add the wheels (note, wegs are created with the wheels) -->
+        
+        <!-- Wheel joint macro -->
+        <xacro:macro name="wheel_joint" params="wheel_name reflect_fr reflect_lr">
+            <joint name="${wheel_name}_joint" type="continuous">
+                <parent link="chassis" />
+                <child link="${wheel_name}" />
+                <origin xyz="${ch_length/2*reflect_fr} ${(wh_length+ch_width)/2*reflect_lr} 0" rpy="0 0 0" />
+                <axis xyz="0 1 0" />
+                <limit effort="10" velocity="10" />
+            </joint>
+        </xacro:macro>
+        
+        <!--Front Left Wheel-->
+        <xacro:wheel suffix="front_left" />
+        <xacro:wheel_joint wheel_name="front_left_wheel" reflect_lr="1"  reflect_fr="1" />
+        
+        <!--Front Right Wheel-->
+        <xacro:wheel suffix="front_right" />
+        <xacro:wheel_joint wheel_name="front_right_wheel" reflect_lr="-1"  reflect_fr="1" />
+        
+        <!--Rear Left Wheel-->
+        <xacro:wheel suffix="rear_left" />
+        <xacro:wheel_joint wheel_name="rear_left_wheel" reflect_lr="1"  reflect_fr="-1" />
+        
+        <!--Rear Right Wheel-->
+        <xacro:wheel suffix="rear_right" />
+        <xacro:wheel_joint wheel_name="rear_right_wheel" reflect_lr="-1"  reflect_fr="-1" />
+    
+    </xacro:macro>
+
+</robot>

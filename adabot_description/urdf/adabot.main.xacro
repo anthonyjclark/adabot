@@ -2,120 +2,12 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
 
 
-    <!-- Include the parameters xacro flie -->
-    <xacro:include filename="$(find adabot_description)/urdf/adabot.parameters.xacro" />
+    <!-- Import adabot xacro flie -->
+    <xacro:include filename="$(find adabot_description)/urdf/macros/adabot.xacro" />
 
-    <!-- Import colors defined for Rviz -->
-    <xacro:include filename="$(find adabot_description)/urdf/adabot.materials.xacro" />
-
-    <!-- Include macros for creating all links and joints -->
-    <xacro:include filename="$(find adabot_description)/urdf/adabot.macros.xacro" />
-
-    <!-- Add the Gazebo related elements -->
-    <xacro:include filename="$(find adabot_description)/urdf/adabot.gazebo.xacro" />
-
-
-
-
-    <!-- Create the chassis geometry (for visual debug and collisions) -->
-    <xacro:property name="chassis_geometry">
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-            <box size="${ch_length} ${ch_width} ${ch_height}" />
-        </geometry>
-    </xacro:property>
-
-    <!-- Add the base_link and the chassis. The base_link helps with positioning. -->
-    <link name="base_link" />
-    <xacro:gz_white_material name="chassis" />
-    <link name="chassis">
-        <visual>
-            <xacro:if value="${debug_visuals == 'true'}">
-                <xacro:insert_block name="chassis_geometry" />
-            </xacro:if>
-            <xacro:if value="${debug_visuals == 'false'}">
-                <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}" />
-                <geometry>
-                    <mesh filename="package://adabot_description/meshes/chassis.stl"
-                          scale="${0.001 * SCALE} ${0.001 * SCALE} ${0.001 * SCALE}" />
-                </geometry>
-            </xacro:if>
-            <material name="white" />
-        </visual>
-        
-        <collision>
-            <xacro:insert_block name="chassis_geometry" />
-        </collision>
-        
-        <inertial>
-            <mass value="${ch_mass}" />
-            <inertia
-                ixx="${(1/12)*ch_mass*(ch_width**2 + ch_height**2)}"
-                ixy="0"
-                ixz="0"
-                iyy="${(1/12)*ch_mass*(ch_length**2 + ch_height**2)}"
-                iyz="0"
-                izz="${(1/12)*ch_mass*(ch_length**2 + ch_width**2)}"
-                />
-        </inertial>
-    </link>
-
-    <joint name="base_link_joint" type="fixed">
-        <origin xyz="0 0 ${z_offset}" rpy="0 0 0" />
-        <parent link="base_link" />
-        <child link="chassis" />
-    </joint>
-
-
-
-
-    <!-- Add the wheels (note, wegs are created with the wheels) -->
-    <xacro:wheel reflect_lr="1"  reflect_fr="1"  suffix="front_left"  />
-    <xacro:wheel reflect_lr="-1" reflect_fr="1"  suffix="front_right" />
-    <xacro:wheel reflect_lr="1"  reflect_fr="-1" suffix="rear_left"   />
-    <xacro:wheel reflect_lr="-1" reflect_fr="-1" suffix="rear_right"  />
-
-
-
-
-    <!-- Create the roll cage (for visual debug and collisions) -->
-    <xacro:property name="roll_cage_geometry">
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-            <sphere radius="${cg_radius}" />
-        </geometry>
-    </xacro:property>
-
-    <!-- Add a roll cage -->
-    <link name="chassis_cage">
-        <xacro:if value="${debug_visuals == 'true'}">
-            <visual>
-                <xacro:insert_block name="roll_cage_geometry" />
-            </visual>
-        </xacro:if>
-        
-        <collision>
-            <xacro:insert_block name="roll_cage_geometry" />
-        </collision>
-        
-        <inertial>
-            <mass value="${cg_mass}" />
-            <inertia
-                ixx="${(2/5) * cg_mass * cg_radius * cg_radius}"
-                ixy="0"
-                ixz="0"
-                iyy="${(2/5) * cg_mass * cg_radius * cg_radius}"
-                iyz="0"
-                izz="${(2/5) * cg_mass * cg_radius * cg_radius}"
-                />
-        </inertial>
-    </link>
-
-    <joint name="chassis_cage_joint" type="fixed">
-        <origin xyz="0 0 ${cg_radius}" rpy="0 0 0" />
-        <parent link="chassis" />
-        <child link="chassis_cage" />
-    </joint>
-
+    
+    
+    <!-- Create an adabot -->
+    <xacro:adabot />
 
 </robot>
