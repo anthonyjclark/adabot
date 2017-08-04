@@ -42,4 +42,4 @@ for v in g.data.vertices:
     if abs(v.co.x) != 1 and abs(v.co.y) != 1:
         v.co += Vector((0, 0, random.uniform(0, 0.24)))
     else:
-        v.co += Vector((0, 0, random.uniform(0, 0.06)))
+        v.co += Vector((0, 0, random.uniform(0.08, 0.16)))
