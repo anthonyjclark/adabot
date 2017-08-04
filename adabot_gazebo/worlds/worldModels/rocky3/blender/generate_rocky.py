@@ -36,4 +36,4 @@ g = new_grid(y_subdivisions=y_subdivisions, scale=(1, y_scale, 1))
 import random
 for v in g.data.vertices:
     if abs(v.co.x) != 1 and abs(v.co.y) != 1:
-        v.co += Vector((0, 0, random.uniform(0, 0.25)))
+        v.co += Vector((0, 0, random.uniform(0, 0.3)))
