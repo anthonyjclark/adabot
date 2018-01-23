@@ -9,19 +9,19 @@ adabot:
   front_left_wheel_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
     joint: front_left_wheel_joint
-    pid: {p: 0.5, i: 0.0, d: 0.0, i_clamp: 0.0}
+    pid: {p: 1.5, i: 0.0, d: 0.0, i_clamp: 0.0}
   front_right_wheel_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
     joint: front_right_wheel_joint
-    pid: {p: 0.5, i: 0.0, d: 0.0, i_clamp: 0.0}
+    pid: {p: 1.5, i: 0.0, d: 0.0, i_clamp: 0.0}
   rear_left_wheel_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
     joint: rear_left_wheel_joint
-    pid: {p: 0.5, i: 0.0, d: 0.0, i_clamp: 0.0}
+    pid: {p: 1.5, i: 0.0, d: 0.0, i_clamp: 0.0}
   rear_right_wheel_joint_velocity_controller:
     type: effort_controllers/JointVelocityController
     joint: rear_right_wheel_joint
-    pid: {p: 0.5, i: 0.0, d: 0.0, i_clamp: 0.0}
+    pid: {p: 1.5, i: 0.0, d: 0.0, i_clamp: 0.0}
 
   # Front Left Wheel Weg Controllers ---------------------------
   front_left_weg_1_joint_position_controller:
