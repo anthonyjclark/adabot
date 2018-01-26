@@ -36,16 +36,16 @@ env:
 
 before_install:
   # Docker is required to run Ubuntu 16.04.2 LTS (Xenial Xerus) and,
-  # therefore, ROS Kinetic
-  - docker pull ros:kinetic-ros-core
+  # therefore, ROS Lunar
+  - docker pull ros:lunar-ros-core
 
 script:
   # Run the build test script in the docker container
   # docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
   #   run : run a command in the new container
   #     -v $(pwd):$(pwd) : mount the current directory in the container
-  #     ros:kinetic-ros-base : is the image
+  #     ros:lunar-ros-base : is the image
   #     /bin/bash -c "source $(pwd)/.travis.sh" : the command to run in the container
   #       the -c flag tells bash to execute commands from the given string
   #         the source built-in command executes the script **in the current shell**
-  - docker run -v $(pwd):$(pwd) ros:kinetic-ros-base /bin/bash -c "source $(pwd)/.travis.sh"
+  - docker run -v $(pwd):$(pwd) ros:lunar-ros-base /bin/bash -c "source $(pwd)/.travis.sh"

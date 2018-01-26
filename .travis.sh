@@ -95,7 +95,7 @@ exit 0
 # # fails. Running `catkin_test_results` aggregates all the results and returns
 # # non-zero when a test fails (which notifies Travis the build failed).
 # script:
-#   - source /opt/ros/kinetic/setup.bash
+#   - source /opt/ros/lunar/setup.bash
 #   - cd ~/catkin_ws
 #   - catkin_make_isolated $( [ -f $CATKIN_OPTIONS ] && cat $CATKIN_OPTIONS )
 #   # Run the tests, ensuring the path is set correctly.
