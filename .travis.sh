@@ -22,17 +22,15 @@ apt-get update
 apt-get -y install python-catkin-tools
 apt-get -y install ros-lunar-xacro
 apt-get -y install liburdfdom-tools
-apt-get -y install tree
 
 # ---------------------------------------------------------
 printf "\nCreating the catkin workspace.\n"
 
 mkdir -p ~/ros_workspaces/adabot_ws/src/
-ln -s /home/travis/build/anthony-jclark/adabot ~/ros_workspaces/adabot_ws/src/
+ln -s /home/travis/build/anthonyjclark/adabot ~/ros_workspaces/adabot_ws/src/
 cd ~/ros_workspaces/adabot_ws/
 catkin init
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Debug
-tree -l ~/ros_workspaces/
 
 # ---------------------------------------------------------
 printf "\nBuilding the source tree.\n"

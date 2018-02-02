@@ -1,14 +1,14 @@
 
-[![Build Status](https://travis-ci.org/anthony-jclark/adabot.svg?branch=master)](https://travis-ci.org/anthony-jclark/adabot)
+[![Build Status](https://travis-ci.org/anthonyjclark/adabot.svg?branch=master)](https://travis-ci.org/anthonyjclark/adabot)
 
 # adabot
 
-This is a stack for the adabot robot. Below are instructions for setting up the adabot workspace; they assume that you have correctly setup your development environment. Visit [the adabot wiki](https://github.com/anthony-jclark/adabot/wiki) for more detailed instructions.
+This is a stack for the adabot robot. Below are instructions for setting up the adabot workspace; they assume that you have correctly setup your development environment. Visit [the adabot wiki](https://github.com/anthonyjclark/adabot/wiki) for more detailed instructions.
 
 ```bash
 mkdir -p ~/.ros_repos/
 cd ~/.ros_repos/
-hub clone anthony-jclark/adabot.git
+hub clone anthonyjclark/adabot.git
 hub fork
 mkdir -p ~/ros_workspaces/adabot_ws/src/
 ln -s ~/.ros_repos/adabot ~/ros_workspaces/adabot_ws/src/
