@@ -32,7 +32,7 @@ ln -s /home/travis/build/anthony-jclark/adabot ~/ros_workspaces/adabot_ws/src/
 cd ~/ros_workspaces/adabot_ws/
 catkin init
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Debug
-tree ~/ros_workspaces/
+tree ~/ros_workspaces/adabot_ws/src/adabot/
 
 # ---------------------------------------------------------
 printf "\nBuilding the source tree.\n"
