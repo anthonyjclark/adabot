@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
+    
+    
+    
+    
+    
+    <!-- Create the weg geometry (for visuals and collisions) -->
+    <xacro:property name="weg_geometry">
+        <origin xyz="${wh_radius/2} 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="${wg_length} ${wg_width} ${wg_height}" />
+        </geometry>
+    </xacro:property>
+    
+    <!-- Create a geometry for the weg tip -->
+    <xacro:property name="weg_tip_geometry">
+        <geometry>
+            <sphere radius="${wt_radius}" />
+        </geometry>
+    </xacro:property>    
+    
+    <!--
+         Macro for creating wegs
+            wheel  : the suffix of the parent wheel
+            number : a unique identifier for each weg
+            total  : the number of wegs (used to calculate angles)
+    -->
+    <xacro:macro name="weg" params="wheel number total bot_name">
+        
+        <!-- The name of the current weg (based on the parent wheel's name) -->
+        <xacro:property name="weg_name" value="${bot_name}_${wheel}_weg_${number}" />
+        
+
+        <!-- Add the weg's Gazebo material -->
+        <xacro:gz_white_material name="${weg_name}" />
+        <xacro:gz_black_material name="${weg_name}_tip" />
+
+        <!-- Make the weg tip high friction -->
+        <xacro:gz_high_friction name="${weg_name}_tip" />
+
+        <!-- The weg's rigid body -->
+        <link name="${weg_name}">
+            <visual>
+                <xacro:if value="${debug_visuals == 'true'}">
+                    <xacro:insert_block name="weg_geometry" />
+                </xacro:if>
+                <xacro:if value="${debug_visuals == 'false'}">
+                    <origin xyz="0.024 0 0" rpy="0 ${PI/2} ${-PI/2}" />
+                    <geometry>
+                        <mesh filename="package://adabot_description/meshes/weg.stl"
+                                scale="${MM_to_M * SCALE} ${MM_to_M * SCALE} ${MM_to_M * SCALE}" />
+                    </geometry>
+                </xacro:if>
+                <material name="white" />
+            </visual>
+            
+            <collision>
+                <xacro:insert_block name="weg_geometry" />
+            </collision>
+            
+            <inertial>
+                <mass value="${wg_mass}" />
+                <inertia
+                    ixx="${(1/12)*wg_mass*(wg_width**2 + wg_height**2)}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(1/12)*wg_mass*(wg_length**2 + wg_height**2)}"
+                    iyz="0"
+                    izz="${(1/12)*wg_mass*(wg_length**2 + wg_width**2)}"
+                    />
+            </inertial>
+        </link>        
+
+        <!--
+             Attach a POSITION controller to each weg prismatic joint
+                Any changes to the wheel joint's name will need to be reflected
+                  in 'adabot.control.yaml' and 'adabot.control.launch'.
+                Also note that, technically, all wegs for a single joint should be
+                  controlled together (a single transimission for each weg set).
+                  However, I do not think this will be possible given that the transmission
+                  interface requires a single process value for each motor.
+        -->
+        <transmission name="${weg_name}_transmission" type="SimpleTransmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${weg_name}_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${weg_name}_motor">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+
+        <!-- Attach a sphere to the end of the weg for better physics (less jitter) -->
+        <link name="${weg_name}_tip">
+            <xacro:if value="${debug_visuals == 'true'}">
+                <visual>
+                    <xacro:insert_block name="weg_tip_geometry" />
+                    <material name="black" />
+                </visual>
+            </xacro:if>                
+            
+            <collision>
+                <xacro:insert_block name="weg_tip_geometry" />
+            </collision>
+            
+            <inertial>
+                <mass value="${wt_mass}" />
+                <inertia
+                    ixx="${(2/5) * wt_mass * wt_radius * wt_radius}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(2/5) * wt_mass * wt_radius * wt_radius}"
+                    iyz="0"
+                    izz="${(2/5) * wt_mass * wt_radius * wt_radius}"
+                    />
+            </inertial>
+        </link>
+
+        <!-- Connect the weg tip to the weg -->
+        <joint name="${weg_name}_tip_joint" type="fixed">
+            <parent link="${weg_name}" />
+            <child link="${weg_name}_tip" />
+            <!-- The 0.95 is a fudge factor so that weg tips are not aligned with the
+                 wheel radius when commanded to zero. -->
+            <origin xyz="${wh_radius * 0.95 - wt_radius} 0 0" rpy="0 0 0" />
+        </joint>
+
+    </xacro:macro>
+    
+</robot>

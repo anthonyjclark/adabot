@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
+    
+    
+       
+    
+    <!-- Create the wheel geometry (for visual debug and collisions) -->
+    <xacro:property name="wheel_geometry">
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+        <geometry>
+            <sphere radius="${wh_radius}" />
+        </geometry>
+    </xacro:property>
+    
+    <!--
+         Macro for creating wheels
+            suffix     : give the wheel a unique name
+    -->
+    <xacro:macro name="wheel" params="suffix bot_name">
+
+        <!-- The name of the current wheel -->
+        <xacro:property name="wheel_name" value="${bot_name}_${suffix}_wheel" />
+
+        <!-- Add the wheel's Gazebo material -->
+        <xacro:gz_black_material name="${wheel_name}" />
+
+        <!-- Make the wheel have lower friction -->
+        <xacro:gz_low_friction name="${wheel_name}" />
+        
+
+        <!-- The wheel's rigid body -->
+        <link name="${wheel_name}">
+            <visual>
+                <xacro:if value="${debug_visuals == 'true'}">
+                    <xacro:insert_block name="wheel_geometry" />
+                </xacro:if>
+                <xacro:if value="${debug_visuals == 'false'}">
+                    <origin xyz="0 0 0" rpy="0 0 0" />
+                    <geometry>
+                        <mesh filename="package://adabot_description/meshes/wheel.stl"
+                                scale="${MM_to_M * SCALE} ${MM_to_M * SCALE} ${MM_to_M * SCALE}" />
+                    </geometry>
+                </xacro:if>
+                <material name="black" />
+            </visual>
+            
+            <collision>
+                <xacro:insert_block name="wheel_geometry" />
+            </collision>
+            
+            <inertial>
+                <mass value="${wh_mass}" />
+                <origin xyz="0 0 0" rpy="${PI/2} 0 0" />
+                <inertia
+                    ixx="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(1/12)*wh_mass*(3*wh_radius**2 + wh_length**2)}"
+                    iyz="0"
+                    izz="${(1/2)*wh_mass*wh_radius**2}"
+                    />
+            </inertial>
+        </link>    
+
+        <!--
+             Attach a VELOCITY controller to the wheel's joint
+                Any changes to the wheel joint's name will need to be reflected
+                  in 'adabot.control.yaml' and 'adabot.control.launch'.
+        -->
+        <transmission name="${wheel_name}_transmission" type="SimpleTransmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${wheel_name}_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${wheel_name}_motor">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+        <!-- Add wegs to this wheel -->
+        
+        <!-- Macro for weg-wheel joint -->
+        <xacro:macro name="weg_wheel_joint" params="weg_name number">
+            <joint name="${weg_name}_joint" type="prismatic">
+                <parent link="${wheel_name}" />
+                <child link="${weg_name}" />
+                <origin xyz="0 0 0" rpy="0 ${2 * PI * (number/wg_per_wheel)} 0" />
+                <limit upper="${wg_length}" lower="${wg_jnt_lower_limit}"
+                        effort="${wg_jnt_effort}" velocity="${wg_jnt_velocity}" />
+            </joint>
+        </xacro:macro>
+        
+        <!-- Add the appropriate number of wegs -->
+        <xacro:if value="${wg_per_wheel > 0}">
+            <xacro:weg wheel="${suffix}" number="1" total="${wg_per_wheel}" bot_name="${bot_name}" />
+            <xacro:weg_wheel_joint weg_name="${bot_name}_${suffix}_weg_1" number="1" />
+        </xacro:if>
+        <xacro:if value="${wg_per_wheel > 1}">
+            <xacro:weg wheel="${suffix}" number="2" total="${wg_per_wheel}" bot_name="${bot_name}" />
+            <xacro:weg_wheel_joint weg_name="${bot_name}_${suffix}_weg_2" number="2" />
+        </xacro:if>
+        <xacro:if value="${wg_per_wheel > 2}">
+            <xacro:weg wheel="${suffix}" number="3" total="${wg_per_wheel}" bot_name="${bot_name}" />
+            <xacro:weg_wheel_joint weg_name="${bot_name}_${suffix}_weg_3" number="3" />
+        </xacro:if>
+        <xacro:if value="${wg_per_wheel > 3}">
+            <xacro:weg wheel="${suffix}" number="4" total="${wg_per_wheel}" bot_name="${bot_name}" />
+            <xacro:weg_wheel_joint weg_name="${bot_name}_${suffix}_weg_4" number="4" />
+        </xacro:if>
+        <xacro:if value="${wg_per_wheel > 4}">
+            <xacro:weg wheel="${suffix}" number="5" total="${wg_per_wheel}" bot_name="${bot_name}" />
+            <xacro:weg_wheel_joint weg_name="${bot_name}_${suffix}_weg_5" number="5" />
+        </xacro:if>
+        <xacro:if value="${wg_per_wheel > 5}">
+            <xacro:weg wheel="${suffix}" number="6" total="${wg_per_wheel}" bot_name="${bot_name}" />
+            <xacro:weg_wheel_joint weg_name="${bot_name}_${suffix}_weg_6" number="6" />
+        </xacro:if>
+        <xacro:if value="${wg_per_wheel > 6}">
+            <xacro:weg wheel="${suffix}" number="7" total="${wg_per_wheel}" bot_name="${bot_name}" />
+            <xacro:weg_wheel_joint weg_name="${bot_name}_${suffix}_weg_7" number="7" />
+        </xacro:if>
+        <xacro:if value="${wg_per_wheel > 7}">
+            <xacro:weg wheel="${suffix}" number="8" total="${wg_per_wheel}" bot_name="${bot_name}" />
+            <xacro:weg_wheel_joint weg_name="${bot_name}_${suffix}_weg_8" number="8" />
+        </xacro:if>
+        <xacro:if value="${wg_per_wheel > 8}">
+            <xacro:weg wheel="${suffix}" number="9" total="${wg_per_wheel}" bot_name="${bot_name}" />
+            <xacro:weg_wheel_joint weg_name="${bot_name}_${suffix}_weg_9" number="9" />
+        </xacro:if>
+    </xacro:macro>
+
+</robot>

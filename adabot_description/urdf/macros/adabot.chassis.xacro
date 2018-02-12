@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="adabot">
+    
+    
+
+
+    
+    <!-- Create the chassis geometry (for visual debug and collisions) -->
+    <xacro:property name="chassis_geometry">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="${ch_length} ${ch_width} ${ch_height}" />
+        </geometry>
+    </xacro:property>
+    
+    <!--
+        Macro for creating chassis
+            chassis_name:   name used for the chasis link
+    -->
+    <xacro:macro name="chassis" params="chassis_name">
+        
+        <!-- Add the roll cage's Gazebo material -->
+        <xacro:gz_white_material name="${chassis_name}" />
+
+        <link name="${chassis_name}">
+            <visual>
+                <xacro:if value="${debug_visuals == 'true'}">
+                    <xacro:insert_block name="chassis_geometry" />
+                </xacro:if>
+                <xacro:if value="${debug_visuals == 'false'}">
+                    <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}" />
+                    <geometry>
+                        <mesh filename="package://adabot_description/meshes/chassis.stl"
+                              scale="${MM_to_M * SCALE} ${MM_to_M * SCALE} ${MM_to_M * SCALE}" />
+                    </geometry>
+                </xacro:if>
+                <material name="white" />
+            </visual>
+            
+            <collision>
+                <xacro:insert_block name="chassis_geometry" />
+            </collision>
+            
+            <inertial>
+                <mass value="${ch_mass}" />
+                <inertia
+                    ixx="${(1/12)*ch_mass*(ch_width**2 + ch_height**2)}"
+                    ixy="0"
+                    ixz="0"
+                    iyy="${(1/12)*ch_mass*(ch_length**2 + ch_height**2)}"
+                    iyz="0"
+                    izz="${(1/12)*ch_mass*(ch_length**2 + ch_width**2)}"
+                    />
+            </inertial>
+        </link>
+        
+    </xacro:macro>
+
+</robot>
